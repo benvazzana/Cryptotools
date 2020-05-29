@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!-- OfotoNow Album Data File -->
+<!-- Copyright 2001 Ofoto, Inc.  All rights reserved. -->
+<on:album version="3.0" name="images">
+    <!-- groups album belongs to -->
+    <on:groups>
+    </on:groups>
+
+    <!-- files in album -->
+    <on:members>
+        <on:member hidden="0">
+            P6141317.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141298.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141299.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141300.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141301.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141302.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141303.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141304.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141305.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141306.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141307.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141308.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141309.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141310.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141311.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141312.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141313.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141314.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141315.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141316.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6131297.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141318.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6141319.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6221321.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6221320.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6221322.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6221323.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6221324.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6221325.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231332.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231327.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231328.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231329.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231330.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231331.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231326.JPG
+        </on:member>
+        <on:member hidden="0">
+            P6231333.JPG
+        </on:member>
+    </on:members>
+</on:album>

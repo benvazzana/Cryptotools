@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Casesar Cipher</title>
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+            </head>
+
+
+
+
+
+<body>
+
+    <div class="myDiv">
+        <img  src="../images/jba512SS.jpg" width="725" >
+    </div>    
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Ciphers 
+            <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            <a href="02CaesarCipher.html">Caesar Cipher</a>
+            <a href="03AffineCipher.html">Affine Cipher</a>
+            </div>
+        </div> 
+            <a href="https://blackboard.truman.edu/webapps/discussionboard/do/conference?toggle_mode=edit&action=list_forums&course_id=_27546_1&nav=discussion_board_entry&mode=cpview">Student Messages</a>
+            <a href="../Cryptotools.html">Cryptography Tools</a>
+    
+    </div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>The Caesar Cipher</h1>
+        <h2>Tools</h2>
+
+        <div id="textToNum" class="default">
+            <p id="lblTxtNum">Text to numbers:</p>
+            <input type="text" id="txtNumInput">
+            <script>
+                function btnTxtNumClick() {
+                    const text = document.getElementById("txtNumInput").value;
+                    document.getElementById("lblTxtNumResult").innerText = "" + textToNum(text);
+                }
+            </script>
+            <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
+            <p id="lblTxtNumResult"></p>
+        </div>
+        <div id="numToText" class="default">
+            <p id="lblNumText">Numbers to text:</p>
+            <!-- Input list of numbers must be separated by commas -->
+            <input type="text" id="numTxtInput">
+            <script>
+                function btnNumTxtClick() {
+                    let text = document.getElementById("numTxtInput").value;
+                    if(text.indexOf(',') == -1) {
+                        document.getElementById("lblNumTxtResult").innerText = "Please separate values with commas only.";
+                        return;
+                    }
+                    let txtNums = text.split(',');
+                    let nums = [];
+                    for(let i = 0; i < txtNums.length; i++) {
+                        nums.push(parseInt(txtNums[i]));
+                    }
+                    document.getElementById("lblNumTxtResult").innerText = numToText(nums);
+                }
+            </script>
+            <button id="btnTxtNum" onclick=btnNumTxtClick()>Submit</button>
+            <p id="lblNumTxtResult"></p>
+        </div>
+        <div id="listCompute" class="default">
+            <p id="lblListCompute">Number list operation:</p>
+            <input type="text" id="listComputeInput">
+            <select id="listComputeSelect">
+                <option value='+'>+</option>
+                <option value='-'>-</option>
+                <option value='*'>*</option>
+                <option value='/'>/</option>
+                <option value='%'>mod</option>
+            </select>
+            <input type="text" id="listComputeSclInput">
+            <script>
+                function btnListComputeClick() {
+                    let text = document.getElementById("listComputeInput").value;
+                    let operation = document.getElementById("listComputeSelect").value;
+                    let scale = parseInt(document.getElementById("listComputeSclInput").value);
+                    if(text.indexOf(',') == -1) {
+                        document.getElementById("lblListComputeResult").innerText = "Please separate values with commas only.";
+                        return;
+                    }
+                    let numsTxt = text.split(',');
+                    let nums = [];
+                    for(let i = 0; i < numsTxt.length; i++) {
+                        nums.push(parseInt(numsTxt[i]));
+                    }
+                    listCompute(nums, operation, scale);
+                    document.getElementById("lblListComputeResult").innerText = nums;
+                }
+            </script>
+            <button id="btnListCompute" onclick=btnListComputeClick()>Submit</button>
+            <p id="lblListComputeResult"></p>
+        </div>
+        <h2>How it works</h2>
+       <P>We use mod 26 arithmetic to achieve a shift of the alphabet.</P> 
+     
+        <table>
+        <tr>
+            <td><img src="../images/lock.png" alt="Lock" ALIGN="middle" height="42" width="42"></td> 
+            <td><h3>Encryption:</h3></td>
+        </tr>
+        </table> 
+        <P>
+        <ol> 
+            <li>Select a key value, <i>a</i>.</li>
+            <li>Convert plaintext to numbers.</li>
+            <li>Add <i>a</i> to each number in the list.</li>
+            <li>Reduce each number mod 26.</li>
+            <li>Convert back to letters.</li>
+        </ol>
+        </P>
+
+        <button type="button" class="collapsible">Example</button>
+            <div class="content">
+            <p>We will encrypt the message:</P> 
+            <div class="preDiv">All Hail Caesar</div>
+            <ol>
+                <li> We will use the shift value <i>a</i> = 10.</li>
+                <li> Using the Text to numbers tool, we get:
+                    <div class="displayDiv">1,12,12,8,1,9,12,3,1,5,19,1,18</div>
+         
+                Note that this tool ignores any spaces and punctuation.
+                </li>
+                <li>Using the Number list operation, we add 10:<BR>
+                    <div class="displayDiv">11,22,22,18,11,19,22,13,11,15,29,11,28</div>
+                </li>
+                <li>Using the Number list operation, we reduce mod 26:<BR>
+                    <div class="displayDiv">11,22,22,18,11,19,22,13,11,15,3,11,2,</div>
+                </li>
+                <li>Using the Numbers to text, we convert back to letters:
+                    <div class="preDiv">kvvrksvmkockb</div>
+                </li>
+
+            </ol>
+            </div>
+        <P></P>
+        
+        <table>
+            <tr>
+                <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Decryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li>Compute the additive inverse of <i>a</i> mod 26.</li>
+            <li>Convert the ciphtertext to letters.</li>
+            <li>Add the additive inverse of <i>a</i> to each letter.</li>
+            <li>Reduce each number mod 26.</li>
+            <li>Convert back to letters.</li>
+        </ol>
+
+        <button type="button" class="collapsible">Example</button>
+            <div class="content">
+            <p>We will decrypt the message from the previous example.</p>
+            <ol>
+            <li>The additive inverse of 20 mod 26 is: 26 - 10 = 16. </li>
+            <li>We convert the ciphertext to numbers: 
+                <div class="displayDiv">
+                11,22,22,18,11,19,22,13,11,15,3,11,2
+                </div>
+            </li>
+            <li>We add 16 to each number:
+                <div class="displayDiv">
+                27,38,38,34,27,35,38,29,27,31,19,27,18
+                </div>
+            </li>
+            <li>Reduce mod 26:
+                <div class="displayDiv">
+                1,12,12,8,1,9,12,3,1,5,19,1,18
+                </div>
+            </li>
+            <li>And convert back to letters
+                <div class="preDiv">allhailcaesar</div>
+                
+            </li>
+            
+            </ol>
+            </div>
+        <P></P>
+        <table>
+            <tr>
+                <td><img src="../images/thinkingcap.gif" alt="Unlock" ALIGN="middle"  height="60" width="60"></td> 
+                <td><h2>Exercises:</h2></td>
+            </tr>
+        </table>
+
+        <ol>
+            <li>Reduce the numbers 30, 54, 13, 52, -10 mod 26 by hand, and then check your answers using the Number list operation. </li>
+            <li>Convert the text: 
+                <div class="preDiv">
+                I am really excited to be studying cryptography
+                </div>
+                to a list of numbers.
+                (Your answer should start out: 9, 1, 13, 18,...)    
+                </li>
+            <LI>Convert the list of numbers: 1,18,5,23,5,8,1,22,9,14,7,6,21,14,25,5,20 to text.</LI>
+            <LI>Encipher the message, "Here is my first attempt at enciphering a message a long message with the Caesar shift" using a shift of 8.  Then check your answer by deciphering it with a shift of 18.
+            </LI>
+            <LI>Decipher the following message which was enciphered using a Caesar cipher using a shift of 11:
+                <div class="preDiv">
+                tnzfwodfcprzqzclnlpdlcdlwloctrseyzh</div>
+            </LI>
+            <LI> (Challenge) Decipher the following message which was enciphered using a Caesar cipher using an unknown shift.
+                <div class="preDiv">hvwgojcwrghvohuimhvohtczzckgr</div>
+            </LI>
+        </ol>    
+        </td>
+    </tr>
+    </table>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+    </body>
+</html>

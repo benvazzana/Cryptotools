@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test page</title>
+        <script type="text/javascript" src="script.js"></script>
+        <style>
+            .default
+            {
+                font-family:Arial, Helvetica, sans-serif;
+                font-size:16;
+                font-weight:normal;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="textToNum" class="default">
+            <p id="lblTxtNum">Text to numbers:</p>
+            <input type="text" id="txtNumInput">
+            <script>
+                function btnTxtNumClick() {
+                    const text = document.getElementById("txtNumInput").value;
+                    document.getElementById("lblTxtNumResult").innerText = "" + textToNum(text);
+                }
+            </script>
+            <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
+            <p id="lblTxtNumResult"></p>
+        </div>
+        <div id="numToText" class="default">
+            <p id="lblNumText">Numbers to text:</p>
+            <!-- Input list of numbers must be separated by commas -->
+            <input type="text" id="numTxtInput">
+            <script>
+                function btnNumTxtClick() {
+                    let text = document.getElementById("numTxtInput").value;
+                    if(text.indexOf(',') == -1) {
+                        document.getElementById("lblNumTxtResult").innerText = "Please separate values with commas only.";
+                        return;
+                    }
+                    let txtNums = text.split(',');
+                    let nums = [];
+                    for(let i = 0; i < txtNums.length; i++) {
+                        nums.push(parseInt(txtNums[i]));
+                    }
+                    document.getElementById("lblNumTxtResult").innerText = numToText(nums);
+                }
+            </script>
+            <button id="btnTxtNum" onclick=btnNumTxtClick()>Submit</button>
+            <p id="lblNumTxtResult"></p>
+        </div>
+        <div id="listCompute" class="default">
+            <p id="lblListCompute">Number list operation:</p>
+            <input type="text" id="listComputeInput">
+            <select id="listComputeSelect">
+                <option value='+'>+</option>
+                <option value='-'>-</option>
+                <option value='*'>*</option>
+                <option value='/'>/</option>
+                <option value='%'>%</option>
+            </select>
+            <input type="text" id="listComputeSclInput">
+            <script>
+                function btnListComputeClick() {
+                    let text = document.getElementById("listComputeInput").value;
+                    let operation = document.getElementById("listComputeSelect").value;
+                    let scale = parseInt(document.getElementById("listComputeSclInput").value);
+                    if(text.indexOf(',') == -1) {
+                        document.getElementById("lblListComputeResult").innerText = "Please separate values with commas only.";
+                        return;
+                    }
+                    let numsTxt = text.split(',');
+                    let nums = [];
+                    for(let i = 0; i < numsTxt.length; i++) {
+                        nums.push(parseInt(numsTxt[i]));
+                    }
+                    listCompute(nums, operation, scale);
+                    document.getElementById("lblListComputeResult").innerText = nums;
+                }
+            </script>
+            <button id="btnListCompute" onclick=btnListComputeClick()>Submit</button>
+            <p id="lblListComputeResult"></p>
+        </div>
+    </body>
+</html>

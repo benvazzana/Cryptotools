@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Affine Cipher</title>
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+            </head>
+
+<body>
+
+    <div class="myDiv">
+        <img  src="../images/jba512SS.jpg" width="725" >
+    </div>    
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Ciphers 
+            <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            <a href="02CaesarCipher.html">Caesar Cipher</a>
+            <a href="03AffineCipher.html">Affine Cipher</a>
+            </div>
+        </div> 
+            <a href="https://blackboard.truman.edu/webapps/discussionboard/do/conference?toggle_mode=edit&action=list_forums&course_id=_27546_1&nav=discussion_board_entry&mode=cpview">Student Messages</a>
+            <a href="../Cryptotools.html">Cryptography Tools</a>
+    
+    </div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>The Affine Cipher</h1>
+        <h2>Tools</h2>
+
+        <div id="textToNum" class="default">
+            <p id="lblTxtNum">Text to numbers:</p>
+            <input type="text" id="txtNumInput">
+            <script>
+                function btnTxtNumClick() {
+                    const text = document.getElementById("txtNumInput").value;
+                    document.getElementById("lblTxtNumResult").innerText = "" + textToNum(text);
+                }
+            </script>
+            <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
+            <p id="lblTxtNumResult"></p>
+        </div>
+        <div id="numToText" class="default">
+            <p id="lblNumText">Numbers to text:</p>
+            <!-- Input list of numbers must be separated by commas -->
+            <input type="text" id="numTxtInput">
+            <script>
+                function btnNumTxtClick() {
+                    let text = document.getElementById("numTxtInput").value;
+                    if(text.indexOf(',') == -1) {
+                        document.getElementById("lblNumTxtResult").innerText = "Please separate values with commas only.";
+                        return;
+                    }
+                    let txtNums = text.split(',');
+                    let nums = [];
+                    for(let i = 0; i < txtNums.length; i++) {
+                        nums.push(parseInt(txtNums[i]));
+                    }
+                    document.getElementById("lblNumTxtResult").innerText = numToText(nums);
+                }
+            </script>
+            <button id="btnTxtNum" onclick=btnNumTxtClick()>Submit</button>
+            <p id="lblNumTxtResult"></p>
+        </div>
+        <div id="listCompute" class="default">
+            <p id="lblListCompute">Number list operation:</p>
+            <input type="text" id="listComputeInput">
+            <select id="listComputeSelect">
+                <option value='+'>+</option>
+                <option value='-'>-</option>
+                <option value='*'>*</option>
+                <option value='/'>/</option>
+                <option value='%'>mod</option>
+            </select>
+            <input type="text" id="listComputeSclInput">
+            <script>
+                function btnListComputeClick() {
+                    let text = document.getElementById("listComputeInput").value;
+                    let operation = document.getElementById("listComputeSelect").value;
+                    let scale = parseInt(document.getElementById("listComputeSclInput").value);
+                    if(text.indexOf(',') == -1) {
+                        document.getElementById("lblListComputeResult").innerText = "Please separate values with commas only.";
+                        return;
+                    }
+                    let numsTxt = text.split(',');
+                    let nums = [];
+                    for(let i = 0; i < numsTxt.length; i++) {
+                        nums.push(parseInt(numsTxt[i]));
+                    }
+                    listCompute(nums, operation, scale);
+                    document.getElementById("lblListComputeResult").innerText = nums;
+                }
+            </script>
+            <button id="btnListCompute" onclick=btnListComputeClick()>Submit</button>
+            <p id="lblListComputeResult"></p>
+        </div>
+
+        <h2>How it works</h2>
+        <p>The Affine Cipher combines the additive shift of the Caesar Cipher with a multiplication.</p>
+        <table>
+            <tr>
+                <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Encryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li>We need both an additive key, <i>a</i> and a multiplicative key, <i>m</i>, and we required gcd(<i>m</i>,26) = 1.</li>
+            <li>Convert plaintext to numbers.</li>
+            <li>Add <i>a</i> to each number in the list.</li>
+            <li>Multiply each number in the list by <i>m</i>.</li>
+            <li>Reduce each number mod 26.</li>
+            <li>Convert back to letters.</li>
+        </ol>
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+       We will encrypt the message: 
+       <div class="preDiv">
+           This cipher is so fine
+
+       </div>
+        <ol>
+            <li> We will use <i>a</i> = 7 and <i>m</i> = 3. Note that gcd(3,26) = 1.</li>
+            <li> Using the Text to numbers tool, we get:
+                <div class="displayDiv">
+                20,8,9,19,3,9,16,8,5,18,9,19,19,15,6,9,14,5
+                </div>
+            </li>
+            <li>Using the Number list operation, we add 7:
+                <div class="displayDiv">
+                27,15,16,26,10,16,23,15,12,25,16,26,26,22,13,16,21,12
+            </div>
+            </li>
+            <li>Using the Number list operation again, we multiply by 3:
+                <div class="displayDiv">
+                81,45,48,78,30,48,69,45,36,75,48,78,78,66,39,48,63,36
+                </div>
+            </li>
+            <li>Using the Number list operation, we reduce mod 26:
+                <div class="displayDiv">
+                3,19,22,0,4,22,17,19,10,23,22,0,0,14,13,22,11,10
+                </div>
+            </li>
+            <li>Using the Numbers to text, we convert back to letters:
+                <div class="preDiv">
+                csvzdvqsjwvzznmvkj
+                </div>
+            </li>
+
+        </ol>
+        <p>Note that order matters in steps 3 and 4, just as order matters when putting on your socks and shoes. Speaking of which, to decrypt (we reverse the order. So we take our shoes off, then our socks).
+        </p>
+        </div>
+
+        <table>
+            <tr>
+                <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Decryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li>Compute the additive inverse of <i>a</i> mod 26, and the multiplicative inverse of <i>m</i> mod 26. (Note: here's why we need to gcd(<i>m</i>,26)=1. That guarantees a multiplicative inverse for <i>m</i></li>
+            <li>Convert the ciphtertext to letters.</li>
+            <li>Multiply each number by the multiplicative inverse of <i>m</i>.</li>
+            <li>Add the additive inverse of <i>a</i> to each letter.</li>
+            <li>Reduce each number mod 26.</li>
+            <li>Convert back to letters.</li>
+        </ol>
+
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+            <p>We will decrypt the message from the previous example.</p>
+            <ol>
+            <li>The additive inverse of 7 mod 26 is: 26-7=9. The multiplicative inverse of 3 mod 26 is 9 because 3*9 = 27 mod 26 =1. Later we will see how to quickly compute multiplicative inverses, but for now trial and error is good enough.</li>
+            <li>We convert the ciphertext to numbers:
+                <div class="displayDiv">
+                    3,19,22,26,4,22,17,19,10,23,22,26,26,14,13,22,11,10
+                </div>
+                
+            </li>
+            <li>We multiply each number by 9:
+                <div class="displayDiv">
+                    27,171,198,234,36,198,153,171,90,207,198,234,234,126,117,198,99,90
+                </div>
+                
+            </li>
+            <li>We add 19 to each number:
+                <div class="displayDiv">
+                    46,190,217,253,55,217,172,190,109,226,217,253,253,145,136,217,118,1098
+                </div>
+                
+            </li>
+            <li>Reduce mod 26:
+                <div class="displayDiv">
+                    20,8,9,19,3,9,16,8,5,18,9,19,19,15,6,9,14,5
+                </div>
+                
+            </li>
+            <li>And convert back to letters:
+                <div class="preDiv"></div>
+                thiscipherissofine
+            </li>
+            </ol>
+        </div>        
+        <table>
+            <tr>
+                <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Group Message Exchange</h2></td>
+            </tr>
+        </table>
+        <p>We will experiment with affine ciphers in groups as follows:</p>
+        <ol>
+            <li> 
+                Each group will come up with a secret message, and encipher it using an affine cipher.
+            </li>
+             <li>Share the message with the class
+                a) Open Blackboard and click on "Student Messages" in the menu on the left.
+                b) Click on the "Affine Cipher Messages" forum
+                c) Create a new thread to post your message.  Be sure to give ciphertext, the multiplicative key, the additive key and the ciphertext. Also list the members of your group.
+            </li>
+            <li>
+            As other groups post their message, your group should work to decipher them.
+            </LI>
+        </ol>   
+        
+        <table>
+            <tr>
+                <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Cryptanalysis Challenge</h2></td>
+            </tr>
+
+        </table>
+        <p>The message below was encrypted with an affine cipher. Can you decipher it?</p>
+        <div class="preDiv">
+            NTTOM TGOVO HTREP IFATX EFXDP UUAES FFERC OSFOP COFUF IFCDF HJ
+        </div>
+  
+    </td>
+    </tr>
+    </table>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+</body>
+</html>
