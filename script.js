@@ -3,7 +3,7 @@
  * where a's become 1's (both upper and lowe case), b's are 2's, and
  * so on. Other characters are ignored
  * @param {String} str input string of text
- * @return {Array<number>} list of corresponding numbers
+ * @returns {Array<number>} list of corresponding numbers
  */
 function textToNum(str) {
     let result = [];
@@ -23,7 +23,7 @@ function textToNum(str) {
  * a string of characters replacing 1's with a's, 2's with b's, and
  * so on.
  * @param {Array<number>} nums
- * @return {String} corresponding characters (all lowercase)
+ * @returns {String} corresponding characters (all lowercase)
  */
 function numToText(nums) {
     let result = "";
@@ -53,6 +53,12 @@ function listCompute(nums, op, scale) {
     }
 }
 
+/**
+ * This function cleans a String of text by deleting any non-letter
+ * characters, and changing each character to a capital letter.
+ * @param {String} text input String of text
+ * @returns {String} cleaned String of text
+ */
 function cleanText(text) {
     text = text.toUpperCase();
     let result = "";
@@ -65,6 +71,13 @@ function cleanText(text) {
     return result;
 }
 
+/**
+ * Given a string of text, this function counts the number of times
+ * each character occurs in the string, and stores it into the
+ * returned dictionary
+ * @param {String} text input string of text
+ * @returns {Dictionary} dictionary of characters as keys and numbers as values
+ */
 function frequencyAnalysis(text) {
     let dict = {};
     for(let i = 0; i < text.length; i++) {
@@ -84,6 +97,12 @@ function frequencyAnalysis(text) {
     return dict;
 }
 
+/**
+ * Given a dictionary of frequency analysis data, this function
+ * outputs the data to the HTML table on the frequency analysis
+ * page
+ * @param {Dictionary} dict dictionary of data
+ */
 function outputTable(dict) {
     console.log(dict);
     let length = Object.keys(dict).length;
