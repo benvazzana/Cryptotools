@@ -52,3 +52,53 @@ function listCompute(nums, op, scale) {
         else if(op == '%') nums[i] %= scale;
     }
 }
+
+function cleanText(text) {
+    text = text.toUpperCase();
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charCodeAt(i);
+        if(c > 64 && c < 91) {
+            result = result.concat(text.charAt(i));
+        }
+    }
+    return result;
+}
+
+function frequencyAnalysis(text) {
+    let dict = {};
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        if(dict.hasOwnProperty(c)) {
+            dict[c]++;
+        } else {
+            dict[c] = 1;
+        }
+    }
+    for(key in dict) {
+        dict[key] /= text.length;
+        dict[key] *= 1000.0;
+        dict[key] = Math.round(dict[key]);
+        dict[key] /= 10.0;
+    }
+    return dict;
+}
+
+function outputTable(dict) {
+    console.log(dict);
+    let length = Object.keys(dict).length;
+    for(let i = 0; i < length; i++) {
+        let n = -1;
+        let letter = "";
+        for(key in dict) {
+            let value = dict[key];
+            if(value > n) {
+                n = value;
+                letter = key;
+            }
+        }
+        //TODO: output to table
+        console.log("" + letter + ": " + dict[letter]);
+        delete dict[letter];
+    }
+}
