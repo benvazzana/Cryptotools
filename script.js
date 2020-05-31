@@ -72,20 +72,22 @@ function cleanText(text) {
 }
 
 /**
- * Given a string of text, this function counts the number of times
- * each character occurs in the string, and stores it into the
- * returned dictionary
+ * Given a string of text, this function tracks the frequency of
+ * each substring of a given length, and stores the data in a
+ * dictionary
  * @param {String} text input string of text
- * @returns {Dictionary} dictionary of characters as keys and numbers as values
+ * @param {Number} length length of substrings
+ * @returns {Dictionary} dictionary of strings as keys and numbers as
+ * values 
  */
-function frequencyAnalysis(text) {
+function frequencyAnalysis(text, length) {
     let dict = {};
-    for(let i = 0; i < text.length; i++) {
-        let c = text.charAt(i);
-        if(dict.hasOwnProperty(c)) {
-            dict[c]++;
+    for(let i = 0; i < text.length - (length - 1); i++) {
+        let sub = text.substring(i, i + length);
+        if(dict.hasOwnProperty(sub)) {
+            dict[sub]++;
         } else {
-            dict[c] = 1;
+            dict[sub] = 1;
         }
     }
     for(key in dict) {
@@ -122,3 +124,8 @@ function outputTable(dict) {
         delete dict[letter];
     }
 }
+
+let text = "The quick brown fox jumps over the lazy dog";
+let txtClean = cleanText(text);
+let dict = frequencyAnalysis(txtClean, 3);
+console.log(dict);
