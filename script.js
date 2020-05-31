@@ -104,7 +104,8 @@ function frequencyAnalysis(text) {
  * @param {Dictionary} dict dictionary of data
  */
 function outputTable(dict) {
-    console.log(dict);
+    let table = document.getElementById("freq_Analysis_Table");
+    let rows = table.rows;
     let length = Object.keys(dict).length;
     for(let i = 0; i < length; i++) {
         let n = -1;
@@ -116,8 +117,8 @@ function outputTable(dict) {
                 letter = key;
             }
         }
-        //TODO: output to table
-        console.log("" + letter + ": " + dict[letter]);
+        rows[i + 2].cells[3].innerHTML = letter;
+        rows[i + 2].cells[4].innerHTML = dict[letter];
         delete dict[letter];
     }
 }

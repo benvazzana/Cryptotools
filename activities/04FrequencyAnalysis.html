@@ -46,7 +46,16 @@
     <td>
         <h1>Frequency Analysis</h1>
 
-       [Insert input window for text to be analyzed]
+       <textarea type="text" rows=4 cols=100 id="inputFreqAnalysis"></textarea> <br />
+       <script>
+         function freqAnalysisOnClick() {
+          let text = document.getElementById("inputFreqAnalysis").value;
+          let txtClean = cleanText(text);
+          let dict = frequencyAnalysis(txtClean);
+          outputTable(dict);
+         }
+       </script>
+       <button onclick=freqAnalysisOnClick()>Submit</button>
        
      <P></P>   
      <table id="freq_Analysis_Table"> 
@@ -194,8 +203,6 @@
           <td></td><td></td>
         </tr>
      </table>  
-
-    
     
     </td>
     </tr>
