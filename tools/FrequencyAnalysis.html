@@ -40,7 +40,7 @@
          function freqAnalysisOnClick() {
           let text = document.getElementById("inputFreqAnalysis").value;
           let txtClean = cleanText(text);
-          let dict = frequencyAnalysis(txtClean);
+          let dict = frequencyAnalysis(txtClean, 1);
           outputTable(dict);
          }
        </script>
