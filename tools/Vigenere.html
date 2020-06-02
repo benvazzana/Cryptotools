@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Casesar Cipher</title>
+    <script src="../jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("../header.html"); 
+    });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+</head>
+
+
+
+
+
+<body>
+
+    <div id="includedContent"></div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>Vigen&egrave;re Cipher Tools</h1>
+
+        <h3>Encyryption   </h3>
+        <div id="vigEncrypt" class="default">
+  
+        Plaintext:
+        <textarea type="text" rows=4 cols=100 id="vigEncryptPlaintext"></textarea> <br />
+        Keyword:
+        <input type="text" id="vigEncyrptKey"><br>
+        </div>
+
+        <h3>Decyryption   </h3>
+        <div id="vigDecrypt" class="default">
+  
+        Plaintext:
+        <textarea type="text" rows=4 cols=100 id="vigDecryptCiphertext"></textarea> <br />
+        Keyword:
+        <input type="text" id="vigDecryptKey"><br>
+        </div>
+
+        <h3>Quadgraph Search  </h3>
+        <div id="quadgraphSearch" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="quadgraphCiphertext"></textarea> <br />
+        Number of Quadgraphs
+        <input type="text" id="numberQuadgraphs"><br>
+        </div>
+        
+        <h3>Subtext Frequency Analysis  </h3>
+        <div id="subtextFreqAnalysis" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="freqAnalysisCiphertext"></textarea> <br />
+        Keyword length
+        <input type="text" id="keywordLength"><br>
+        </div>
+    </td>
+    </tr>
+
+    </table>
+
+</body>
+</html>
