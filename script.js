@@ -119,13 +119,8 @@ function outputTable(dict) {
                 letter = key;
             }
         }
-        rows[i + 2].cells[3].innerHTML = letter;
-        rows[i + 2].cells[4].innerHTML = dict[letter];
+        rows[i + 2].cells[2].innerHTML = letter;
+        rows[i + 2].cells[3].innerHTML = dict[letter];
         delete dict[letter];
     }
 }
-
-let text = "The quick brown fox jumps over the lazy dog";
-let txtClean = cleanText(text);
-let dict = frequencyAnalysis(txtClean, 3);
-console.log(dict);
