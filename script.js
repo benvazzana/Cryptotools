@@ -104,8 +104,10 @@ function frequencyAnalysis(text, length) {
  * outputs the data to the HTML table on the frequency analysis
  * page
  * @param {Dictionary} dict dictionary of data
+ * @param {Number} column number from 1-3 specifying which column
+ * to output data to
  */
-function outputTable(dict) {
+function outputTable(dict, column) {
     let table = document.getElementById("freq_Analysis_Table");
     let rows = table.rows;
     let length = Object.keys(dict).length;
@@ -119,8 +121,8 @@ function outputTable(dict) {
                 letter = key;
             }
         }
-        rows[i + 2].cells[2].innerHTML = letter;
-        rows[i + 2].cells[3].innerHTML = dict[letter];
+        rows[i + 2].cells[column + 1].innerHTML = letter;
+        rows[i + 2].cells[column + 2].innerHTML = dict[letter];
         delete dict[letter];
     }
 }
