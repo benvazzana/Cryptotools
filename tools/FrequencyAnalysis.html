@@ -41,7 +41,11 @@
           let text = document.getElementById("inputFreqAnalysis").value;
           let txtClean = cleanText(text);
           let dict = frequencyAnalysis(txtClean, 1);
-          outputTable(dict);
+          outputTable(dict, 1);
+          dict = frequencyAnalysis(txtClean, 2);
+          outputTable(dict, 2);
+          dict = frequencyAnalysis(txtClean, 3);
+          outputTable(dict, 3);
          }
        </script>
        <button onclick=freqAnalysisOnClick()>Submit</button>

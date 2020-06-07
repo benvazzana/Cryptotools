@@ -90,11 +90,13 @@ function frequencyAnalysis(text, length) {
             dict[sub] = 1;
         }
     }
-    for(key in dict) {
-        dict[key] /= text.length;
-        dict[key] *= 1000.0;
-        dict[key] = Math.round(dict[key]);
-        dict[key] /= 10.0;
+    if(length == 1) {
+        for(key in dict) {
+            dict[key] /= text.length;
+            dict[key] *= 1000.0;
+            dict[key] = Math.round(dict[key]);
+            dict[key] /= 10.0;
+        }
     }
     return dict;
 }
@@ -111,6 +113,7 @@ function outputTable(dict, column) {
     let table = document.getElementById("freq_Analysis_Table");
     let rows = table.rows;
     let length = Object.keys(dict).length;
+    if(length > 26) length = 15;
     for(let i = 0; i < length; i++) {
         let n = -1;
         let letter = "";
@@ -121,8 +124,8 @@ function outputTable(dict, column) {
                 letter = key;
             }
         }
-        rows[i + 2].cells[column + 1].innerHTML = letter;
-        rows[i + 2].cells[column + 2].innerHTML = dict[letter];
+        rows[i + 2].cells[column * 2].innerHTML = letter;
+        rows[i + 2].cells[(column * 2) + 1].innerHTML = dict[letter];
         delete dict[letter];
     }
 }
