@@ -31,6 +31,11 @@ li
     text-align: center;
     margin: 7px 0;
 }
+.preDivLeft
+{
+    font-family:"Courier New", Courier, monospace;
+    margin: 7px 0;
+}
 .collapsible 
 {
     background-color: #336699;
