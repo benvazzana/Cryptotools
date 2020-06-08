@@ -61,13 +61,37 @@
         Ciphertext:
         <textarea type="text" rows=4 cols=100 id="quadgraphCiphertext"></textarea> <br />
         Number of Quadgraphs
-        <input type="text" id="numberQuadgraphs">             
-        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
+        <input type="text" id="numberQuadgraphs">
+        <script>
+          function btnQuadGraphClick() {
+            let text = document.getElementById("quadgraphCiphertext").value;
+            let nQuadGraphs = parseInt(document.getElementById("numberQuadgraphs").value);
+            let txtClean = cleanText(text);
+            let dict = frequencyAnalysis(txtClean, 4);
+            let table = document.getElementById("quad_Graph_Table");
+            if(table.rows.length == 1) {
+              for(let i = 1; i < nQuadGraphs; i++) {
+                let row = table.insertRow(i);
+                let cellQuadGraph = row.insertCell(0);
+                let cellFrequency = row.insertCell(1);
+                let n = -1;
+                let selectedKey = "";
+                for(key in dict) {
+                  let value = dict[key];
+                  if(value > n) {
+                    n = value;
+                    selectedKey = key;
+                  }
+                }
+                cellQuadGraph.innerHTML = selectedKey;
+                cellFrequency.innerHTML = dict[selectedKey];
+                delete dict[selectedKey];
+              }
+            }
+          }
+        </script>          
+        <button id="btnQuadGraph" onclick=btnQuadGraphClick()>Submit</button>
         </div>
-        
-        <!--TODO:
-        Quadraph analysis, add row to table for each quadgraph required with freuency
-        -->
 
         <p>
           <table id="quad_Graph_Table">

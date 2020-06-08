@@ -111,7 +111,6 @@ function frequencyAnalysis(text, length) {
  * to output data to
  */
 function outputTable(dict, column, tableId) {
-    //TODO: Make this work with other tables
     let table = document.getElementById(tableId);
     let rows = table.rows;
     let length = Object.keys(dict).length;
