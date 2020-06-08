@@ -41,7 +41,8 @@
         Plaintext:
         <textarea type="text" rows=4 cols=100 id="vigEncryptPlaintext"></textarea> <br />
         Keyword:
-        <input type="text" id="vigEncyrptKey"><br>
+        <input type="text" id="vigEncyrptKey">
+        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
         </div>
 
         <h3>Decyryption   </h3>
@@ -50,7 +51,8 @@
         Plaintext:
         <textarea type="text" rows=4 cols=100 id="vigDecryptCiphertext"></textarea> <br />
         Keyword:
-        <input type="text" id="vigDecryptKey"><br>
+        <input type="text" id="vigDecryptKey">
+        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
         </div>
 
         <h3>Quadgraph Search  </h3>
@@ -59,18 +61,126 @@
         Ciphertext:
         <textarea type="text" rows=4 cols=100 id="quadgraphCiphertext"></textarea> <br />
         Number of Quadgraphs
-        <input type="text" id="numberQuadgraphs"><br>
+        <input type="text" id="numberQuadgraphs">             
+        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
         </div>
         
+        <!--TODO:
+        Quadraph analysis, add row to table for each quadgraph required with freuency
+        -->
+
+        <p>
+          <table id="quad_Graph_Table">
+          <tr>
+           <td>Quadgraph </td>
+           <td>Frequency</td>
+          </tr>
+          </table>  
+        </p>
+        
+        <!--TODO
+          Clean the text.
+        If n = key word length, add 2*n columns. The first column is frequency analysis of letters 1, n+1, 2n+1,... The second column is frequence analysis for letters 2, n+2, 2n+2... and so on.
+        -->
+
         <h3>Subtext Frequency Analysis  </h3>
         <div id="subtextFreqAnalysis" class="default">
   
         Ciphertext:
-        <textarea type="text" rows=4 cols=100 id="freqAnalysisCiphertext"></textarea> <br />
+        <textarea type="text" rows=4 cols=100 id="freqAnalysisCiphertext"></textarea> <br>
         Keyword length
-        <input type="text" id="keywordLength"><br>
+        <input type="text" id="keywordLength">
+        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
         </div>
-    </td>
+        <p>
+          <table id="freq_Analysis_Table">       <tr>
+            <td><h3>Letter</h3></td>
+            <td><h3>Rel. Freq.</h3></td>
+        </tr>
+        <tr>
+        <td>a</td><td></td>
+        </tr>
+        <tr>
+          <td>b</td><td></td>
+        </tr>
+        <tr>
+          <td>c</td><td></td>
+        </tr>
+        <tr>
+          <td>d</td><td></td>
+        </tr>
+        <tr>
+          <td>e</td><td></td>
+        </tr>
+        <tr>
+          <td>f</td><td></td>
+        </tr>
+        <tr>
+          <td>g</td><td></td>
+        </tr>
+        <tr>
+          <td>h</td><td></td>
+        </tr>
+        <tr>
+          <td>i</td><td></td>
+        </tr>
+        <tr>
+          <td>j</td><td></td>
+        </tr>
+        <tr>
+          <td>k</td><td></td>
+        </tr>
+        <tr>
+          <td>l</td><td></td>
+        </tr>
+        <tr>
+          <td>m</td><td></td>
+        </tr>
+        <tr>
+          <td>n</td><td></td>
+        </tr>
+        <tr>
+          <td>o</td><td></td>
+        </tr>
+        <tr>
+          <td>p</td><td></td>
+        </tr>
+        <tr>
+          <td>q</td><td></td>
+        </tr>
+        <tr>
+          <td>r</td><td></td>
+        </tr>
+        <tr>
+          <td>s</td><td></td>
+        </tr>
+        <tr>
+          <td>t</td><td></td>
+        </tr>
+        <tr>
+          <td>u</td><td></td>
+        </tr>
+        <tr>
+          <td>v</td><td></td>
+        </tr>
+        <tr>
+          <td>w</td><td></td>
+        </tr>
+        <tr>
+          <td>x</td><td></td>
+        </tr>
+        <tr>
+          <td>y</td><td></td>
+        </tr>
+        <tr>
+          <td>z</td><td></td>
+        </tr>
+
+
+          </table>
+        </p>
+
+      </td>
     </tr>
 
     </table>
