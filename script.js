@@ -107,11 +107,12 @@ function frequencyAnalysis(text, length) {
  * page
  * @param {Dictionary} dict dictionary of data
  * @param {Number} column number from 1-3 specifying which column
+ * @param {String} tableId HTML id of table to edit
  * to output data to
  */
-function outputTable(dict, column) {
+function outputTable(dict, column, tableId) {
     //TODO: Make this work with other tables
-    let table = document.getElementById("freq_Analysis_Table");
+    let table = document.getElementById(tableId);
     let rows = table.rows;
     let length = Object.keys(dict).length;
     if(length > 26) length = 15;
