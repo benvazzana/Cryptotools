@@ -146,6 +146,12 @@ function spaceText(text, length) {
     return result;
 }
 
+/**
+ * This function Encrypts a string of text with the vigenere
+ * cipher given a keyword
+ * @param {String} text input plain text
+ * @param {String} keyword encryption keyword
+ */
 function vigenereEncrypt(text, keyword) {
     text = cleanText(text);
     keyword = cleanText(keyword);
@@ -169,6 +175,12 @@ function vigenereEncrypt(text, keyword) {
     return spaceText(result, 5);
 }
 
+/**
+ * This function Decrypts a string of vigenere ciphertext given a
+ * keyword
+ * @param {String} text vigenere ciphertext
+ * @param {String} keyword decryption keyword
+ */
 function vigenereDecrypt(text, keyword) {
     text = cleanText(text);
     keyword = cleanText(keyword);
