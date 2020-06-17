@@ -26,11 +26,17 @@ function textToNum(str) {
  * @returns {String} corresponding characters (all lowercase)
  */
 function numToText(nums) {
+    return numToText(nums, true);
+}
+
+function numToText(nums, isUpperCase) {
     let result = "";
     for(let i = 0; i < nums.length; i++) {
         let n = nums[i];
         if (n == 0) n = 26;
-        result += String.fromCharCode(n + 96);
+        let k = 96;
+        if(isUpperCase) k = 64;
+        result += String.fromCharCode(n + k);
     }
     return result;
 }
@@ -129,4 +135,59 @@ function outputTable(dict, column, tableId) {
         rows[i + 2].cells[(column * 2) + 1].innerHTML = dict[letter];
         delete dict[letter];
     }
+}
+
+function spaceText(text, length) {
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        result = result.concat(text.charAt(i));
+        if((i + 1) % length == 0) result = result.concat(' ');
+    }
+    return result;
+}
+
+function vigenereEncrypt(text, keyword) {
+    text = cleanText(text);
+    keyword = cleanText(keyword);
+
+    let textNums = textToNum(text);
+    let keywordNums = textToNum(keyword);
+
+    // Reduce each keyword value by 1 since 'a' indicates no shift
+    for(let i = 0; i < keywordNums.length; i++) {
+        keywordNums[i]--;
+    }
+
+    let n = keywordNums.length;
+
+    for(let i = 0; i < textNums.length; i++) {
+        textNums[i] += keywordNums[i % n];
+        textNums[i] %= 26;
+    }
+
+    let result = numToText(textNums, true);
+    return spaceText(result, 5);
+}
+
+function vigenereDecrypt(text, keyword) {
+    text = cleanText(text);
+    keyword = cleanText(keyword);
+
+    let textNums = textToNum(text);
+    let keywordNums = textToNum(keyword);
+
+    // Reduce each keyword value by 1 since 'a' indicates no shift
+    for(let i = 0; i < keywordNums.length; i++) {
+        keywordNums[i]--;
+    }
+
+    let n = keywordNums.length;
+
+    for(let i = 0; i < textNums.length; i++) {
+        textNums[i] -= keywordNums[i % n];
+        if(textNums[i] < 0) textNums[i] += 26;
+    }
+
+    let result = numToText(textNums, false);
+    return spaceText(result, 5);
 }

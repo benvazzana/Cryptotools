@@ -41,8 +41,16 @@
         Plaintext:
         <textarea type="text" rows=4 cols=100 id="vigEncryptPlaintext"></textarea> <br />
         Keyword:
-        <input type="text" id="vigEncyrptKey">
-        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
+        <input type="text" id="vigEncryptKey">
+        <script>
+          function btnVigEncryptOnClick() {
+            let text = document.getElementById('vigEncryptPlaintext').value;
+            let keyword = document.getElementById('vigEncryptKey').value;
+            document.getElementById('vigEncryptResult').innerHTML = vigenereEncrypt(text, keyword);
+          }
+        </script>
+        <button id="btnVigEncrypt" onclick=btnVigEncryptOnClick()>Submit</button>
+        <p id="vigEncryptResult"></p>
         </div>
 
         <h3>Decyryption   </h3>
@@ -52,7 +60,15 @@
         <textarea type="text" rows=4 cols=100 id="vigDecryptCiphertext"></textarea> <br />
         Keyword:
         <input type="text" id="vigDecryptKey">
-        <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
+        <script>
+          function btnVigDecryptOnClick() {
+            let text = document.getElementById('vigDecryptCiphertext').value;
+            let keyword = document.getElementById('vigDecryptKey').value;
+            document.getElementById('vigDecryptResult').innerHTML = vigenereDecrypt(text, keyword);
+          }
+        </script>
+        <button id="btnVigDecrypt" onclick=btnVigDecryptOnClick()>Submit</button>
+        <p id="vigDecryptResult"></p>
         </div>
 
         <h3>Quadgraph Search  </h3>
