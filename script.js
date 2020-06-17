@@ -203,3 +203,13 @@ function vigenereDecrypt(text, keyword) {
     let result = numToText(textNums, false);
     return spaceText(result, 5);
 }
+
+/**
+ * This function generates a random integer between two given numbers,
+ * both inclusive
+ * @param {Number} min smallest possible value
+ * @param {Number} max largest possible value
+ */
+function rng(min, max) {
+    return parseInt((Math.random() * (max - (min - 1))) + min)
+}
