@@ -37,9 +37,9 @@
                     let length = parseInt(document.getElementById('oneTimeLength').value);
                     let result = "";
                     for(let i = 0; i < length; i++) {
-                        result = result.concat(String.fromCharCode(rng(97, 122)));
+                        result = result.concat(String.fromCharCode(rng(65, 90)));
                     }
-                    document.getElementById('oneTimePadResult').innerHTML = result;
+                    document.getElementById('oneTimePadResult').innerHTML = spaceText(result, 5);
                 }
             </script>
             <button id="btnOneTimePad" onclick=btnOneTimePadOnClick()>Submit</button>
