@@ -32,14 +32,20 @@
         <div id="oneTimePad" class="default">
             <p id="lblOneTimePad">Number of letters in One Time Pad:</p>
             <input type="text" id="oneTimeLength">
-            <button id="btnOneTimePad" onclick=btnTxtNumClick()>Submit</button>
+            <script>
+                function btnOneTimePadOnClick() {
+                    let length = parseInt(document.getElementById('oneTimeLength').value);
+                    let result = "";
+                    for(let i = 0; i < length; i++) {
+                        result = result.concat(String.fromCharCode(rng(97, 122)));
+                    }
+                    document.getElementById('oneTimePadResult').innerHTML = result;
+                }
+            </script>
+            <button id="btnOneTimePad" onclick=btnOneTimePadOnClick()>Submit</button>
+            <p id="oneTimePadResult"></p>
 
         </div>
-    <!--TODO
-    The one time pad cipher is just the Vigenere cipher which has a keyword consisting of random letters of length greater than they plain text message. All we need here is a tool that will create a random string of letters of whatever length the used requests. 
-    Make the output in capital letters, with spacees between every 5 letters.
-    We can the re-use the Vigenere tools for the rest.
-    -->
 
 
 
