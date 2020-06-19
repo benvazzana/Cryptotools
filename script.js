@@ -151,6 +151,7 @@ function spaceText(text, length) {
  * cipher given a keyword
  * @param {String} text input plain text
  * @param {String} keyword encryption keyword
+ * @return {String} encrypted ciphertext
  */
 function vigenereEncrypt(text, keyword) {
     text = cleanText(text);
@@ -180,6 +181,7 @@ function vigenereEncrypt(text, keyword) {
  * keyword
  * @param {String} text vigenere ciphertext
  * @param {String} keyword decryption keyword
+ * @return {String} decrypted message
  */
 function vigenereDecrypt(text, keyword) {
     text = cleanText(text);
@@ -201,6 +203,45 @@ function vigenereDecrypt(text, keyword) {
     }
 
     let result = numToText(textNums, false);
+    return spaceText(result, 5);
+}
+
+/**
+ * This function encrypts a string of text with a monoalphabetic
+ * substitution cipher given a ciphertext alphabet
+ * @param {String} text input plain text
+ * @param {String} key string of length 26 representing a
+ * ciphertext alphabet
+ * @return {String} encrypted ciphertext
+ */
+function monoEncrypt(text, key) {
+    text = cleanText(text);
+    key = cleanText(key);
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let keyIndex = text.charCodeAt(i) - 65;
+        result = result.concat(key.charAt(keyIndex));
+    }
+    return spaceText(result, 5);
+}
+
+/**
+ * This function decrypts a string of ciphertext with a
+ * monoalphabetic substitution cipher given a ciphertext alphabet
+ * @param {String} text input ciphertext
+ * @param {String} key string of length 26 representing a
+ * ciphertext alphabet
+ * @return {String} decrypted message
+ */
+function monoDecrypt(text, key) {
+    text = cleanText(text);
+    key = cleanText(key);
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        let index = key.indexOf(c);
+        result = result.concat(String.fromCharCode(index + 65));
+    }
     return spaceText(result, 5);
 }
 

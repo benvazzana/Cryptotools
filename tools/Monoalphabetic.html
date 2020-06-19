@@ -42,7 +42,16 @@
         <input type="text" id="monoEncryptKey"><br>
         Plaintext:
         <textarea type="text" rows=4 cols=100 id="monoEncryptPlaintext"></textarea>
-        <button id="btnMonoEncrypt" onclick=btnVigEncryptOnClick()>Submit</button>
+        <script>
+          function btnMonoEncryptOnClick() {
+            let text = document.getElementById('monoEncryptPlaintext').value;
+            let key = document.getElementById('monoEncryptKey').value;
+            let cipherText = monoEncrypt(text, key);
+            document.getElementById('monoEncryptResult').innerHTML = cipherText;
+          }
+        </script>
+        <button id="btnMonoEncrypt" onclick=btnMonoEncryptOnClick()>Submit</button>
+        <p id="monoEncryptResult"></p>
         </div>
 
         <h3>Decyryption   </h3>
@@ -52,7 +61,16 @@
         <input type="text" id="monoDecryptKey">
         Plaintext:
         <textarea type="text" rows=4 cols=100 id="monoDecryptCiphertext"></textarea> <br />
+        <script>
+          function btnMonoDecryptOnClick() {
+            let text = document.getElementById('monoDecryptCiphertext').value;
+            let key = document.getElementById('monoDecryptKey').value;
+            let decryptedMessage = monoDecrypt(text, key);
+            document.getElementById('monoDecryptResult').innerHTML = decryptedMessage;
+          }
+        </script>
         <button id="btnMonoDecrypt" onclick=btnMonoDecryptOnClick()>Submit</button>
+        <p id="monoDecryptResult"></p>
 
         </div>
 
