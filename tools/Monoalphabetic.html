@@ -41,7 +41,7 @@
         Key:
         <input type="text" id="monoEncryptKey"><br>
         Plaintext:
-        <textarea type="text" rows=4 cols=100 id="monoEncryptPlaintext"></textarea>
+        <textarea type="text" rows=4 cols=100 id="monoEncryptPlaintext"></textarea> <br>
         <script>
           function btnMonoEncryptOnClick() {
             let text = document.getElementById('monoEncryptPlaintext').value;
@@ -57,9 +57,9 @@
         <h3>Decyryption   </h3>
         <div id="monoDecrypt" class="default">
   
-        Keyword:
-        <input type="text" id="monoDecryptKey">
-        Plaintext:
+        Key:
+        <input type="text" id="monoDecryptKey"><br>
+        Ciphertext:
         <textarea type="text" rows=4 cols=100 id="monoDecryptCiphertext"></textarea> <br />
         <script>
           function btnMonoDecryptOnClick() {
