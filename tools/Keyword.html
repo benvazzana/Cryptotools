@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Keyword Cipher</title>
+    <script src="../jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("../header.html"); 
+    });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+</head>
+
+
+
+
+
+<body>
+
+    <div id="includedContent"></div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>The Keyword Cipher</h1>
+
+        <h3>Encyryption   </h3>
+        <div id="keywordEncrypt" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordEncryptKey"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordEncryptKey"><br><br>
+
+        Plaintext:
+        <textarea type="text" rows=4 cols=100 id="keywordEncryptPlaintext"></textarea> <br>
+
+        <button id="btnkeywordEncrypt" onclick=btnkeywordEncryptOnClick()>Submit</button>
+        <p id="keywordEncryptResult"></p>
+        </div>
+
+        <h3>Decyryption   </h3>
+        <div id="keywordDecrypt" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKey"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="keywordDecryptCiphertext"></textarea> <br />
+
+        <button id="btnkeywordDecrypt" onclick=btnkeywordDecryptOnClick()>Submit</button>
+        <p id="keywordDecryptResult"></p>
+
+        </div>
+
+
+    </table>
+
+</body>
+</html>
