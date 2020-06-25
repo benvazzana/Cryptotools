@@ -245,6 +245,51 @@ function monoDecrypt(text, key) {
     return spaceText(result, 5);
 }
 
+function removeDupLetters(text) {
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        if(result.indexOf(c) == -1) result = result.concat(c);
+    }
+    return result;
+}
+
+function removeLetters(text, ...letters) {
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        if(!letters.includes(c)) result = result.concat(c);
+    }
+    return result;
+}
+
+function getKeywordAlphabet(key, letter) {
+    key = cleanText(key);
+    key = removeDupLetters(key);
+    letter = letter.toUpperCase();
+    let letterCode = letter.charCodeAt(0) - 65;
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let monoKey = [];
+    for(let i = 0; i < key.length; i++) {
+        monoKey[(i + letterCode) % 26] = key.charAt(i);
+    }
+    alphabet = removeLetters(alphabet, key.split(''));
+    for(let i = 0; i < alphabet.length; i++) {
+        monoKey[(i + letterCode + key.length) % 26] = alphabet.charAt(i);
+    }
+    return monoKey.join('');
+}
+
+function keywordEncrypt(text, key, letter) {
+    let alphabet = getKeywordAlphabet(key, letter);
+    return monoEncrypt(text, alphabet);
+}
+
+function keywordDecrypt(text, key, letter) {
+    let alphabet = getKeywordAlphabet(key, letter);
+    return monoDecrypt(text, alphabet);
+}
+
 /**
  * This function generates a random integer between two given numbers,
  * both inclusive
