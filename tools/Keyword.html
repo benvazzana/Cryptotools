@@ -41,12 +41,20 @@
         Keyword:
         <input type="text" id="keywordEncryptKey"><br><br>
         Keyletter:
-        <input type="text" maxlength="1" size="1" id="keywordEncryptKey"><br><br>
+        <input type="text" maxlength="1" size="1" id="keywordEncryptKeyLetter"><br><br>
 
         Plaintext:
         <textarea type="text" rows=4 cols=100 id="keywordEncryptPlaintext"></textarea> <br>
-
-        <button id="btnkeywordEncrypt" onclick=btnkeywordEncryptOnClick()>Submit</button>
+        <script>
+          function btnKeywordEncryptOnClick() {
+            let text = document.getElementById('keywordEncryptPlaintext').value;
+            let keyword = document.getElementById('keywordEncryptKey').value;
+            let keyLetter = document.getElementById('keywordEncryptKeyLetter').value;
+            let cipherText = keywordEncrypt(text, keyword, keyLetter);
+            document.getElementById('keywordEncryptResult').innerHTML = cipherText;
+          }
+        </script>
+        <button id="btnkeywordEncrypt" onclick=btnKeywordEncryptOnClick()>Submit</button>
         <p id="keywordEncryptResult"></p>
         </div>
 
@@ -56,11 +64,19 @@
         Keyword:
         <input type="text" id="keywordDecryptKey"><br><br>
         Keyletter:
-        <input type="text" maxlength="1" size="1" id="keywordDecryptKey"><br><br>
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter"><br><br>
         Ciphertext:
         <textarea type="text" rows=4 cols=100 id="keywordDecryptCiphertext"></textarea> <br />
-
-        <button id="btnkeywordDecrypt" onclick=btnkeywordDecryptOnClick()>Submit</button>
+        <script>
+          function btnKeywordDecryptOnClick() {
+            let text = document.getElementById('keywordDecryptCiphertext').value;
+            let keyword = document.getElementById('keywordDecryptKey').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt" onclick=btnKeywordDecryptOnClick()>Submit</button>
         <p id="keywordDecryptResult"></p>
 
         </div>
