@@ -242,7 +242,7 @@ function monoDecrypt(text, key) {
         let index = key.indexOf(c);
         result = result.concat(String.fromCharCode(index + 65));
     }
-    return spaceText(result, 5);
+    return spaceText(result, 5).toLowerCase();
 }
 
 function removeDupLetters(text) {
