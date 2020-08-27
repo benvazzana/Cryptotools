@@ -245,6 +245,12 @@ function monoDecrypt(text, key) {
     return spaceText(result, 5).toLowerCase();
 }
 
+/**
+ * This function removes any duplicate letters from a given string
+ * of text.
+ * @param {String} text input text
+ * @return {String} text with duplicate characters removed
+ */
 function removeDupLetters(text) {
     let result = "";
     for(let i = 0; i < text.length; i++) {
@@ -254,6 +260,12 @@ function removeDupLetters(text) {
     return result;
 }
 
+/**
+ * This function removes all given letters from the given string of
+ * text.
+ * @param {*} text input text
+ * @param  {...char} letters any letter
+ */
 function removeLetters(text, ...letters) {
     let result = "";
     for(let i = 0; i < text.length; i++) {
@@ -263,6 +275,15 @@ function removeLetters(text, ...letters) {
     return result;
 }
 
+/**
+ * This function generates a keyword alphabet for a keyword cipher
+ * given an encryption key and a shift letter
+ * @param {String} key keyword to insert into alphabet
+ * @param {char} letter letter indicating where to shift keyword into
+ * alphabet
+ * @return {String} keyword alphabet to be used for monoalphabetic
+ * substitution cipher
+ */
 function getKeywordAlphabet(key, letter) {
     key = cleanText(key);
     key = removeDupLetters(key);
@@ -280,11 +301,28 @@ function getKeywordAlphabet(key, letter) {
     return monoKey.join('');
 }
 
+/**
+ * This function encrypts a string of text with a keyword cipher
+ * given a string of text, a keyword, and a shift letter
+ * @param {String} text input plain text
+ * @param {String} key keyword
+ * @param {char} letter letter indicating where to shift keyword
+ * into cipher alphabet
+ * @return {String} encrypted text
+ */
 function keywordEncrypt(text, key, letter) {
     let alphabet = getKeywordAlphabet(key, letter);
     return monoEncrypt(text, alphabet);
 }
 
+/**
+ * This function decrypts a string of keyword-ciphered text
+ * @param {String} text input ciphertext
+ * @param {String} key keyword
+ * @param {char} letter letter indicating where to shift keyword
+ * into cipher alphabet
+ * @return {String} decrypted text
+ */
 function keywordDecrypt(text, key, letter) {
     let alphabet = getKeywordAlphabet(key, letter);
     return monoDecrypt(text, alphabet);
