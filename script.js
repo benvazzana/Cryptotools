@@ -329,6 +329,32 @@ function keywordDecrypt(text, key, letter) {
 }
 
 /**
+ * This function encrypts a string of text with a binary cipher
+ * given a string of text, and a key (in binary)
+ * @param {String} text input pain text
+ * @param {String} key binary encryption key
+ */
+function binaryEncrypt(text, key) {
+    text = text.toLowerCase();
+    let binaryText = "";
+    for(let i = 0; i < text.length; i++) {
+        let letterCode = text.charCodeAt(i);
+        letterBinaryStr = letterCode.toString(2);
+        letterBinaryStr = "00000000".substr(letterBinaryStr.length) + letterBinaryStr; // leading zeroes
+        binaryText = binaryText.concat(letterBinaryStr);
+    }
+    let keyLength = text.length * 8;
+    let extendedKey = "";
+    for(let i = 0; i < keyLength; i++) {
+        extendedKey = extendedKey.concat(key[i % 3]);
+    }
+    let textValue = parseInt(binaryText, 2);
+    let keyValue = parseInt(extendedKey, 2);;
+    let result = textValue ^ keyValue;
+    console.log(result.toString(16));
+}
+
+/**
  * This function generates a random integer between two given numbers,
  * both inclusive
  * @param {Number} min smallest possible value
@@ -337,3 +363,5 @@ function keywordDecrypt(text, key, letter) {
 function rng(min, max) {
     return parseInt((Math.random() * (max - (min - 1))) + min)
 }
+
+binaryDecrypt("ok", "101");
