@@ -333,9 +333,9 @@ function keywordDecrypt(text, key, letter) {
  * given a string of text, and a key (in binary)
  * @param {String} text input pain text
  * @param {String} key binary encryption key
+ * @return {String} encrypted text in hexadecimal form
  */
 function binaryEncrypt(text, key) {
-    text = text.toLowerCase();
     let binaryText = "";
     for(let i = 0; i < text.length; i++) {
         let letterCode = text.charCodeAt(i);
@@ -346,12 +346,50 @@ function binaryEncrypt(text, key) {
     let keyLength = text.length * 8;
     let extendedKey = "";
     for(let i = 0; i < keyLength; i++) {
-        extendedKey = extendedKey.concat(key[i % 3]);
+        extendedKey = extendedKey.concat(key[i % key.length]);
     }
     let textValue = parseInt(binaryText, 2);
-    let keyValue = parseInt(extendedKey, 2);;
+    let keyValue = parseInt(extendedKey, 2);
     let result = textValue ^ keyValue;
-    console.log(result.toString(16));
+    return result.toString(16);
+}
+
+/**
+ * This function decrypts a string of ciphertext with a binary cipher
+ * given the ciphertext, and a key (in binary)
+ * @param {String} text input ciphertext
+ * @param {String} key binary key
+ * @return {String} decrypted text (cases are preserved)
+ */
+function binaryDecrypt(text, key) {
+    let binaryCipherText = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        let n = parseInt(c, 16);
+        let letterBinaryStr = n.toString(2);
+        letterBinaryStr = "0000".substr(letterBinaryStr.length) + letterBinaryStr;
+        binaryCipherText = binaryCipherText.concat(letterBinaryStr);
+    }
+    let keyLength = text.length * 4;
+    let extendedKey = "";
+    for(let i = 0; i < keyLength; i++) {
+        extendedKey = extendedKey.concat(key[i % key.length]);
+    }
+    let textValue = parseInt(binaryCipherText, 2);
+    let keyValue = parseInt(extendedKey, 2);
+    let decryptedTextBinary = (textValue ^ keyValue).toString(2);
+    let leadingZeroes = "";
+    for(let i = 0; i < text.length * 4; i++) {
+        leadingZeroes = leadingZeroes.concat("0");
+    }
+    decryptedTextBinary = leadingZeroes.substr(decryptedTextBinary.length) + decryptedTextBinary;
+    let result = "";
+    for(let i = 0; i < text.length / 2; i++) {
+        let letterBinary = decryptedTextBinary.substr(i * 8, (i + 1) * 8);
+        let letterValue = parseInt(letterBinary, 2);
+        result = result.concat(String.fromCharCode(letterValue));
+    }
+    return result;
 }
 
 /**
@@ -363,5 +401,3 @@ function binaryEncrypt(text, key) {
 function rng(min, max) {
     return parseInt((Math.random() * (max - (min - 1))) + min)
 }
-
-binaryDecrypt("ok", "101");
