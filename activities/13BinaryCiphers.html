@@ -37,11 +37,42 @@
     5) Reverse step 1
     -->
 
+        <h3>Encyryption   </h3>
+        <div id="binaryEncrypt" class="default">
+  
+        Key:
+        <input type="text" id="binaryEncryptKey"><br>
+        Plaintext:
+        <textarea type="text" rows=4 cols=100 id="binaryEncryptPlaintext"></textarea> <br>
+        <script>
+          function btnbinaryEncryptOnClick() {
+            let text = document.getElementById('binaryEncryptPlaintext').value;
+            let key = document.getElementById('binaryEncryptKey').value;
+            let cipherText = binaryEncrypt(text, key);
+            document.getElementById('binaryEncryptResult').innerHTML = cipherText;
+          }
+        </script>
+        <button id="btnbinaryEncrypt" onclick=btnbinaryEncryptOnClick()>Submit</button>
+        <p id="binaryEncryptResult"></p>
+        </div>
 
-
-
-
-
+        <h3>Decyryption   </h3>
+        <div id="binaryDecrypt" class="default">
+  
+        Key:
+        <input type="text" id="binaryDecryptKey"><br>
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="binaryDecryptCiphertext"></textarea> <br />
+        <script>
+          function btnbinaryDecryptOnClick() {
+            let text = document.getElementById('binaryDecryptCiphertext').value;
+            let key = document.getElementById('binaryDecryptKey').value;
+            let decryptedMessage = binaryDecrypt(text, key);
+            document.getElementById('binaryDecryptResult').innerHTML = decryptedMessage;
+          }
+        </script>
+        <button id="btnbinaryDecrypt" onclick=btnbinaryDecryptOnClick()>Submit</button>
+        <p id="binaryDecryptResult"></p>
 
         
     </td>
