@@ -66,11 +66,14 @@ function listCompute(nums, op, scale) {
  * @returns {String} cleaned String of text
  */
 function cleanText(text) {
-    text = text.toUpperCase();
+    return cleanTextCaseSensitive(text.toUpperCase());
+}
+
+function cleanTextCaseSensitive(text) {
     let result = "";
     for(let i = 0; i < text.length; i++) {
         let c = text.charCodeAt(i);
-        if(c > 64 && c < 91) {
+        if((c > 64 && c < 91) || (c > 96 && c < 123)) {
             result = result.concat(text.charAt(i));
         }
     }
@@ -336,6 +339,7 @@ function keywordDecrypt(text, key, letter) {
  * @return {String} encrypted text in hexadecimal form
  */
 function binaryEncrypt(text, key) {
+    text = cleanTextCaseSensitive(text);
     let binaryText = "";
     for(let i = 0; i < text.length; i++) {
         let letterCode = text.charCodeAt(i);
@@ -348,10 +352,26 @@ function binaryEncrypt(text, key) {
     for(let i = 0; i < keyLength; i++) {
         extendedKey = extendedKey.concat(key[i % key.length]);
     }
-    let textValue = parseInt(binaryText, 2);
-    let keyValue = parseInt(extendedKey, 2);
-    let result = textValue ^ keyValue;
-    return result.toString(16);
+    let resultBinary = "";
+    for(let i = 0; i < binaryText.length; i++) {
+        let bit1 = binaryText.charAt(i);
+        let bit2 = extendedKey.charAt(i);
+        let sumBit = "";
+        if(bit1 == "0") {
+            sumBit = bit2;
+        } else if(bit1 == "1") {
+            if(bit2 == "0") sumBit = "1";
+            else sumBit = "0";
+        }
+        resultBinary = resultBinary.concat(sumBit);
+    }
+    let resultHex = "";
+    for(let i = 0; i < resultBinary.length / 4; i++) {
+        let nibble = resultBinary.substr(i * 4, 4);
+        let n = parseInt(nibble, 2);
+        resultHex = resultHex.concat(n.toString(16));
+    }
+    return resultHex;
 }
 
 /**
@@ -375,9 +395,21 @@ function binaryDecrypt(text, key) {
     for(let i = 0; i < keyLength; i++) {
         extendedKey = extendedKey.concat(key[i % key.length]);
     }
-    let textValue = parseInt(binaryCipherText, 2);
-    let keyValue = parseInt(extendedKey, 2);
-    let decryptedTextBinary = (textValue ^ keyValue).toString(2);
+    let decryptedTextBinary = "";
+    for(let i = 0; i < keyLength; i++) {
+        let bit1 = binaryCipherText.charAt(i);
+        let bit2 = extendedKey.charAt(i);
+        let sumBit = "";
+        if(bit1 == "0") {
+            sumBit = bit2;
+        } else if(bit1 == "1") {
+            if(bit2 == "0") sumBit = "1";
+            else {
+                sumBit = "0";
+            }
+        }
+        decryptedTextBinary = decryptedTextBinary.concat(sumBit);
+    }
     let leadingZeroes = "";
     for(let i = 0; i < text.length * 4; i++) {
         leadingZeroes = leadingZeroes.concat("0");
@@ -385,7 +417,7 @@ function binaryDecrypt(text, key) {
     decryptedTextBinary = leadingZeroes.substr(decryptedTextBinary.length) + decryptedTextBinary;
     let result = "";
     for(let i = 0; i < text.length / 2; i++) {
-        let letterBinary = decryptedTextBinary.substr(i * 8, (i + 1) * 8);
+        let letterBinary = decryptedTextBinary.substr(i * 8, 8);
         let letterValue = parseInt(letterBinary, 2);
         result = result.concat(String.fromCharCode(letterValue));
     }
