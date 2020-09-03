@@ -514,3 +514,32 @@ function binaryDecrypt(text, key) {
 function rng(min, max) {
     return parseInt((Math.random() * (max - (min - 1))) + min)
 }
+
+/**
+ * This function computes the gcd of 2 integers recursively using
+ * Euler's algorithm
+ * @param {Number} a 
+ * @param {Number} b 
+ */
+function gcd(a, b) {
+    if(a == 0) return b;
+    return gcd(b % a, a);
+}
+
+/**
+ * This function computes the gcd of 2 integers, a and b, along with
+ * 2 integers, x and y, such that ax + by = gcd(a, b) using Euler's
+ * extended algorithm
+ * @param {Number} a 
+ * @param {Number} b 
+ */
+function extendedGcd(a, b) {
+    if(a == 0) return [b, 0, 1];
+
+    let list = extendedGcd(b % a, a);
+
+    let x = list[2] - (Math.floor(b / a)) * list[1];
+    let y = list[1];
+
+    return [list[0], x, y];
+}
