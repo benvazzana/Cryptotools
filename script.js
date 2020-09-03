@@ -279,6 +279,20 @@ function removeLetters(text, ...letters) {
 }
 
 /**
+ * This function removes all spaces from a given string of text
+ * @param {String} text input text
+ * @return {String} text with spaces removed
+ */
+function removeSpaces(text) {
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        if(c != " ") result = result.concat(c);
+    }
+    return result;
+}
+
+/**
  * This function generates a keyword alphabet for a keyword cipher
  * given an encryption key and a shift letter
  * @param {String} key keyword to insert into alphabet
@@ -339,39 +353,106 @@ function keywordDecrypt(text, key, letter) {
  * @return {String} encrypted text in hexadecimal form
  */
 function binaryEncrypt(text, key) {
+    let binaryText = textToBinary(text);
+    let encryptedBinaryText = addKey(binaryText, key);
+    return binToHex(encryptedBinaryText);
+}
+
+/**
+ * This function converts a string of text into binary and returns
+ * it in the form of a string
+ * @param {String} text input string of text
+ * @return {String} output binary text
+ */
+function textToBinary(text) {
     text = cleanTextCaseSensitive(text);
     let binaryText = "";
     for(let i = 0; i < text.length; i++) {
         let letterCode = text.charCodeAt(i);
-        letterBinaryStr = letterCode.toString(2);
-        letterBinaryStr = "00000000".substr(letterBinaryStr.length) + letterBinaryStr; // leading zeroes
+        let letterBinaryStr = letterCode.toString(2);
+        letterBinaryStr = "00000000".substr(letterBinaryStr.length) + letterBinaryStr;
         binaryText = binaryText.concat(letterBinaryStr);
     }
-    let keyLength = text.length * 8;
+    return spaceText(binaryText, 8);
+}
+
+/**
+ * This function converts a binary string of text to normal text
+ * @param {String} binaryText binary text
+ * @return {String} output normal text
+ */
+function binToText(binaryText) {
+    binaryText = removeSpaces(binaryText);
+    let result = "";
+    for(let i = 0; i < binaryText.length / 8; i++) {
+        let letterBinaryStr = binaryText.substr(i * 8, 8);
+        let letterCode = parseInt(letterBinaryStr, 2);
+        let ch = String.fromCharCode(letterCode);
+        result = result.concat(ch);
+    }
+    return spaceText(result, 5);
+}
+
+/**
+ * This function adds a key (XOR operator) to a binary string of
+ * text and returns the result as a string
+ * @param {String} binaryText input binary text
+ * @param {String} key binary encryption key
+ * @return {String} resulting binary ciphertext
+ */
+function addKey(binaryText, key) {
+    binaryText = removeSpaces(binaryText);
+    let keyLength = binaryText.length;
     let extendedKey = "";
     for(let i = 0; i < keyLength; i++) {
         extendedKey = extendedKey.concat(key[i % key.length]);
     }
     let resultBinary = "";
     for(let i = 0; i < binaryText.length; i++) {
-        let bit1 = binaryText.charAt(i);
-        let bit2 = extendedKey.charAt(i);
-        let sumBit = "";
-        if(bit1 == "0") {
-            sumBit = bit2;
-        } else if(bit1 == "1") {
-            if(bit2 == "0") sumBit = "1";
-            else sumBit = "0";
-        }
+        let bit1Str = binaryText.charAt(i);
+        let bit2Str = extendedKey.charAt(i);
+        let bit1 = parseInt(bit1Str, 2);
+        let bit2 = parseInt(bit2Str, 2);
+        let sumBit = (bit1 ^ bit2).toString(2);
         resultBinary = resultBinary.concat(sumBit);
     }
-    let resultHex = "";
-    for(let i = 0; i < resultBinary.length / 4; i++) {
-        let nibble = resultBinary.substr(i * 4, 4);
+    return spaceText(resultBinary, 8);
+}
+
+/**
+ * This function converts a binary string of text into hexadecimal
+ * form
+ * @param {String} binaryText input binary text
+ * @return {String} hexadecimal form of the text
+ */
+function binToHex(binaryText) {
+    binaryText = removeSpaces(binaryText);
+    let result = "";
+    for(let i = 0; i < binaryText.length / 4; i++) {
+        let nibble = binaryText.substr(i * 4, 4);
         let n = parseInt(nibble, 2);
-        resultHex = resultHex.concat(n.toString(16));
+        result = result.concat(n.toString(16));
     }
-    return resultHex;
+    return spaceText(result, 5);
+}
+
+/**
+ * This function converts a hex string of text into binary
+ * form
+ * @param {String} hexText input hex text
+ * @return {String} binary form of the text
+ */
+function hexToBin(hexText) {
+    hexText = removeSpaces(hexText);
+    let result = "";
+    for(let i = 0; i < hexText.length; i++) {
+        let c = hexText.charAt(i);
+        let n = parseInt(c, 16);
+        let letterBinaryStr = n.toString(2);
+        letterBinaryStr = "0000".substr(letterBinaryStr.length) + letterBinaryStr;
+        result = result.concat(letterBinaryStr);
+    }
+    return spaceText(result, 8);
 }
 
 /**

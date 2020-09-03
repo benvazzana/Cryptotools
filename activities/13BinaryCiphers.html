@@ -39,42 +39,94 @@
 
         <h3>Encyryption   </h3>
         <div id="binaryEncrypt" class="default">
-  
-        Key:
-        <input type="text" id="binaryEncryptKey"><br>
-        Plaintext:
-        <textarea type="text" rows=4 cols=100 id="binaryEncryptPlaintext"></textarea> <br>
+        <h4>Text to Binary</h4>
+        Text:
+        <textarea type="text" rows=4 cols=100 id="textToBinary"></textarea> <br>
         <script>
-          function btnbinaryEncryptOnClick() {
-            let text = document.getElementById('binaryEncryptPlaintext').value;
-            let key = document.getElementById('binaryEncryptKey').value;
-            let cipherText = binaryEncrypt(text, key);
-            document.getElementById('binaryEncryptResult').innerHTML = cipherText;
+          function btnTextToBinaryOnClick() {
+            let text = document.getElementById('textToBinary').value;
+            let binaryText = textToBinary(text);
+            document.getElementById('textToBinaryResult').innerHTML = binaryText;
           }
         </script>
-        <button id="btnbinaryEncrypt" onclick=btnbinaryEncryptOnClick()>Submit</button>
-        <p id="binaryEncryptResult"></p>
+        <button id="btnTextToBinary" onclick=btnTextToBinaryOnClick()>Submit</button>
+        <p id="textToBinaryResult"></p>
+
+        <h4>Adding Key</h4>
+        Binary text:
+        <textarea type="text" rows=4 cols=100 id="addKeyTextEncrypt"></textarea> <br>
+        Key:
+        <input type="text" id="binaryKeyInputEncrypt"><br>
+        <script>
+          function btnAddKeyEncryptOnClick() {
+            let binaryText = document.getElementById('addKeyTextEncrypt').value;
+            let key = document.getElementById('binaryKeyInputEncrypt').value;
+            let resultBinary = addKey(binaryText, key);
+            document.getElementById('addKeyResultEncrypt').innerHTML = resultBinary;
+          }
+        </script>
+        <button id="btnAddKeyEncrypt" onclick=btnAddKeyEncryptOnClick()>Submit</button>
+        <p id="addKeyResultEncrypt"></p>
+
+        <h4>Binary to Hexadecimal</h4>
+        Binary text:
+        <textarea type="text" rows=4 cols=100 id="binToHexText"></textarea> <br>
+        <script>
+          function btnBinToHexOnClick() {
+            let binaryText = document.getElementById('binToHexText').value;
+            let hexText = binToHex(binaryText);
+            document.getElementById('binToHexResult').innerHTML = hexText;
+          }
+        </script>
+        <button id="btnBinToHex" onclick=btnBinToHexOnClick()>Submit</button>
+        <p id="binToHexResult"></p>
         </div>
 
         <h3>Decyryption   </h3>
         <div id="binaryDecrypt" class="default">
-  
-        Key:
-        <input type="text" id="binaryDecryptKey"><br>
-        Ciphertext:
-        <textarea type="text" rows=4 cols=100 id="binaryDecryptCiphertext"></textarea> <br />
-        <script>
-          function btnbinaryDecryptOnClick() {
-            let text = document.getElementById('binaryDecryptCiphertext').value;
-            let key = document.getElementById('binaryDecryptKey').value;
-            let decryptedMessage = binaryDecrypt(text, key);
-            document.getElementById('binaryDecryptResult').innerHTML = decryptedMessage;
-          }
-        </script>
-        <button id="btnbinaryDecrypt" onclick=btnbinaryDecryptOnClick()>Submit</button>
-        <p id="binaryDecryptResult"></p>
+          <h4>Hexadecimal to Binary</h4>
+          Hexadecimal text:
+          <textarea type="text" rows=4 cols=100 id="hexToBinText"></textarea> <br>
+          <script>
+            function btnHexToBinOnClick() {
+              let hexText = document.getElementById('hexToBinText').value;
+              let binText = hexToBin(hexText);
+              document.getElementById('hexToBinResult').innerHTML = binText;
+            }
+          </script>
+          <button id="btnHexToBin" onclick=btnHexToBinOnClick()>Submit</button>
+          <p id="hexToBinResult"></p>
 
-        
+          <h4>Adding Key</h4>
+          Binary text:
+          <textarea type="text" rows=4 cols=100 id="addKeyTextDecrypt"></textarea> <br>
+          Key:
+          <input type="text" id="binaryKeyInputDecrypt"><br>
+          <script>
+            function btnAddKeyDecryptOnClick() {
+              let binaryText = document.getElementById('addKeyTextDecrypt').value;
+              let key = document.getElementById('binaryKeyInputDecrypt').value;
+              let resultBinary = addKey(binaryText, key);
+              console.log(resultBinary);
+              document.getElementById('addKeyResultDecrypt').innerHTML = resultBinary;
+            }
+          </script>
+          <button id="btnAddKeyDecrypt" onclick=btnAddKeyDecryptOnClick()>Submit</button>
+          <p id="addKeyResultDecrypt"></p>
+
+          <h4>Binary to Text</h4>
+          Binary Text:
+          <textarea type="text" rows=4 cols=100 id="binToTextInput"></textarea> <br>
+          <script>
+            function btnBinToTextOnClick() {
+              let binaryText = document.getElementById("binToTextInput").value;
+              let result = binToText(binaryText);
+              document.getElementById('binToTextResult').innerHTML = result;
+            }
+          </script>
+          <button id="btnBinToText" onclick=btnBinToTextOnClick()>Submit</button>
+          <p id="binToTextResult"></p>
+        </div>
     </td>
     </tr>
 </table>
