@@ -543,3 +543,39 @@ function extendedGcd(a, b) {
 
     return [list[0], x, y];
 }
+
+function successiveSquare(a, k, n) {
+    let largest2Pow = 1;
+    while(largest2Pow < k) largest2Pow *= 2;
+    largest2Pow /= 2;
+
+    let powerTable = {};
+
+    for(let i = 1; i <= largest2Pow; i *= 2) {
+        if(i == 1) {
+            powerTable[i] = a;
+        } else {
+            powerTable[i] = Math.pow(powerTable[i / 2], 2) % n;
+        }
+    }
+    
+    let exponent = k;
+    let pow = largest2Pow;
+    let powers = [];
+    while(pow > 0) {
+        powers.push(pow);
+        exponent -= pow;
+        while(pow > exponent) {
+            pow /= 2;
+        }
+    }
+    let result = 1;
+    for(let i = 0; i < powers.length; i++) {
+        exponent = powers[i];
+        result *= powerTable[exponent];
+        result %= n;
+    }
+    return result;
+}
+
+console.log(successiveSquare(5, 703, 826));
