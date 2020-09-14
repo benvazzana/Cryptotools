@@ -26,14 +26,37 @@
     <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
     </td>
     <td>
-    <h1> Binary One Time Pads </h1>
+        <h1> Binary One Time Pads </h1>
 
 <!-- TODO
     This works the same as Binary. We just need to add a command to generate a psuedo random list of bits of specified length. The way I did this before was to have the used input a prime p, and exponent s, and a length m, and then computes 2^t mod p mod 2 starting with t=s and continuing to t=s+m-1
 
 
--->>
-        
+-->
+    <div id="binaryOneTimePad" class="default">
+        Text:
+        <textarea type="text" rows=4 cols=100 id="txtBinaryOneTimePadInput"></textarea> <br />
+        Prime number:
+        <input type="text" id="txtPrime"> <br />
+        Exponent:
+        <input type="text" id="txtExponent"> <br />
+    </div>
+    <script>
+        function btnBinaryOneTimePadEncryptOnClick() {
+            let text = document.getElementById('txtBinaryOneTimePadInput').value;
+            let prime = parseInt(document.getElementById('txtPrime').value);
+            let exponent = parseInt(document.getElementById('txtExponent').value);
+            let length = text.length * 8;
+
+            let key = generateBinaryOneTimePad(prime, exponent, length);
+            let binaryText = textToBinary(text);
+            let encryptedText = addKey(binaryText, key);
+            let result = binToHex(encryptedText);
+            document.getElementById('binaryOneTimePadResult').innerHTML = result;
+        }
+    </script>
+    <button id="btnBinaryOneTimePadEncrypt" onclick=btnBinaryOneTimePadEncryptOnClick()>Submit</button>
+    <p id="binaryOneTimePadResult"></p>
     </td>
     </tr>
 </table>

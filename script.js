@@ -66,10 +66,10 @@ function listCompute(nums, op, scale) {
  * @returns {String} cleaned String of text
  */
 function cleanText(text) {
-    return cleanTextCaseSensitive(text.toUpperCase());
+    return cleanTextCaseSensative(text.toUpperCase());
 }
 
-function cleanTextCaseSensitive(text) {
+function cleanTextCaseSensative(text) {
     let result = "";
     for(let i = 0; i < text.length; i++) {
         let c = text.charCodeAt(i);
@@ -365,7 +365,7 @@ function binaryEncrypt(text, key) {
  * @return {String} output binary text
  */
 function textToBinary(text) {
-    text = cleanTextCaseSensitive(text);
+    text = cleanTextCaseSensative(text);
     let binaryText = "";
     for(let i = 0; i < text.length; i++) {
         let letterCode = text.charCodeAt(i);
@@ -578,4 +578,13 @@ function successiveSquare(a, k, n) {
     return result;
 }
 
-console.log(successiveSquare(5, 703, 826));
+function generateBinaryOneTimePad(p, s, m) {
+    let key = "";
+    for(let t = s; t < s + m; t++) {
+        let bit = successiveSquare(2, t, p) % 2;
+        key = key.concat(bit);
+    }
+    return key;
+}
+
+console.log(generateBinaryOneTimePad(5, 81, 18));
