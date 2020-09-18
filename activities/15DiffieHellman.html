@@ -29,9 +29,11 @@
     <h1> The Diffie - Hellman Exchange </h1>
 
     <!--TODO
-        1) Need a procedure to compute a^k mod p
-        2) A procedure which on input message m and key k (a number) will do the Binary Encryption using the base 2 expansion of k as the key
-        3) Decryption procedure
+        1) Given input a, k, n compute a^k mod n
+        2) Given input of a number, conver number to binary
+        3) Put the binary cipher back together and create a one step command for encryption and one for decryption:
+           a) Given input plaintext and key (list of bits) - convert message to binary, add key, convert result to hexadecimal
+           b) Given hexadecimal input and key (list of bits) - convert hex to binary, add key, convert back to text.
 
     -->
 
