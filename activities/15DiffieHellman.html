@@ -36,6 +36,81 @@
            b) Given hexadecimal input and key (list of bits) - convert hex to binary, add key, convert back to text.
 
     -->
+    <div id="diffieHellman" class="default">
+        <h3>Computing a^k mod n</h3>
+        Base (a):
+        <input type="text" id="txtBase"> <br />
+        Exponent (k):
+        <input type="text" id="txtExponent"> <br />
+        Modulus (n):
+        <input type="text" id="txtModulus"> <br />
+        <script>
+            function btnComputeOnClick() {
+                let a = document.getElementById('txtBase').value;
+                let k = document.getElementById('txtExponent').value;
+                let n = document.getElementById('txtModulus').value;
+                let result = successiveSquare(a, k, n);
+                document.getElementById('computeResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnCompute" onclick=btnComputeOnClick()>Submit</button>
+        <p id="computeResult"></p>
+
+        <h3>Binary Conversion</h3>
+        Number:
+        <input type="text" id="txtNumber"> <br />
+        <script>
+            function btnNumToBinaryOnClick() {
+                let numStr = document.getElementById('txtNumber').value;
+                let num = parseInt(numStr);
+                let binaryNumStr = num.toString(2);
+                let length = binaryNumStr.length;
+                let nLeadingZeroes = 8 - (length % 8);
+                console.log(nLeadingZeroes);
+                let leadingZeroes = "";
+                for(let i = 0; i < nLeadingZeroes; i++) {
+                    leadingZeroes += "0";
+                }
+                console.log(leadingZeroes);
+                let adjustedNumStr = leadingZeroes + binaryNumStr;
+                document.getElementById('numToBinaryResult').innerHTML = adjustedNumStr;
+            }
+        </script>
+        <button id="btnNumToBinary" onclick=btnNumToBinaryOnClick()>Submit</button>
+        <p id="numToBinaryResult"></p>
+
+        <h3>Encryption (Binary Cipher)</h3>
+        Plaintext:
+        <input type="text" id="txtPlaintext"> <br />
+        Key:
+        <input type="text" id="txtKey"> <br />
+        <script>
+            function btnBinaryEncryptOnClick() {
+                let plainText = document.getElementById('txtPlaintext').value;
+                let key = document.getElementById('txtKey').value;
+                let result = binaryEncrypt(plainText, key);
+                document.getElementById('binaryEncryptResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnBinaryEncrypt" onclick=btnBinaryEncryptOnClick()>Submit</button>
+        <p id="binaryEncryptResult"></p>
+
+        <h3>Decryption (Binary Cipher)</h3> 
+        Ciphertext:
+        <input type="text" id="txtCiphertext"> <br />
+        Key:
+        <input type="text" id="txtKeyDecrypt"> <br />
+        <script>
+            function btnBinaryDecryptOnClick() {
+                let cipherText = document.getElementById('txtCiphertext').value;
+                let key = document.getElementById('txtKeyDecrypt').value;
+                let result = binaryDecrypt(cipherText, key);
+                document.getElementById('binaryDecryptResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnBinaryDecrypt" onclick=btnBinaryDecryptOnClick()>Submit</button>
+        <p id="binaryDecryptResult"></p>
+    </div>
 
         
     </td>

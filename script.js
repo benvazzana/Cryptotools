@@ -366,6 +366,7 @@ function binaryEncrypt(text, key) {
  */
 function textToBinary(text) {
     text = cleanTextCaseSensative(text);
+    console.log('TEXT: ' + text);
     let binaryText = "";
     for(let i = 0; i < text.length; i++) {
         let letterCode = text.charCodeAt(i);
@@ -373,6 +374,7 @@ function textToBinary(text) {
         letterBinaryStr = "00000000".substr(letterBinaryStr.length) + letterBinaryStr;
         binaryText = binaryText.concat(letterBinaryStr);
     }
+    console.log("BINARY PLAINTEXT: " + binaryText);
     return spaceText(binaryText, 8);
 }
 
@@ -407,6 +409,7 @@ function addKey(binaryText, key) {
     for(let i = 0; i < keyLength; i++) {
         extendedKey = extendedKey.concat(key[i % key.length]);
     }
+    console.log("EXTENDED KEY: " + extendedKey);
     let resultBinary = "";
     for(let i = 0; i < binaryText.length; i++) {
         let bit1Str = binaryText.charAt(i);
@@ -416,6 +419,7 @@ function addKey(binaryText, key) {
         let sumBit = (bit1 ^ bit2).toString(2);
         resultBinary = resultBinary.concat(sumBit);
     }
+    console.log('BINARY CIPHERTEXT: ' + resultBinary);
     return spaceText(resultBinary, 8);
 }
 
@@ -464,6 +468,7 @@ function hexToBin(hexText) {
  */
 function binaryDecrypt(text, key) {
     let binaryCipherText = "";
+    text = removeSpaces(text);
     for(let i = 0; i < text.length; i++) {
         let c = text.charAt(i);
         let n = parseInt(c, 16);
@@ -586,5 +591,3 @@ function generateBinaryOneTimePad(p, s, m) {
     }
     return key;
 }
-
-console.log(generateBinaryOneTimePad(5, 81, 18));
