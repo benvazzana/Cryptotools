@@ -545,6 +545,14 @@ function extendedGcd(a, b) {
     return [list[0], x, y];
 }
 
+/**
+ * Given large numbers a, k, and n, this function computes
+ * a^k modulus n using the successive squaring method
+ * @param {Number} a base 
+ * @param {Number} k exponent
+ * @param {Number} n modulus
+ * @return {Number} a^k modulus n
+ */
 function successiveSquare(a, k, n) {
     let largest2Pow = 1;
     while(largest2Pow < k) largest2Pow *= 2;
@@ -579,6 +587,14 @@ function successiveSquare(a, k, n) {
     return result;
 }
 
+/**
+ * This function generates a key for a binary cipher given a prime
+ * number, an exponent, and a length
+ * @param {Number} p input prime
+ * @param {Number} s exponent
+ * @param {Number} m length
+ * @return {String} binary key
+ */
 function generateBinaryOneTimePad(p, s, m) {
     let key = "";
     for(let t = s; t < s + m; t++) {
@@ -586,4 +602,17 @@ function generateBinaryOneTimePad(p, s, m) {
         key = key.concat(bit);
     }
     return key;
+}
+
+/**
+ * This function determines whether or not a given positive whole
+ * number is prime
+ * @param {Number} n input number
+ * @return {Boolean} true if prime, false if not
+ */
+function isPrime(n) {
+    for(let i = 2; i < n; i++) {
+        if(n % 2 == 0) return false;
+    }
+    return true;
 }
