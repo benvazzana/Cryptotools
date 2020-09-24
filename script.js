@@ -605,6 +605,23 @@ function generateBinaryOneTimePad(p, s, m) {
 }
 
 /**
+ * Given an integer, n, thsi function returns the next prime number
+ * found after n. If n itself is prime, the following prime number
+ * will be returned.
+ * @param {Number} n input integer 
+ */
+function findNextPrime(n) {
+    let found = false;
+    while(!found) {
+        n++;
+        if(isPrime(n)) {
+            found = true;
+        }
+    }
+    return n;
+}
+
+/**
  * This function determines whether or not a given positive whole
  * number is prime
  * @param {Number} n input number
