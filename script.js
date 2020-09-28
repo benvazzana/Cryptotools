@@ -26,7 +26,7 @@ function textToNum(str) {
  * @returns {String} corresponding characters (all lowercase)
  */
 function numToText(nums) {
-    return numToText(nums, true);
+    return numToText(nums, false);
 }
 
 function numToText(nums, isUpperCase) {
@@ -154,7 +154,7 @@ function spaceText(text, length) {
  * cipher given a keyword
  * @param {String} text input plain text
  * @param {String} keyword encryption keyword
- * @return {String} encrypted ciphertext
+ * @returns {String} encrypted ciphertext
  */
 function vigenereEncrypt(text, keyword) {
     text = cleanText(text);
@@ -184,7 +184,7 @@ function vigenereEncrypt(text, keyword) {
  * keyword
  * @param {String} text vigenere ciphertext
  * @param {String} keyword decryption keyword
- * @return {String} decrypted message
+ * @returns {String} decrypted message
  */
 function vigenereDecrypt(text, keyword) {
     text = cleanText(text);
@@ -215,7 +215,7 @@ function vigenereDecrypt(text, keyword) {
  * @param {String} text input plain text
  * @param {String} key string of length 26 representing a
  * ciphertext alphabet
- * @return {String} encrypted ciphertext
+ * @returns {String} encrypted ciphertext
  */
 function monoEncrypt(text, key) {
     text = cleanText(text);
@@ -234,7 +234,7 @@ function monoEncrypt(text, key) {
  * @param {String} text input ciphertext
  * @param {String} key string of length 26 representing a
  * ciphertext alphabet
- * @return {String} decrypted message
+ * @returns {String} decrypted message
  */
 function monoDecrypt(text, key) {
     text = cleanText(text);
@@ -252,7 +252,7 @@ function monoDecrypt(text, key) {
  * This function removes any duplicate letters from a given string
  * of text.
  * @param {String} text input text
- * @return {String} text with duplicate characters removed
+ * @returns {String} text with duplicate characters removed
  */
 function removeDupLetters(text) {
     let result = "";
@@ -281,7 +281,7 @@ function removeLetters(text, ...letters) {
 /**
  * This function removes all spaces from a given string of text
  * @param {String} text input text
- * @return {String} text with spaces removed
+ * @returns {String} text with spaces removed
  */
 function removeSpaces(text) {
     let result = "";
@@ -298,7 +298,7 @@ function removeSpaces(text) {
  * @param {String} key keyword to insert into alphabet
  * @param {char} letter letter indicating where to shift keyword into
  * alphabet
- * @return {String} keyword alphabet to be used for monoalphabetic
+ * @returns {String} keyword alphabet to be used for monoalphabetic
  * substitution cipher
  */
 function getKeywordAlphabet(key, letter) {
@@ -325,7 +325,7 @@ function getKeywordAlphabet(key, letter) {
  * @param {String} key keyword
  * @param {char} letter letter indicating where to shift keyword
  * into cipher alphabet
- * @return {String} encrypted text
+ * @returns {String} encrypted text
  */
 function keywordEncrypt(text, key, letter) {
     let alphabet = getKeywordAlphabet(key, letter);
@@ -338,7 +338,7 @@ function keywordEncrypt(text, key, letter) {
  * @param {String} key keyword
  * @param {char} letter letter indicating where to shift keyword
  * into cipher alphabet
- * @return {String} decrypted text
+ * @returns {String} decrypted text
  */
 function keywordDecrypt(text, key, letter) {
     let alphabet = getKeywordAlphabet(key, letter);
@@ -350,7 +350,7 @@ function keywordDecrypt(text, key, letter) {
  * given a string of text, and a key (in binary)
  * @param {String} text input pain text
  * @param {String} key binary encryption key
- * @return {String} encrypted text in hexadecimal form
+ * @returns {String} encrypted text in hexadecimal form
  */
 function binaryEncrypt(text, key) {
     let binaryText = textToBinary(text);
@@ -362,7 +362,7 @@ function binaryEncrypt(text, key) {
  * This function converts a string of text into binary and returns
  * it in the form of a string
  * @param {String} text input string of text
- * @return {String} output binary text
+ * @returns {String} output binary text
  */
 function textToBinary(text) {
     text = cleanTextCaseSensative(text);
@@ -379,7 +379,7 @@ function textToBinary(text) {
 /**
  * This function converts a binary string of text to normal text
  * @param {String} binaryText binary text
- * @return {String} output normal text
+ * @returns {String} output normal text
  */
 function binToText(binaryText) {
     binaryText = removeSpaces(binaryText);
@@ -398,7 +398,7 @@ function binToText(binaryText) {
  * text and returns the result as a string
  * @param {String} binaryText input binary text
  * @param {String} key binary encryption key
- * @return {String} resulting binary ciphertext
+ * @returns {String} resulting binary ciphertext
  */
 function addKey(binaryText, key) {
     binaryText = removeSpaces(binaryText);
@@ -423,7 +423,7 @@ function addKey(binaryText, key) {
  * This function converts a binary string of text into hexadecimal
  * form
  * @param {String} binaryText input binary text
- * @return {String} hexadecimal form of the text
+ * @returns {String} hexadecimal form of the text
  */
 function binToHex(binaryText) {
     binaryText = removeSpaces(binaryText);
@@ -440,7 +440,7 @@ function binToHex(binaryText) {
  * This function converts a hex string of text into binary
  * form
  * @param {String} hexText input hex text
- * @return {String} binary form of the text
+ * @returns {String} binary form of the text
  */
 function hexToBin(hexText) {
     hexText = removeSpaces(hexText);
@@ -460,7 +460,7 @@ function hexToBin(hexText) {
  * given the ciphertext, and a key (in binary)
  * @param {String} text input ciphertext
  * @param {String} key binary key
- * @return {String} decrypted text (cases are preserved)
+ * @returns {String} decrypted text (cases are preserved)
  */
 function binaryDecrypt(text, key) {
     let binaryCipherText = "";
@@ -504,6 +504,34 @@ function binaryDecrypt(text, key) {
         result = result.concat(String.fromCharCode(letterValue));
     }
     return result;
+}
+
+/**
+ * Encrypts a string of text using the Hill cipher given a 2x2 matrix
+ * as a key
+ * @param {String} text 
+ * @param {Array<Number>} mat2 array storing 2x2 matrix
+ * @returns {String} encrypted text
+ */
+function hillEncrypt(text, mat2) {
+    text = cleanText(text);
+    if(text.length % 2 == 1) {
+        text += "q";
+    }
+    let a = mat2[0];
+    let b = mat2[1];
+    let c = mat2[2];
+    let d = mat2[3];
+    if(a * d - b * c == 0) console.log("Matrix is not invertible!");
+    txtNums = textToNum(text);
+    let resultNums = [];
+    for(let i = 0; i < txtNums.length - 1; i += 2) {
+        let m = txtNums[i];
+        let n = txtNums[i + 1];
+        resultNums.push((a * m + b * n) % 26, (c * m + d * n) % 26);
+    }
+    let result = numToText(resultNums, true);
+    return spaceText(result, 4);
 }
 
 /**
