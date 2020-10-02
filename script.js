@@ -507,13 +507,13 @@ function binaryDecrypt(text, key) {
 }
 
 /**
- * Encrypts a string of text using the Hill cipher given a 2x2 matrix
+ * Performs a Hill cipher on a string of text given a 2x2 matrix
  * as a key
  * @param {String} text 
  * @param {Array<Number>} mat2 array storing 2x2 matrix
  * @returns {String} encrypted text
  */
-function hillEncrypt(text, mat2) {
+function hillCipher(text, mat2) {
     text = cleanText(text);
     if(text.length % 2 == 1) {
         text += "q";
@@ -528,8 +528,15 @@ function hillEncrypt(text, mat2) {
     for(let i = 0; i < txtNums.length - 1; i += 2) {
         let m = txtNums[i];
         let n = txtNums[i + 1];
-        resultNums.push((a * m + b * n) % 26, (c * m + d * n) % 26);
+        let h = (a * m + b * n);
+        let k = (c * m + d * n);
+        while(h < 0) h += 26;
+        while(k < 0) k += 26;
+        h %= 26;
+        k %= 26;
+        resultNums.push(h, k);
     }
+    console.log(resultNums);
     let result = numToText(resultNums, true);
     return spaceText(result, 4);
 }

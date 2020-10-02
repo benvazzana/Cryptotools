@@ -43,10 +43,33 @@
     7) Convert back to letters, capital, in blocks of 4
     -->
 
-
-
-
-
+    <div id="hillCipher" class="default">
+        <h3>Algorithm (Encryption and Decryption)</h3>
+        Text:
+        <input type="text" id="txtHill"> <br />
+        <p id="matWarning"></p>
+        Matrix (Format: "a, b, c, d"):
+        <input type="text" id="txtMatrix"> <br />
+        <button id="btnSubmit" onclick=btnSubmitOnClick()>Submit</button>
+        <script>
+            function btnSubmitOnClick() {
+                let text = document.getElementById('txtHill').value;
+                let matStr = document.getElementById('txtMatrix').value;
+                matStr = removeSpaces(matStr);
+                let matListStr = matStr.split(',');
+                let mat2 = [];
+                for(let i = 0; i < matListStr.length; i++) {
+                    mat2.push(matListStr[i]);
+                }
+                let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
+                if(det == 0) {
+                    document.getElementById('matWarning').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                document.getElementById('hillResult').innerHTML = hillCipher(text, mat2);
+            }
+        </script>
+        <p id="hillResult"></p>
+    </div>
         
     </td>
     </tr>
