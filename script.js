@@ -542,6 +542,78 @@ function hillCipher(text, mat2) {
 }
 
 /**
+ * Converts a string of text into a list of numbers by grouping
+ * characters into groups of 4, filling in 0's in front of single
+ * digits
+ * @param {String} message input plaintext
+ * @returns {Array<Number>} list of numbers
+ */
+function phTxtNums(message) {
+    message = cleanText(message);
+    let nExtraCharacters = message.length % 4;
+    for(let i = 0; i < nExtraCharacters; i++) {
+        message += "q";
+    }
+    let nums = textToNum(message);
+    let groupedNumStrs = [];
+    for(let i = 0; i < message.length; i += 4) {
+        let str = "";
+        for(let j = 0; j < 4; j++) {
+            let n = nums[i + j];
+            if(n < 10) str += ("0" + n.toString());
+            else str += n.toString();
+        }
+        groupedNumStrs.push(str);
+    }
+    let groupedNums = [];
+    for(let i = 0; i < groupedNumStrs.length; i++) {
+        groupedNums.push(parseInt(groupedNumStrs[i]));
+    }
+    return groupedNums;
+}
+
+/**
+ * Converts a list of numbers into characters by splitting
+ * each number into 4 sections, getting a single character from
+ * each section
+ * @param {Array<Number>} nums input list of numbers
+ * @returns {String} resulting string
+ */
+function phNumsTxt(nums) {
+    let result = "";
+    for(let i = 0; i < nums.length; i++) {
+        let n = nums[i];
+        let numStr = n.toString();
+        if(numStr.length < 8) {
+            numStr = "0" + numStr;
+        }
+        for(let j = 0; j < 4; j++) {
+            let charNumStr = numStr.substr(j * 2, 2);
+            let charNum = parseInt(charNumStr);
+            let ch = charNum + 65;
+            result += String.fromCharCode(ch);
+        }
+    }
+}
+
+/**
+ * For each number in the list of numbers, this function calculates
+ * list[i]^t mod n, returning it as a separate list
+ * @param {Array<Number>} nums 
+ * @param {Number} t 
+ * @param {Number} n 
+ * @returns {Array<Number>} resulting list of numbers
+ */
+function phExponentiate(nums, t, n) {
+    let resultNums = [];
+    for(let i = 0; i < nums.length; i++) {
+        let result = successiveSquare(nums[i], t, n);
+        resultNums.push(result);
+    }
+    return resultNums;
+}
+
+/**
  * This function generates a random integer between two given numbers,
  * both inclusive
  * @param {Number} min smallest possible value
@@ -668,3 +740,7 @@ function isPrime(n) {
     }
     return true;
 }
+
+let text = "abcdefghij";
+let nums = phTxtNums(text);
+console.log(nums);
