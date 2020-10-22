@@ -16,7 +16,7 @@
 
 
 <body>
-    <div id="includedContent"></div>
+    <div id="includedContent" class="default"></div>
 
         
 <table style="width:100%"  cellspacing="0" cellpadding="07" >
@@ -39,9 +39,105 @@
 
 
     -->
+    <h3>Next Prime</h3>
+    Number:
+    <input type="text" id="txtNextPrime">
+    <script>
+        function btnNextPrimeOnClick() {
+            let n = parseInt(document.getElementById('txtNextPrime').value);
+            let p = findNextPrime(n);
+            document.getElementById('nextPrimeResult').innerHTML = p;
+        }
+    </script>
+    <button id="btnNextPrime" onclick=btnNextPrimeOnClick()>Submit</button> <br />
+    <p id="nextPrimeResult"></p>
 
+    <h3>GCD</h3>
+    First number:
+    <input type="text" id="txtGcdA"> <br />
+    Second number:
+    <input type="text" id="txtGcdB"> <br />
+    <script>
+        function btnGcdOnClick() {
+            let a = parseInt(document.getElementById('txtGcdA').value);
+            let b = parseInt(document.getElementById('txtGcdB').value);
+            let result = gcd(a, b);
+            document.getElementById('gcdResult').innerHTML = result;
+        }
+    </script>
+    <button id="btnGcd" onclick=btnGcdOnClick()>Submit</button> <br />
+    <p id="gcdResult"></p>
 
-        
+    <h3>Number List Conversion</h3>
+    Text:
+    <input type="text" id="txtNumList">
+    <script>
+        function btnNumListOnClick() {
+            let text = document.getElementById('txtNumList').value;
+            text = cleanText(text);
+            let nums = phTxtNums(text);
+            document.getElementById('numListResult').innerHTML = nums;
+        }
+    </script>
+    <button id="btnNumList" onclick=btnNumListOnClick()>Submit</button> <br />
+    <p id="numListResult"></p>
+
+    <h3>Exponentiation</h3>
+    Number List:
+    <input type="text" id="txtExponentiateNums"> <br />
+    Exponent:
+    <input type="text" id="txtExponentiatePow"> <br />
+    Modulus:
+    <input type="text" id="txtExponentiateMod"> <br />
+    <script>
+        function btnExponentiateOnClick() {
+            let numsStr = document.getElementById('txtExponentiateNums').value;
+            numsStr = removeSpaces(numsStr);
+            let nums = numsStr.split(',');
+            let t = parseInt(document.getElementById('txtExponentiatePow').value);
+            let p = parseInt(document.getElementById('txtExponentiateMod').value);
+            let result = phExponentiate(nums, t, p);
+            document.getElementById('exponentiateResult').innerHTML = result;
+        }
+    </script>
+    <button id="btnExponentiate" onclick=btnExponentiateOnClick()>Submit</button><br />
+    <p id="exponentiateResult"></p>
+
+    <h4>Multiplicative Inverse</h4>
+        Number:
+        <input type="text" id="txtMultInverseNum"> <br />
+        Modulus:
+        <input type="text" id="txtMultInverseMod"> <br />
+        <script>
+            function btnMultInverseOnClick() {
+                let a = parseInt(document.getElementById('txtMultInverseNum').value);
+                let b = parseInt(document.getElementById('txtMultInverseMod').value);
+                let inverse = extendedGcd(a, b)[1];
+                if(inverse < 0) inverse += b;
+                inverse %= b;
+                document.getElementById('multInverseResult').innerHTML = inverse;
+            }
+        </script>
+        <button id="btnMultInverse" onclick=btnMultInverseOnClick()>Submit</button><br />
+        <p id="multInverseResult"></p>
+
+        <h4>Numbers to Text</h4>
+        <input type="text" id="txtNumText"> <br />
+        <script>
+            function btnNumTxtOnClick() {
+                let numsStr = document.getElementById('txtNumText').value;
+                numsStr = removeSpaces(numsStr);
+                let nums = numsStr.split(',');
+                for(let i = 0; i < nums.length; i++) {
+                    nums[i] = parseInt(nums[i]);
+                }
+                console.log(nums);
+                let result = phNumsTxt(nums);
+                document.getElementById('numTxtResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnNumTxt" onclick=btnNumTxtOnClick()>Submit</button><br />
+        <p id="numTxtResult"></p>
     </td>
     </tr>
 </table>

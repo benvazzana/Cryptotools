@@ -587,13 +587,17 @@ function phNumsTxt(nums) {
         if(numStr.length < 8) {
             numStr = "0" + numStr;
         }
+        console.log(numStr);
         for(let j = 0; j < 4; j++) {
             let charNumStr = numStr.substr(j * 2, 2);
             let charNum = parseInt(charNumStr);
-            let ch = charNum + 65;
+            charNum %= 26;
+            console.log(charNum);
+            let ch = charNum + 64;
             result += String.fromCharCode(ch);
         }
     }
+    return result;
 }
 
 /**
@@ -740,7 +744,3 @@ function isPrime(n) {
     }
     return true;
 }
-
-let text = "abcdefghij";
-let nums = phTxtNums(text);
-console.log(nums);
