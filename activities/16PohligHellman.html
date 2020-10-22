@@ -135,6 +135,9 @@
             let nums = numsStr.split(',');
             let t = parseInt(document.getElementById('txtExponentiatePow').value);
             let p = parseInt(document.getElementById('txtExponentiateMod').value);
+            for(let i = 0; i < nums.length; i++) {
+                nums[i] = parseInt(nums[i]);
+            }
             let result = phExponentiate(nums, t, p);
             document.getElementById('exponentiateResult').innerHTML = result;
         }
