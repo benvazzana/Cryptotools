@@ -669,16 +669,21 @@ function successiveSquare(a, k, n) {
     let largest2Pow = 1;
     while(largest2Pow < k) largest2Pow *= 2;
     largest2Pow /= 2;
+    console.log(largest2Pow);
 
     let powerTable = {};
 
     for(let i = 1; i <= largest2Pow; i *= 2) {
         if(i == 1) {
-            powerTable[i] = a;
+            powerTable[i] = BigInt(a);
         } else {
-            powerTable[i] = Math.pow(powerTable[i / 2], 2) % n;
+            const base = BigInt(powerTable[i / 2]);
+            let result = (base ** 2n) % BigInt(n);
+            console.log(result);
+            powerTable[i] = result;
         }
     }
+    console.log(powerTable);
     
     let exponent = k;
     let pow = largest2Pow;
@@ -690,14 +695,16 @@ function successiveSquare(a, k, n) {
             pow /= 2;
         }
     }
-    let result = 1;
+    let result = 1n;
     for(let i = 0; i < powers.length; i++) {
         exponent = powers[i];
         result *= powerTable[exponent];
-        result %= n;
+        result %= BigInt(n);
     }
     return result;
 }
+
+console.log(successiveSquare(385865726, 1000, 45387487861));
 
 /**
  * This function generates a key for a binary cipher given a prime
