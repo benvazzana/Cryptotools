@@ -550,10 +550,11 @@ function hillCipher(text, mat2) {
  */
 function phTxtNums(message) {
     message = cleanText(message);
-    let nExtraCharacters = message.length % 4;
+    let nExtraCharacters = 4 - (message.length % 4);
     for(let i = 0; i < nExtraCharacters; i++) {
-        message += "q";
+        message += "Q";
     }
+    console.log(message);
     let nums = textToNum(message);
     let groupedNumStrs = [];
     for(let i = 0; i < message.length; i += 4) {
