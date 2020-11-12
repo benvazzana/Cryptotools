@@ -536,7 +536,6 @@ function hillCipher(text, mat2) {
         k %= 26;
         resultNums.push(h, k);
     }
-    console.log(resultNums);
     let result = numToText(resultNums, true);
     return spaceText(result, 4);
 }
@@ -554,7 +553,6 @@ function phTxtNums(message) {
     for(let i = 0; i < nExtraCharacters; i++) {
         message += "Q";
     }
-    console.log(message);
     let nums = textToNum(message);
     let groupedNumStrs = [];
     for(let i = 0; i < message.length; i += 4) {
@@ -588,12 +586,10 @@ function phNumsTxt(nums) {
         if(numStr.length < 8) {
             numStr = "0" + numStr;
         }
-        console.log(numStr);
         for(let j = 0; j < 4; j++) {
             let charNumStr = numStr.substr(j * 2, 2);
             let charNum = parseInt(charNumStr);
             charNum %= 26;
-            console.log(charNum);
             let ch = charNum + 64;
             result += String.fromCharCode(ch);
         }
@@ -669,7 +665,6 @@ function successiveSquare(a, k, n) {
     let largest2Pow = 1;
     while(largest2Pow < k) largest2Pow *= 2;
     largest2Pow /= 2;
-    console.log(largest2Pow);
 
     let powerTable = {};
 
@@ -679,11 +674,9 @@ function successiveSquare(a, k, n) {
         } else {
             const base = BigInt(powerTable[i / 2]);
             let result = (base ** 2n) % BigInt(n);
-            console.log(result);
             powerTable[i] = result;
         }
     }
-    console.log(powerTable);
     
     let exponent = k;
     let pow = largest2Pow;
@@ -703,8 +696,6 @@ function successiveSquare(a, k, n) {
     }
     return result;
 }
-
-console.log(successiveSquare(385865726, 1000, 45387487861));
 
 /**
  * This function generates a key for a binary cipher given a prime
