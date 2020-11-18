@@ -733,13 +733,18 @@ function findNextPrime(n) {
 
 /**
  * This function determines whether or not a given positive whole
- * number is prime
+ * number is prime (not 100% effective, tests primes with number
+ * theory based predictions for large number efficiency)
  * @param {Number} n input number
  * @return {Boolean} true if prime, false if not
  */
 function isPrime(n) {
-    for(let i = 2; i < n; i++) {
-        if(n % 2 == 0) return false;
-    }
-    return true;
+    let test2 = successiveSquare(2, n - 1, n) == 1;
+    let test3 = successiveSquare(3, n - 1, n) == 1;
+    let test5 = successiveSquare(5, n - 1, n) == 1;
+    let test7 = successiveSquare(7, n - 1, n) == 1;
+    let test11 = successiveSquare(11, n - 1, n) == 1;
+    return test2 && test3 && test5 && test7 && test11;
 }
+
+console.log(findNextPrime(560));
