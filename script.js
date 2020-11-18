@@ -549,7 +549,7 @@ function hillCipher(text, mat2) {
  */
 function phTxtNums(message) {
     message = cleanText(message);
-    let nExtraCharacters = 4 - (message.length % 4);
+    let nExtraCharacters = (4 - (message.length % 4)) % 4;
     for(let i = 0; i < nExtraCharacters; i++) {
         message += "Q";
     }
@@ -746,5 +746,3 @@ function isPrime(n) {
     let test11 = successiveSquare(11, n - 1, n) == 1;
     return test2 && test3 && test5 && test7 && test11;
 }
-
-console.log(findNextPrime(560));

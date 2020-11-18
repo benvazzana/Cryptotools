@@ -84,24 +84,24 @@
 
     <h3>Exponentiation</h3>
     Number List:
-    <input type="text" id="txtExponentiateNums"> <br />
+    <input type="text" id="txtExponentiateNums1"> <br />
     Exponent:
-    <input type="text" id="txtExponentiatePow"> <br />
+    <input type="text" id="txtExponentiatePow1"> <br />
     Modulus:
-    <input type="text" id="txtExponentiateMod"> <br />
+    <input type="text" id="txtExponentiateMod1"> <br />
     <script>
-        function btnExponentiateOnClick() {
-            let numsStr = document.getElementById('txtExponentiateNums').value;
+        function btnExponentiate1OnClick() {
+            let numsStr = document.getElementById('txtExponentiateNums1').value;
             numsStr = removeSpaces(numsStr);
             let nums = numsStr.split(',');
-            let t = parseInt(document.getElementById('txtExponentiatePow').value);
-            let p = parseInt(document.getElementById('txtExponentiateMod').value);
+            let t = parseInt(document.getElementById('txtExponentiatePow1').value);
+            let p = parseInt(document.getElementById('txtExponentiateMod1').value);
             let result = phExponentiate(nums, t, p);
-            document.getElementById('exponentiateResult').innerHTML = result;
+            document.getElementById('exponentiateResult1').innerHTML = result;
         }
     </script>
-    <button id="btnExponentiate" onclick=btnExponentiateOnClick()>Submit</button><br />
-    <p id="exponentiateResult"></p>
+    <button id="btnExponentiate1" onclick=btnExponentiate1OnClick()>Submit</button><br />
+    <p id="exponentiateResult1"></p>
 
     <h3>Multiplicative Inverse</h4>
     Number:
@@ -123,27 +123,27 @@
 
     <h3>Exponentiation</h3>
     Number List:
-    <input type="text" id="txtExponentiateNums"> <br />
+    <input type="text" id="txtExponentiateNums2"> <br />
     Exponent:
-    <input type="text" id="txtExponentiatePow"> <br />
+    <input type="text" id="txtExponentiatePow2"> <br />
     Modulus:
-    <input type="text" id="txtExponentiateMod"> <br />
+    <input type="text" id="txtExponentiateMod2"> <br />
     <script>
-        function btnExponentiateOnClick() {
-            let numsStr = document.getElementById('txtExponentiateNums').value;
+        function btnExponentiate2OnClick() {
+            let numsStr = document.getElementById('txtExponentiateNums2').value;
             numsStr = removeSpaces(numsStr);
             let nums = numsStr.split(',');
-            let t = parseInt(document.getElementById('txtExponentiatePow').value);
+            let t = parseInt(document.getElementById('txtExponentiatPow2').value);
             let p = parseInt(document.getElementById('txtExponentiateMod').value);
             for(let i = 0; i < nums.length; i++) {
                 nums[i] = parseInt(nums[i]);
             }
             let result = phExponentiate(nums, t, p);
-            document.getElementById('exponentiateResult').innerHTML = result;
+            document.getElementById('exponentiateResult2').innerHTML = result;
         }
     </script>
-    <button id="btnExponentiate" onclick=btnExponentiateOnClick()>Submit</button><br />
-    <p id="exponentiateResult"></p>
+    <button id="btnExponentiate2" onclick=btnExponentiate2OnClick()>Submit</button><br />
+    <p id="exponentiateResult2"></p>
 
     <h3>Numbers to Text</h4>
     <input type="text" id="txtNumText"> <br />
