@@ -739,10 +739,23 @@ function findNextPrime(n) {
  * @return {Boolean} true if prime, false if not
  */
 function isPrime(n) {
-    let test2 = successiveSquare(2, n - 1, n) == 1;
-    let test3 = successiveSquare(3, n - 1, n) == 1;
-    let test5 = successiveSquare(5, n - 1, n) == 1;
-    let test7 = successiveSquare(7, n - 1, n) == 1;
-    let test11 = successiveSquare(11, n - 1, n) == 1;
-    return test2 && test3 && test5 && test7 && test11;
+    let s = n - 1;
+    let r = 0;
+    while(s % 2 == 0) {
+        r++;
+        s = s/2;
+    }
+    let result = false;
+    let a = 2;
+    if(successiveSquare(a, s, n) == 1) result = true;
+    for(let i = 0; i < r; i++) {
+        if(successiveSquare(a, (2**i) * s, n) == n - 1) result = true;
+    }
+    a = 3;
+    if(successiveSquare(a, s, n) == 1) result = true;
+    for(let i = 0; i < r; i++) {
+        if(successiveSquare(a, (2**i) * s, n) == n - 1) result = true;
+    }
+
+    return result;
 }
