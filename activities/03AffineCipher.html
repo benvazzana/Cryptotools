@@ -37,7 +37,13 @@
             <script>
                 function btnTxtNumClick() {
                     const text = document.getElementById("txtNumInput").value;
-                    document.getElementById("lblTxtNumResult").innerText = "" + textToNum(text);
+                    let nums = textToNum(text);
+                    let numsStr = "";
+                    for(let i = 0; i < nums.length; i++) {
+                        numsStr += nums[i];
+                        if(i != nums.length - 1) numsStr += ", ";
+                    }
+                    document.getElementById("lblTxtNumResult").innerText = "" + numsStr;
                 }
             </script>
             <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
@@ -216,10 +222,11 @@
                 Each group will come up with a secret message, and encipher it using an affine cipher.
             </li>
              <li>Share the message with the class
-                a) Open Blackboard and click on "Student Messages" in the menu on the left.
-                b) Click on the "Affine Cipher Messages" forum
-                c) Create a new thread to post your message.  Be sure to give ciphertext, the multiplicative key, the additive key and the ciphertext. Also list the members of your group.
-            </li>
+                <ol type="a">
+                    <li> Open Blackboard and click on "Student Messages" in the menu on the left.</li>
+                <li>Click on the "Affine Cipher Messages" forum.</li>
+                <li>Create a new thread to post your message.  Be sure to give ciphertext, the multiplicative key, the additive key and the ciphertext. Also list the members of your group.</li>
+            </ol>
             <li>
             As other groups post their message, your group should work to decipher them.
             </LI>

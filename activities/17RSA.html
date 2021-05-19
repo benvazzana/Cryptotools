@@ -141,10 +141,8 @@
         function btnMultInverseOnClick() {
             let a = parseInt(document.getElementById('txtMultInverseNum').value);
             let b = parseInt(document.getElementById('txtMultInverseMod').value);
-            let inverse = extendedGcd(a, b)[1];
-            if(inverse < 0) inverse += b;
-            inverse %= b;
-            document.getElementById('multInverseResult').innerHTML = inverse;
+            let result = multInverseModn(a, b);
+            document.getElementById('multInverseResult').innerHTML = result;        
         }
     </script>
     <button id="btnMultInverse" onclick=btnMultInverseOnClick()>Submit</button><br />
@@ -191,8 +189,100 @@
         <button id="btnNumTxt" onclick=btnNumTxtOnClick()>Submit</button><br />
         <p id="numTxtResult"></p>
         
+        <h2>How it works</h2>
+        <p>Description</p>
+        <table>
+            <tr>
+                <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Encryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+
+            <li></li>
+        </ol>
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+       We will encrypt the message: 
+       <div class="preDiv">
+           This cipher is so fine
+
+       </div>
+        <ol>
+          <li> 
+          </li>
+
+        </ol>
+  
+        </div>
+
+        <table>
+            <tr>
+                <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Decryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li></li>
+        </ol>
+
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+            <p>We will decrypt the message from the previous example.</p>
+            <ol>
+            <li>
+            </li>
+            </ol>
+        </div>        
+        <table>
+            <tr>
+                <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Group Message Exchange</h2></td>
+            </tr>
+        </table>
+        <ol>
+          <li> 
+          Each group should decide on a message and create a One Time Pad to encipher the message. Be sure to make sure your One Time Pad is at least as long as your plaintext.
+        </li>
+         <li>Post your message and key in the One Time Pad forum in the Student Messages area of Blackboard.
+        <li>
+          Decipher the messages submitted by the other groups posted in that forum.
+        </LI>  
+        </ol>
+        
+        <table>
+            <tr>
+                <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Cryptanalysis Challenge</h2></td>
+            </tr>
+
+        </table>
+        <p>The message below was encrypted with an affine cipher. Can you decipher it?</p>
+        <div class="preDiv">
+            NTTOM TGOVO HTREP IFATX EFXDP UUAES FFERC OSFOP COFUF IFCDF HJ
+        </div>
+
+
+
+
     </td>
     </tr>
 </table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 </body>
 </html>

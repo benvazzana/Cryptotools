@@ -26,9 +26,44 @@
     <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
     </td>
     <td>
-        <h1>Vigen&egrave;re Cipher</h1>
+        <h1> Cryptanalysis of the Vigen&egrave;re Cipher</h1>
 
+        <h2> The Process</h2>
+        <ol>
+            <li>Use the Quadgraph Search tool to find repeated quadgraphs in the ciphertext. </li>
+            <li>Count the number of letters between repeated quadgraphs. You find it helpful to copy the cipher text into a Google Doc. Highlight from the beginning of one quadgraph to just before the next occurrence of it. Then under the Tools menu, select word count. The number you want is "Characters excluding spaces"</li>
+            <li>Compute the GCD of the numbers you found in step 2. For best results, you will want to compute a GCD of at least three numbers, but preferably more. The length of the keyword is probably a divisor of the GCD you computed.</li>
+            <li>Make a guess for the length of the keyword. Then use the Subtext Frequency Analysis tool to get a frequency analysis of each chunk of the cipher.</li>
+            <li>Make a guess for the shift value for each chunk of of text from the previous step. (Remember that it's just a Caesar shift.)</li>
+            <li>Use the Decryption Tool to try to decipher the text. If your guess at the key is partially correct, you should see pieces of words, and from this, you may able to deduce which letters in your guess for the keyword are correct.</li>
+        </ol>
 
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+            <p>We cryptanalyze the message below:</p>
+            <div class="preDivLeft">XYINS OKLEM PLVSO PWLUW BEIVO OKWID CVGOW FJREM FJWAB ZWSRY OVTEY QCITY EZWSY MMITR FGSLS UZGAV CRRDC XYMCR IRZEM PEREM UVHTR FDAID IRROD IVVAX EKSAC TLQEK NFRGD IVTOG FIWOP UYIEK SKLTR FJIPK SRXEK OUIQE BCWTK UZSND PNLIM IKLEV BNWOP ORXUB FRRDY GEETE SVWGY EVRTS UCITR FDEDO DVRTB FJTEM UKSTR FFTIX JFRSY GDENU JEHRO RLMRO TKLAD UYIYC IFYLN EVGLK SVXHO DRYSO TNLIM IZQPO MKLEW UFXHO TVTAB BKMOX XVLOV EKLEC FKVUD IJXOL FJILP FMMDO OKXHK URPLW FEERO DIIAD FUIQE BCXHK UKLEI BIIEX EFAEN CPXHO JIGRO BKSRG JKLCO SKEIX VEELS FEEBV FIMGR UJXHK URQOX HKLEC FRVEV JWILS CVVTI BEHTR FGYRC VZXOP IRTPS OVWSD IRXTY TVGUB FKLEC FIMGR UJKOF FIRMO OKWAB FZRSD JKYTO ERQOX HDINN FIMVS OXXHO JINUC UGSWO SJJRY NKLEM PEWEX UFJTR FXSVO SEIDD IRXWR FEIVO SRRYP PIQOP HFZEB ODIND CVGOW FJHEC UIYCD JMIOP UYISO FEHSS UZWTR FIMGR UFJTR FGIOZ MVXOK MKIRY SKSAL PCMSR JKENN UFMNC UZXUD FEIWQ PMIRX NVRTV BPMNQ JKWFY VEHAD JFROX TLGHZ SZRCS QCISK OUSRQ BEMZS OXMTC QFAEB TZRSE DYJOB NRWTY UYIMC IRPLC FVQMY TKPIU FCCTY FWJEM UKLES SJEFO UPENN IRTPS OVWS</div>
+            <ol>
+                <li>Using the Quadgraph search and asking for the top 10 results we get:
+                    <table>
+                        <tr><td>TRFG</td><td>3</td></tr>
+                        <tr><td>KLEC</td><td>3</td></tr>
+                        <tr><td>LECF</td><td>3</td></tr>
+                        <tr><td>XHKU</td><td>3</td></tr>
+                        <tr><td>FIMG</td><td>3</td></tr>
+                        <tr><td>IMGR</td><td>3</td></tr>
+                        <tr><td>MGRU</td><td>3</td></tr>
+                        <tr><td>KLEM</td><td>2</td></tr>
+                        <tr><td>LEMP</td><td>2</td></tr>
+                        <tr><td>EIVO</td><td>2</td></tr>
+
+                        </tr>
+                    </table>
+                    This distance between the first occurrence of TRFG and the second is 410, and between the second and third is 200. The distance between the first occurrence of KLEC and the second is 120, and between the second and the third is 55.  
+                </li>
+                <li>We now compute the GCD of 410, 200, 120, and 55 and get 5. This means our keyword likely has length 5. (Notice that if we had only used the first three numbers, we would have gotten a GCD of 10, which would leave us much more work in the next steps.)</li>
+            </ol>
+            
+        </div>   
 
 
 
@@ -37,5 +72,21 @@
     </td>
     </tr>
 </table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 </body>
 </html>

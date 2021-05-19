@@ -27,38 +27,168 @@
     </td>
     <td>
         <h1> Binary One Time Pads </h1>
+        <h2>Tools</h2>
 
-<!-- TODO
-    This works the same as Binary. We just need to add a command to generate a psuedo random list of bits of specified length. The way I did this before was to have the used input a prime p, and exponent s, and a length m, and then computes 2^t mod p mod 2 starting with t=s and continuing to t=s+m-1
+        <h4>Message Bit Length</h4>
+        <p>Text:</p>
+        <textarea type="text" rows=4 cols=80 id="txtMessageLength"></textarea>
+        <script>
+            function btnBinaryLengthofTextOnClick(){
+                let text = document.getElementById('txtMessageLength').value;
+                let length = 8*text.length;
+                document.getElementById('binaryLengthofTextResult').innerHTML = length;                   
+            }   
+        </script>
+        <button id="btnBinaryLengthofText" onclick=btnBinaryLengthofTextOnClick()>Submit</button>
+        <p id="binaryLengthofTextResult"></p>
+
+        <h4>Next Prime</h4>
+        Number:
+        <input type="text" id="txtNextPrime1">
+        <script>
+            function btnNextPrime1OnClick() {
+                let n = parseInt(document.getElementById('txtNextPrime1').value);
+                let p = findNextPrime(n);
+                document.getElementById('nextPrime1Result').innerHTML = p;
+            }
+        </script>
+        <button id="btnNextPrime1" onclick=btnNextPrime1OnClick()>Submit</button> <br />
+        <p id="nextPrime1Result"></p>
 
 
--->
-    <div id="binaryOneTimePad" class="default">
-        Text:
-        <textarea type="text" rows=4 cols=100 id="txtBinaryOneTimePadInput"></textarea> <br />
+        <h4>Binary One Time Pad Key Generator</h4>
+        <div id="binaryOneTimePad" class="default">
         Prime number:
         <input type="text" id="txtPrime"> <br />
-        Exponent:
+        Starting Exponent:
         <input type="text" id="txtExponent"> <br />
-    </div>
-    <script>
+        Number of Bits:
+        <input type="text" id="numBits"> <br />
+        </div>
+        <script>
         function btnBinaryOneTimePadEncryptOnClick() {
-            let text = document.getElementById('txtBinaryOneTimePadInput').value;
             let prime = parseInt(document.getElementById('txtPrime').value);
             let exponent = parseInt(document.getElementById('txtExponent').value);
-            let length = text.length * 8;
-
+            let length = parseInt(document.getElementById('numBits').value);
             let key = generateBinaryOneTimePad(prime, exponent, length);
-            let binaryText = textToBinary(text);
-            let encryptedText = addKey(binaryText, key);
-            let result = binToHex(encryptedText);
+            let result =  generateBinaryOneTimePad(prime, exponent, length);
             document.getElementById('binaryOneTimePadResult').innerHTML = result;
         }
+        </script>
+        <button id="btnBinaryOneTimePadEncrypt" onclick=btnBinaryOneTimePadEncryptOnClick()>Submit</button>
+        <p id="binaryOneTimePadResult"></p>
+
+
+    <h2>How it works</h2>
+    <p>We will use the same Binary Additive Cipher we used in the previous acitivity. The only difference is that we will need a key that is as long as the message. The Messsage Bit Length tool will compute the number of bits in the text entered (i.e it will count the number of characters and multiply by 8.)</p>
+    <p>We will generate a pseudo-random list of bits by computing powers of 2, reducing them mod a prime, and then mod 2. Use the Next Prime tool to find a large-ish prime. The tool returns the next largest prime after the number enetered.  Then use the Binary One Time Pad Key Generator to get a list of 0's and 1's of the necessary length.</p>
+  
+
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>We will encipher the message:</p>
+        <div class="preDiv">
+            One time pads are really secure.
+        </div>
+        <ol>
+        <li> First we use the Message Bit Length tool to compute the number of bits in the message:
+            <div class="preDiv">246</div>
+        </li>
+        <li> Next we choose a prime. We use the Next Prime tool to find the next prime after 12345678:
+            <div class="preDiv">1234577</div>
+        </li>
+        <li>Now we use the Binary One Time Pad Key Generator Tool to produce out One Time Pad. We will use 321 as our first exponent:
+            <div class="preDiv">
+                10010110 11010010 00101001 00100100 10010000 00011010 00001000 11000101 11111001 01101000 11100100 01000011 11100010 11111101 00100111 11110100 11000011 10110101 10000101 11001011 11101110 00100010 10000011 11001011 00010110 10000010 00110000 10100100 11101011 11011011 01100011 10111101
+            </div>
+        </li>
+        <li> From here we proceed with enncryption and decryption the same way we did in the Binary Cipher activity, using the One Time Pad for our key.</li>
+        </ol>
+    </div>        
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+    <p>You can will need the tools we used in the previous Binary Cipher exchange. You can find them either in the Binary Additve Cipher Tools page in the Cryptography Tools menu or by accessing the Binary Ciphers in the Class Activities Menu.</p>
+    <ol>
+        <li>Decide on a message, and convert it to binary, and determine the number of bits in your message.</li>
+        <li>Use the Next Prime tool to select a prime.</li>
+        <li>Select a starting exponent and Use Binary One Time Pad Key Generator to create One Time Pad. </li>
+        <li>Encrypt your message as we did in the previous Binary Cipher exchange.</li>
+        <li> Post your ciphertext along with the number of bits, the starting power, and your prime used to generate your key in a new thread in the Binary Onetime Pads forum in the Student Messages section on Blackboard.</li>
+        <li>Decipher the messages submitted by other groups.</li>
+    </ol>
+    
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+
+    </table>
+    <p>The message below was encrypted using the procedure above. Can you decipher it?</p>
+    <div class="preDiv">
+        3ff8c 2a3cf de3a4 c5d4e 30be6 d38a1 1f919 08307 ee4ec eef96 e3fda 64aa1 5a
+    </div>
+  
+    <p>We happen to know that the message begins:</p>
+        <div class="preDiv">It is</div>
+     <p>   From this, we can work out the first 40 bits of the One Time Pad. We also know that the prime used to generate the One Time Pad was 149.
+    </p>
+
+    <p>The tool below will produce a list of One Time Pad keys.</p>
+
+
+    <div id="listOfOneTimePad" class="default">
+    Prime number:
+    <input type="text" id="txtPrime2"> <br />
+    Starting Exponent:
+    <input type="text" id="txtExponent2"> <br />
+    Number of Keys:
+    <input type="text" id="numExponents2"> <br />
+    Number of Bits:
+    <input type="text" id="numBits2"> <br />
+    </div>
+    <script>
+    function btnlistOfOneTimePadOnClick() {
+        let prime = parseInt(document.getElementById('txtPrime2').value);
+        let exponent = parseInt(document.getElementById('txtExponent2').value);
+        let numberExponents = parseInt(document.getElementById('numExponents2').value);
+        let length = parseInt(document.getElementById('numBits2').value);
+        let key = generateBinaryOneTimePad(prime, exponent, length);
+
+        var result = [];
+        for(let i = 0; i < numberExponents; i++) {
+        result.push(["Exponent=", i,generateBinaryOneTimePad(prime, exponent+i, length)])};
+
+        document.getElementById('listOfOneTimePadResult').innerHTML = result;
+    }
     </script>
-    <button id="btnBinaryOneTimePadEncrypt" onclick=btnBinaryOneTimePadEncryptOnClick()>Submit</button>
-    <p id="binaryOneTimePadResult"></p>
-    </td>
-    </tr>
+    <button id="btnlistOfOneTimePad" onclick=btnlistOfOneTimePadOnClick()>Submit</button>
+    <p id="listOfOneTimePadResult"></p>
+
+
+
+</td>
+</tr>
 </table>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </body>
 </html>

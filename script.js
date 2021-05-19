@@ -365,7 +365,9 @@ function binaryEncrypt(text, key) {
  * @returns {String} output binary text
  */
 function textToBinary(text) {
+/**
     text = cleanTextCaseSensative(text);
+*/  
     let binaryText = "";
     for(let i = 0; i < text.length; i++) {
         let letterCode = text.charCodeAt(i);
@@ -373,7 +375,7 @@ function textToBinary(text) {
         letterBinaryStr = "00000000".substr(letterBinaryStr.length) + letterBinaryStr;
         binaryText = binaryText.concat(letterBinaryStr);
     }
-    return spaceText(binaryText, 8);
+    return spaceText(binaryText, 8);  
 }
 
 /**
@@ -390,7 +392,10 @@ function binToText(binaryText) {
         let ch = String.fromCharCode(letterCode);
         result = result.concat(ch);
     }
+/**    
     return spaceText(result, 5);
+*/ 
+    return result
 }
 
 /**
@@ -402,6 +407,7 @@ function binToText(binaryText) {
  */
 function addKey(binaryText, key) {
     binaryText = removeSpaces(binaryText);
+    key = removeSpaces(key);
     let keyLength = binaryText.length;
     let extendedKey = "";
     for(let i = 0; i < keyLength; i++) {
@@ -708,10 +714,10 @@ function successiveSquare(a, k, n) {
 function generateBinaryOneTimePad(p, s, m) {
     let key = "";
     for(let t = s; t < s + m; t++) {
-        let bit = successiveSquare(2, t, p) % 2;
+        let bit = Number(successiveSquare(2, t, p) % BigInt(2));
         key = key.concat(bit);
     }
-    return key;
+    return spaceText(key, 8);
 }
 
 /**
@@ -759,3 +765,31 @@ function isPrime(n) {
 
     return result;
 }
+
+/**
+ * This function returns the multiplicative inverse of a mod n. If gcd(a,n) is not 1, warning that a is not invertible is returned.
+ * @param {Number} a input number
+ * @param {Number} n input number
+ */
+ function multInverseModn(a,n) {
+    let result = "The number is not invertible."
+    let g = extendedGcd(a, n);
+    if(g[0] == 1) {
+        let inverse = extendedGcd(a, n)[1];
+        if(inverse < 0) inverse += n;
+        inverse %= n;
+        result= inverse;
+    }
+    return result
+ }
+
+ function discreteLogarithm(a, b, n){
+    let possibleKeys=[];
+    for (let i = 2; i < n; i++){
+      if (successiveSquare(a,i,n)== b){
+        possibleKeys.push(i)
+      }
+    }
+    return possibleKeys;
+}
+

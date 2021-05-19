@@ -12,6 +12,10 @@
     </script> 
     <script type="text/javascript" src="../script.js"></script>
     <link rel="stylesheet" type="text/css" href="../jba_style.css">
+    <!-- Mathjax link below-->
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 </head>
 
 
@@ -42,13 +46,13 @@
     6) Repeat on second pair, third pair and so on until the end of the list is reached
     7) Convert back to letters, capital, in blocks of 4
     -->
-
+    <h2>Tools</h2>
     <div id="hillCipher" class="default">
-        <h3>Algorithm (Encryption and Decryption)</h3>
+        <h3>Encryption and Decryption</h3>
         Text:
         <input type="text" id="txtHill"> <br />
         <p id="matWarning"></p>
-        Matrix (Format: "a, b, c, d"):
+        Matrix (Enter as a list: a, b, c, d):
         <input type="text" id="txtMatrix"> <br />
         <button id="btnSubmit" onclick=btnSubmitOnClick()>Submit</button>
         <script>
@@ -70,7 +74,132 @@
         </script>
         <p id="hillResult"></p>
     </div>
-        
+    <h2>How it works</h2>
+    <p>The Hill Cipher is a polgraphic substitution cipher. In this implementation, letters will be encrypted in pairs.</p>
+    <table>
+        <tr>
+            <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Encryption:</h3></td>
+        </tr>
+    </table> 
+    <ol>
+        <li>Choose a key        
+           \(\begin{bmatrix}a &b\\c&d\end{bmatrix}\)
+           and make sure it is invertible mod 26. That is, make sure \(\gcd(ad-bc,26)=1\).                          
+        </li>
+        <li> The encryption tool will automate the following:
+            <ol type="a">
+                <li>Break the plain text into a list of pairs of letters. If there is an odd number of letters, pad the message with an extra q.</li>
+                <li>Convert the letters into numbers and arrange in a \(2 \times 1\) matrix.</li>
+                <li>Multiple each of these by the key matrix, and reduce mod 26.</li>
+                <li>Convert back to letters</li>
+            </ol>
+
+        </li>
+    </ol>
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        We will encrypt the message: 
+        <div class="preDiv">this is our hill</div>
+        <ol>
+            <li>We choose the key \(\begin{bmatrix}9 &4\\5&7\end{bmatrix}\), and check that it is invertible:
+                $$\det\begin{bmatrix}9 &4\\5&7\end{bmatrix}=9\cdot 7-4\cdot 5=43,$$
+            and \(\gcd(43,26)=1\).
+            </li>
+            <li> Using the encryption tool and entering the matrix as 9, 4, 5, 7, we get our ciphertext:
+                <div class="preDiv">
+                    DZAV AVKN LPYY TW
+                </div>
+            </li>
+        </ol>
+   
+
+
+    </div>
+
+    <table>
+        <tr>
+            <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Decryption:</h3></td>
+        </tr>
+    </table> 
+            <p>The decryption process works the same way as the encryption, except we use the inverse matrix as the key.</p>
+            <ol>
+                <li> Compute the multiplicative inverse of the determinant mod 26. Call this number \(t\). So $$t=(ad-bc)^{-1}\mod 26$$</li>
+                <li>Compute the inverse of the key matrix: \(\begin{bmatrix}td &-tb\\-tc&ta\end{bmatrix} \mod 26\)</li>
+                <li> Proceed as with encryption using this as the matrix.</li>
+            </ol>
+
+
+
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>We will decrypt the message from the previous example.</p>
+        <ol>
+            <li>We computed the deterimant of the matrix above to be 43. Reducing that mod 26, we get 17. The multiplicative inverse mod 26 is 23.</li>
+            <li>Our inverse key is:
+                \(\begin{bmatrix}23\cdot 7  &-23\cdot 4\\-23\cdot 5&23\cdot 9\end{bmatrix} \mod 26 = \begin{bmatrix} 5 & 12 \\ 15 & 25 \end{bmatrix}\)
+            </li>
+            <li>We use the encryption tool entering the ciphertext and this matrix as 5, 12, 15, 25. We get:
+                <div class="preDiv">
+                    THIS ISOU RHIL LQ
+                </div>
+                Note the extra Q that resulted from padding the original message.
+            </li>
+        </ol>
+
+    </div>        
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+  
+    <ol>
+        <li> 
+            Each group should decide on a message and select a key. BE SURE THE MATRIX IS INVERTIBLE. Encrypt your message using the tool above.
+        </li>
+         <li>Post your message and key in the Hill Cipher forum in the Student Messages area of Blackboard.
+        <li>
+        Decipher the messages submitted by the other groups posted in that forum.
+        </LI>
+    </ol>   
+    
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+
+    </table>
+    <p>The message below was encrypted with an Hill cipher. The first part of the plaintext is "I'm no". Can you decipher it?</p>
+    <div class="preDiv">
+        DAGGN YANAD ECUPW JSJUG QICMV PRCKT HVDYH ODQTL VEBYL XADLX GHCST DHOBI VFLHB YKOHV UGQSW LUGQC NDLCD INDAY EFMLI ABVLQ WOUPL XBMQF YPBQE PDR
+    </div>
+    <P>Hint: Suppose we know the plaintext in number form \(p_1, p_2, p_3,p_4\) encrypts as \(c_1, c_2, c_3, c_4\). Let \(M\) be the encyption key matrix, \(C=\begin{bmatrix} c_1 & c_3 \\ c_2 & c_4\end{bmatrix}\) and \(P=\begin{bmatrix} p_1 & p_3 \\ p_2 & p_4\end{bmatrix}\). Then $$MC=P.$$ If \(C\) is an invertible, we can solve for \(M\). Even if \(C\) is not invertible, we can narrow down the possibilities for \(M\) greatly.
+
+    </P>
+
+</td>
+</tr>
+</table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>        
     </td>
     </tr>
 </table>

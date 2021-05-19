@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Affine Cipher (Instructor)</title>
+        <script src="../jquery.js"></script> 
+        <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+        </script> 
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+    </head>
+
+<body>
+
+    <div id="includedContent"></div>
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>The Affine Cipher (Instructor)</h1>
+
+
+        <h4>Group 1</h4>
+
+        <div id="textToNum" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput">
+            Add key: 
+            <input type="text" id="addKeyInput">
+            Mult key:
+            <input type="text" id="multKeyInput">
+            <script>
+                function btnAffineDecryptClick() {
+                    let text = document.getElementById("cipherTextInput").value;
+                    let addKey = document.getElementById("addKeyInput").value;
+                    let multKey = document.getElementById("multKeyInput").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt" onclick=btnAffineDecryptClick()>Submit</button>
+            <p id="plainTextResult"></p>
+            
+        </div>
+
+        <h4>Group 2</h4>
+
+        <div id="textToNum2" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput2">
+            Add key: 
+            <input type="text" id="addKeyInput2">
+            Mult key:
+            <input type="text" id="multKeyInput2">
+            <script>
+                function btnAffineDecryptClick2() {
+                    let text = document.getElementById("cipherTextInput2").value;
+                    let addKey = document.getElementById("addKeyInput2").value;
+                    let multKey = document.getElementById("multKeyInput2").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult2").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt2" onclick=btnAffineDecryptClick2()>Submit</button>
+            <p id="plainTextResult2"></p>
+        </div>
+
+        <h4>Group 3</h4>
+        <div id="textToNum3" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput3">
+            Add key: 
+            <input type="text" id="addKeyInput3">
+            Mult key:
+            <input type="text" id="multKeyInput3">
+            <script>
+                function btnAffineDecryptClick3() {
+                    let text = document.getElementById("cipherTextInput3").value;
+                    let addKey = document.getElementById("addKeyInput3").value;
+                    let multKey = document.getElementById("multKeyInput3").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult3").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt3" onclick=btnAffineDecryptClick3()>Submit</button>
+            <p id="plainTextResult3"></p>
+
+        </div>
+
+        <h4>Group 4</h4>
+        <div id="textToNum4" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput4">
+            Add key: 
+            <input type="text" id="addKeyInput4">
+            Mult key:
+            <input type="text" id="multKeyInput4">
+            <script>
+                function btnAffineDecryptClick4() {
+                    let text = document.getElementById("cipherTextInput4").value;
+                    let addKey = document.getElementById("addKeyInput4").value;
+                    let multKey = document.getElementById("multKeyInput4").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult4").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt4" onclick=btnAffineDecryptClick4()>Submit</button>
+            <p id="plainTextResult4"></p>
+
+        </div>
+  
+
+        <h4>Group 5</h4>
+        <div id="textToNum5" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput5">
+            Add key: 
+            <input type="text" id="addKeyInput5">
+            Mult key:
+            <input type="text" id="multKeyInput5">
+            <script>
+                function btnAffineDecryptClick5() {
+                    let text = document.getElementById("cipherTextInput5").value;
+                    let addKey = document.getElementById("addKeyInput5").value;
+                    let multKey = document.getElementById("multKeyInput5").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult5").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt5" onclick=btnAffineDecryptClick5()>Submit</button>
+            <p id="plainTextResult5"></p>
+
+        </div>
+
+        <h4>Group 6</h4>
+        <div id="textToNum6" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput6">
+            Add key: 
+            <input type="text" id="addKeyInput6">
+            Mult key:
+            <input type="text" id="multKeyInput6">
+            <script>
+                function btnAffineDecryptClick6() {
+                    let text = document.getElementById("cipherTextInput6").value;
+                    let addKey = document.getElementById("addKeyInput6").value;
+                    let multKey = document.getElementById("multKeyInput6").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult6").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt6" onclick=btnAffineDecryptClick6()>Submit</button>
+            <p id="plainTextResult6"></p>
+
+        </div>        
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>

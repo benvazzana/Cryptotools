@@ -28,6 +28,41 @@
     <td>
 
     <h1>Cryptoquips</h1>
+    <b>Directions:</b>
+    <ol>
+        <li>Each group should decide on a message of about 10-15 words.</li>
+        <li>Encipher your message using the Keyword Cipher Tool below.</li>
+        <li>Send the message to me in an email <a href="mailto:tvazzana@truman.edu">tvazzana@truman.edu</a>. In addition to the ciphertext, indicate which cipher letter corresponds to the plain letter "e".</li>
+    </ol>
+
+
+
+
+        <div id="keywordEncrypt" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordEncryptKey"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordEncryptKeyLetter"><br><br>
+
+        Plaintext:
+        <textarea type="text" rows=4 cols=100 id="keywordEncryptPlaintext"></textarea> <br>
+        <script>
+          function btnKeywordEncryptOnClick() {
+            let text = document.getElementById('keywordEncryptPlaintext').value;
+            let keyword = document.getElementById('keywordEncryptKey').value;
+            let keyLetter = document.getElementById('keywordEncryptKeyLetter').value;
+            let cipherText = keywordEncrypt(text, keyword, keyLetter);
+            document.getElementById('keywordEncryptResult').innerHTML = cipherText;
+          }
+        </script>
+        <button id="btnkeywordEncrypt" onclick=btnKeywordEncryptOnClick()>Submit</button>
+        <p id="keywordEncryptResult"></p>
+        </div>
+
+
+        
+
 
     <!-- TODO
     Create a monoalphabetic substitution cipher tool. The inputs will be the plaintext and the key.

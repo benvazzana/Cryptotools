@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Keyword Cipher</title>
+    <script src="../jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("../header.html"); 
+    });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+</head>
+
+
+
+
+
+<body>
+
+    <div id="includedContent"></div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1> Binary Additive Cipher Tools</h1>
+        <p>The tools below will allow you to implement the additive binary cipher we have used either with a short key or a key of length greater than that of the message (i.e. a One Time Pad key)</p>
+        
+        <div id="binaryEncrypt" class="default">
+        <h4>Convert Text to Binary</h4>
+        Text:<br>
+        <textarea type="text" rows=2 cols=80 id="textToBinary"></textarea> <br>
+        <script>
+          function btnTextToBinaryOnClick() {
+            let text = document.getElementById('textToBinary').value;
+            let binaryText = textToBinary(text);
+            document.getElementById('textToBinaryResult').innerHTML = binaryText;
+          }
+        </script>
+        <button id="btnTextToBinary" onclick=btnTextToBinaryOnClick()>Submit</button>
+        <p id="textToBinaryResult"></p>
+
+        <h4>Convert Binary to Text</h4>
+        Binary: <br>
+        <textarea type="text" rows=2 cols=80 id="binToTextInput"></textarea> <br>
+        <script>
+          function btnBinToTextOnClick() {
+            let binaryText = document.getElementById("binToTextInput").value;
+            let result = binToText(binaryText);
+            document.getElementById('binToTextResult').innerHTML = result;
+          }
+        </script>
+        <button id="btnBinToText" onclick=btnBinToTextOnClick()>Submit</button>
+        <p id="binToTextResult"></p>
+
+
+        <h4>Add a Binary Key to a Binary String</h4>
+        Binary String:<br>
+        <textarea type="text" rows=2 cols=80 id="addKeyTextEncrypt"></textarea> <br>
+        Key: <br>
+        <textarea type="text" rows=2 cols=80 id="binaryKeyInputEncrypt"></textarea> <br>
+      
+        <script>
+          function btnAddKeyEncryptOnClick() {
+            let binaryText = document.getElementById('addKeyTextEncrypt').value;
+            let key = document.getElementById('binaryKeyInputEncrypt').value;
+            let resultBinary = addKey(binaryText, key);
+            document.getElementById('addKeyResultEncrypt').innerHTML = resultBinary;
+          }
+        </script>
+        <button id="btnAddKeyEncrypt" onclick=btnAddKeyEncryptOnClick()>Submit</button>
+        <p id="addKeyResultEncrypt"></p>
+
+        <h4>Convert Binary to Hexadecimal</h4>
+        Binary text:<br>
+        <textarea type="text" rows=2 cols=80 id="binToHexText"></textarea> <br>
+        <script>
+          function btnBinToHexOnClick() {
+            let binaryText = document.getElementById('binToHexText').value;
+            let hexText = binToHex(binaryText);
+            document.getElementById('binToHexResult').innerHTML = hexText;
+          }
+        </script>
+        <button id="btnBinToHex" onclick=btnBinToHexOnClick()>Submit</button>
+        <p id="binToHexResult"></p>
+        </div>
+
+        <div id="binaryDecrypt" class="default">
+          <h4>Convert Hexadecimal to Binary</h4>
+          Hexadecimal text: <br>
+          <textarea type="text" rows=2 cols=80 id="hexToBinText"></textarea> <br>
+          <script>
+            function btnHexToBinOnClick() {
+              let hexText = document.getElementById('hexToBinText').value;
+              let binText = hexToBin(hexText);
+              document.getElementById('hexToBinResult').innerHTML = binText;
+            }
+          </script>
+          <button id="btnHexToBin" onclick=btnHexToBinOnClick()>Submit</button>
+          <p id="hexToBinResult"></p>
+
+
+
+        </div>
+
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>

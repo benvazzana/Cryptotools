@@ -28,21 +28,15 @@
     <td>
     <h1> The Diffie - Hellman Exchange </h1>
 
-    <!--TODO
-        1) Given input a, k, n compute a^k mod n
-        2) Given input of a number, conver number to binary
-        3) Put the binary cipher back together and create a one step command for encryption and one for decryption:
-           a) Given input plaintext and key (list of bits) - convert message to binary, add key, convert result to hexadecimal
-           b) Given hexadecimal input and key (list of bits) - convert hex to binary, add key, convert back to text.
+    <h2>Tools</h2>
 
-    -->
     <div id="diffieHellman" class="default">
-        <h3>Computing a^k mod n</h3>
-        Base (a):
+        <h3>Computing <i>a<sup>k</sup></i> mod <i>p</i></h3>
+        Base (<i>a</i>):
         <input type="text" id="txtBase"> <br />
-        Exponent (k):
+        Exponent (<i>k</i>):
         <input type="text" id="txtExponent"> <br />
-        Modulus (n):
+        Modulus (<i>p</i>):
         <input type="text" id="txtModulus"> <br />
         <script>
             function btnComputeOnClick() {
@@ -79,42 +73,107 @@
         <button id="btnNumToBinary" onclick=btnNumToBinaryOnClick()>Submit</button>
         <p id="numToBinaryResult"></p>
 
-        <h3>Encryption (Binary Cipher)</h3>
-        Plaintext:
-        <input type="text" id="txtPlaintext"> <br />
-        Key:
-        <input type="text" id="txtKey"> <br />
-        <script>
-            function btnBinaryEncryptOnClick() {
-                let plainText = document.getElementById('txtPlaintext').value;
-                let key = document.getElementById('txtKey').value;
-                let result = binaryEncrypt(plainText, key);
-                document.getElementById('binaryEncryptResult').innerHTML = result;
-            }
-        </script>
-        <button id="btnBinaryEncrypt" onclick=btnBinaryEncryptOnClick()>Submit</button>
-        <p id="binaryEncryptResult"></p>
-
-        <h3>Decryption (Binary Cipher)</h3> 
-        Ciphertext:
-        <input type="text" id="txtCiphertext"> <br />
-        Key:
-        <input type="text" id="txtKeyDecrypt"> <br />
-        <script>
-            function btnBinaryDecryptOnClick() {
-                let cipherText = document.getElementById('txtCiphertext').value;
-                let key = document.getElementById('txtKeyDecrypt').value;
-                let result = binaryDecrypt(cipherText, key);
-                document.getElementById('binaryDecryptResult').innerHTML = result;
-            }
-        </script>
-        <button id="btnBinaryDecrypt" onclick=btnBinaryDecryptOnClick()>Submit</button>
-        <p id="binaryDecryptResult"></p>
-    </div>
 
         
-    </td>
-    </tr>
+    <h2>How it works</h2>
+    <p>The Diffie - Hellman protocol allows two parties to agree upon a key in public in a way that prevents eavesdroppers from knowing the key. The procedure requires an exchange of information for both parties to contruct the key.</p>
+    <ol>
+        <li> The two parties agree on a prime number <i>p</i> and base <i>a</i>. This information can be shared publicly.
+        </li>
+        <li>Each party choose an exponent, say <i>k</i></i><sub>1</sub> for the sender and <i>k</i></i><sub>2</sub> for the receiver. These are kept secret.
+        </li>
+        <li>They each compute the base raised to their exponent mod <i>p</i>. Say, <i>b</i><sub>1</sub> = <i>a</i><sup><i>k<sub>1</sub></i></sup> mod <i>p</i></li> and <i>b</i><sub>2</sub> = <i>a</i><sup><i>k<sub>2</sub></i></sup> mod <i>p</i></li>. They exchange <i>b</i></i><sub>1</sub> and <i>b</i></i><sub>2</sub>. (The crucial point is that, if the numbers are large enough, no one can work out the exponents from the just the <i>b</i> values.)
+        <li>They each compute the <i>b</i> value they received raised to their exponent mod <i>p</i>, and the will get the same number. That is <i>b</i><sub>1</sub><sup><i>k<sub>2</sub></i></sup> mod <i>p</i> = <i>b</i><sub>2</sub><sup><i>k<sub>1</sub></i></sup> mod <i>p</i>
+        At this point they are both in possession of the same number that they can use for any cipher they like.</li>
+
+
+    </ol>
+    
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <ol>
+        <li> The two parties agree to use the prime 541 and the base 131.
+        </li>
+        <li> The sender chooses the exponent 23 and the receiver chooses 93.</li>
+        <li> The sender computes 131<sup>23</sup> mod 541 = 117 and communicates 117 to the receiver. The receivers computes 131<sup>93</sup> mod 541 =384</li> and communicates 384 to the sender.
+        <li>The sender computes 384<sup>23</sup> mod 541  and gets 364. The receiver computes 117<sup>93</sup> mod 541 and also gets 364. So 364 can serve as the key for whichever cipher they wish to use.</li>
+        </ol>
+    </div>        
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+    <ol>
+        <li>Everyone will use the prime <i>p</i>=541 and the base <i>b</i>=131.</li>
+        <li>Decide on a secret exponent <i>k</i> between 1 and 540 (choose something in between - not 1 or 540).</li>
+        <li>Use the tool at the top of the page to compute you "half-key," 131<sup><i>k</i></sup> mod 541 and post it in the appropriate thread in the Diffie-Hellman Key Exchange Forum in Student Messages on Blackboard.</li>
+        <li>Obtain the half-key, <i>b</i> from the group you will be communicating with, and again use the tool at the top of the page to compute <i>b<sup>k</sup></i> mod 541.  This will be your key.  </li>
+        <li>Use the Binary Conversion tool to covert your key to binary.</li>
+        <li>Decide on a message and encrypt it using the Binary Additive Cipher. You can find the necessary tools for that in the Binary Additive Cipher tools pages in the tools menu. Post your message in the appropriate thread in the Diffie-Hellman Key Exchange Forum in Student Messages on Blackboard. </li>
+        <li>Decipher the message from your partner group.</li>
+    </ol>
+    
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+
+    </table>
+
+
+
+    <p>If the numbers being used are small, one can try a brute force approach to find the exponents. The tool below does that.</p>
+    <div id="discreteLog" class="default">
+        <h3>Finding <i>k</i> satisfying <i>a<sup>k</sup></i> mod <i>p</i> = <i>b</i></h3>
+        Base (<i>a</i>):
+        <input type="text" id="txtBase2"> <br />
+        Computed Power (<i>b</i>):
+        <input type="text" id="txtComputedPower2"> <br />
+        Modulus (<i>p</i>):
+        <input type="text" id="txtModulus2"> <br />
+        <script>
+            function btnDiscreteLogOnClick() {
+                let a = document.getElementById('txtBase2').value;
+                let b = document.getElementById('txtComputedPower2').value;
+                let n = document.getElementById('txtModulus2').value;
+                let result = discreteLogarithm(a, b, n);
+                document.getElementById('discreteLogResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnDiscreteLog" onclick=btnDiscreteLogOnClick()>Submit</button>
+        <p id="discreteLogResult"></p>
+    <p>The message below was encrypted with by first doing a Diffie-Hellman exhange and then the Binary Additive Cipher. </p>
+    <div class="preDiv">
+        48406 61564 13724 07605 21136 90f74 0c654 06901 77052 11572 05654 06309 66076 41221 0e740 d6305 73132 f
+    </div>
+    <p>For the Diffie-Hellman exchange, we know the prime was 541, the base was 123, and the two half keys were 25 and 214. Cryptanalyze the message.</p>
+
+
+
+
+
+
+</td>
+</tr>
 </table>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </body>
 </html>

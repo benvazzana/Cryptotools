@@ -28,19 +28,12 @@
     <td>
     <h1> Binary Ciphers</h1>
 
-    <!-- TODO
-    We need several tools:
-    1) Converts a message to ASCII then binary then outputs the list of bits
-    2) Give a list of bits and a key, which is a binary string of any length, perform a Vigener cipher: add the first bit of the key to the first cipher bit, then the 2nd to the second, and so on. When you get to the end of the key string, go back to the beginning. Output the new list of bits
-    3) We'd like to convert this back to text, but some of the ASCII codes are likely to be garbage. Instead break each byte into two binary strings of length 4 and convert 0000 to A, 0001 to B, ... 1111 to P
-    4) Reverse step 3
-    5) Reverse step 1
-    -->
+      <h2>Tools</h2>
 
-        <h3>Encyryption   </h3>
+        <h3>Encryption   </h3>
         <div id="binaryEncrypt" class="default">
         <h4>Text to Binary</h4>
-        Text:
+        Text:<br>
         <textarea type="text" rows=4 cols=100 id="textToBinary"></textarea> <br>
         <script>
           function btnTextToBinaryOnClick() {
@@ -53,7 +46,7 @@
         <p id="textToBinaryResult"></p>
 
         <h4>Adding Key</h4>
-        Binary text:
+        Binary text:<br>
         <textarea type="text" rows=4 cols=100 id="addKeyTextEncrypt"></textarea> <br>
         Key:
         <input type="text" id="binaryKeyInputEncrypt"><br>
@@ -69,7 +62,7 @@
         <p id="addKeyResultEncrypt"></p>
 
         <h4>Binary to Hexadecimal</h4>
-        Binary text:
+        Binary text:<br>
         <textarea type="text" rows=4 cols=100 id="binToHexText"></textarea> <br>
         <script>
           function btnBinToHexOnClick() {
@@ -85,7 +78,7 @@
         <h3>Decyryption   </h3>
         <div id="binaryDecrypt" class="default">
           <h4>Hexadecimal to Binary</h4>
-          Hexadecimal text:
+          Hexadecimal text: <br>
           <textarea type="text" rows=4 cols=100 id="hexToBinText"></textarea> <br>
           <script>
             function btnHexToBinOnClick() {
@@ -98,7 +91,7 @@
           <p id="hexToBinResult"></p>
 
           <h4>Adding Key</h4>
-          Binary text:
+          Binary text: <br>
           <textarea type="text" rows=4 cols=100 id="addKeyTextDecrypt"></textarea> <br>
           Key:
           <input type="text" id="binaryKeyInputDecrypt"><br>
@@ -115,7 +108,7 @@
           <p id="addKeyResultDecrypt"></p>
 
           <h4>Binary to Text</h4>
-          Binary Text:
+          Binary Text: <br>
           <textarea type="text" rows=4 cols=100 id="binToTextInput"></textarea> <br>
           <script>
             function btnBinToTextOnClick() {
@@ -127,8 +120,134 @@
           <button id="btnBinToText" onclick=btnBinToTextOnClick()>Submit</button>
           <p id="binToTextResult"></p>
         </div>
+
+
+        <h2>How it works</h2>
+        <p>In this cipher, each character in a message will first be converted to its binary ASCII value. So the plaintext becomes a string of 0's and 1's. They key is a random string of 0's and 1's. We combine the plain text and key as in the Vigen&egravere only reducing mod 2 instead of mod 26. If we try to convert the resulting ciphertext back to regular characters, we will likely get some ASCII code values that don't correspond to characters. Instead we group four bits at a time and convert to hexadecimal. Thus, the ciphertext will be twice as long as the plaintext.  </p>
+        <table>
+            <tr>
+                <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Encryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li>Use the Text to Binary tool to conver each letter in the message to its binary ASCII value.</li>
+            <li>Choose a random string of 0's and 1's for a key. Then use the Adding Key tool to add copies of it to the binary form of the plaintext.
+            </li>
+            <li>Use the Binary to Hexadecimal tool to convert the binary ciphertext to hexadecimal.</li>
+        </ol>
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+          <p>We will encrypt the message:</p> 
+       <div class="preDiv">
+        Hello. How is it going? What the &*$^&%!
+      </div>
+        <p>We will use 00110101 as our key. (Note: the key need not have exactly 8 bits. In fact it's better if it doesn't, but we'll think about that later.)</p>
+      <ol>
+          <li>We first convert the message to binary using the Text to Binary tool:
+            <div class="preDiv">
+              01001000 01100101 01101100 01101100 01101111 00101110 00100000 01001000 01101111 01110111 00100000 01101001 01110011 00100000 01101001 01110100 00100000 01100111 01101111 01101001 01101110 01100111 00111111 00100000 01010111 01101000 01100001 01110100 00100000 01110100 01101000 01100101 00100000 00100110 00101010 00100100 01011110 00100110 00100101 00100001
+            </div>
+          </li>
+          <li>Next we add our key using the Adding Key tool:
+            <div class="preDiv">
+              01111101 01010000 01011001 01011001 01011010 00011011 00010101 01111101 01011010 01000010 00010101 01011100 01000110 00010101 01011100 01000001 00010101 01010010 01011010 01011100 01011011 01010010 00001010 00010101 01100010 01011101 01010100 01000001 00010101 01000001 01011101 01010000 00010101 00010011 00011111 00010001 01101011 00010011 00010000 00010100
+            </div>
+          </li>
+          <li>Finally we use the Binary to Hexadecimal tool to get our ciphertext:
+            <div class="preDiv">
+              7d505 9595a 1b157 d5a42 155c4 6155c 41155 25a5c 5b520 a1562 5d544 11541 5d501 5131f 116b1 31014
+            </div>
+          </li>
+        </ol>
+  
+        </div>
+
+        <table>
+            <tr>
+                <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Decryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li>Remember that the ciphertext is in hexadecimal. So start by converting it to binary using the Binary to Hexadecimal tool.</li>
+            <li>Now use the Adding Key tool to combine with the key. Note this is the exact same command, using the same key as in the encryption phase. Mod 2, we undo adding 1 by adding 1 again, and we undo adding 0 by adding 0 again.</li>
+            <li>Use the Binary to Text tool to recover the original plaintext.</li>
+        </ol>
+
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+            <p>We will decrypt the message from the previous example:
+              <div class="preDiv">
+                7d505 9595a 1b157 d5a42 155c4 6155c 41155 25a5c 5b520 a1562 5d544 11541 5d501 5131f 116b1 31014  
+              </div>
+
+            </p>
+            <ol>
+            <li>We begin by using the Binary to Hexadecimal tool to convert the ciphertext to binary.
+              <div class="preDiv">
+                01111101 01010000 01011001 01011001 01011010 00011011 00010101 01111101 01011010 01000010 00010101 01011100 01000110 00010101 01011100 01000001 00010101 01010010 01011010 01011100 01011011 01010010 00001010 00010101 01100010 01011101 01010100 01000001 00010101 01000001 01011101 01010000 00010101 00010011 00011111 00010001 01101011 00010011 00010000 00010100
+              </div>
+            </li>
+            <li>Next we add the same key we used for encryption using the Adding Key tool.
+              <div class="preDiv">
+                01001000 01100101 01101100 01101100 01101111 00101110 00100000 01001000 01101111 01110111 00100000 01101001 01110011 00100000 01101001 01110100 00100000 01100111 01101111 01101001 01101110 01100111 00111111 00100000 01010111 01101000 01100001 01110100 00100000 01110100 01101000 01100101 00100000 00100110 00101010 00100100 01011110 00100110 00100101 00100001
+              </div>
+            </li>
+            <li>Finally, we convert back to plaintext using the Binary to text tool.
+              <div class="preDiv">
+                Hello. How is it going? What the &*$^&%!
+              </div>
+            </li>
+            </ol>
+        </div>        
+        <table>
+            <tr>
+                <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Group Message Exchange</h2></td>
+            </tr>
+        </table>
+        <ol>
+          <li>Decide on a message, and select a key.  Your key should just be a string of 0's and 1's (of any length).</li>
+          <li>Convert your message to binary, add your key string, and then convert it to cipher letters as above.</li>
+          <li>Post your message and key in a new thread in the Binary Additive Cipher forum in the Student Messages section on Blackboard./li> 
+          <li>Decipher the messages submitted by other groups.</li> 
+        </ol>
+        
+        <table>
+            <tr>
+                <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Cryptanalysis Challenge</h2></td>
+            </tr>
+
+        </table>
+        <p>The following message was enciphered by first converting the message to binary, and then instead of adding a key, a permutation was applied to each block of 8 bits.  What does the message say?</p>
+        <div class="preDiv">
+          JFPGF HACBG CHFGA CDHNG BGCHE HBC
+        </div>
+        <p>Hint: Make some guesses about which characters are capital letters, lower case letters, or spaces.</p>
+
+
+
+
     </td>
     </tr>
 </table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 </body>
 </html>

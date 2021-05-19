@@ -27,7 +27,7 @@
     </td>
     <td>
         <h1>One Time Pads</h1>
-
+        <h2>Tools</h2>
 
         <div id="oneTimePad" class="default">
             <p id="lblOneTimePad">Number of letters in One Time Pad:</p>
@@ -44,17 +44,125 @@
             </script>
             <button id="btnOneTimePad" onclick=btnOneTimePadOnClick()>Submit</button>
             <p id="oneTimePadResult"></p>
-
+            <h3>Encryption   </h3>
+            <div id="vigEncrypt" class="default">
+      
+            Plaintext:<br>
+            <textarea type="text" rows=2 cols=80 id="vigEncryptPlaintext"></textarea> <br />
+            One Time Pad:<br>
+            <textarea type="text" rows=2 cols=80 type="text" id="vigEncryptKey"></textarea><br>
+            <script>
+              function btnVigEncryptOnClick() {
+                let text = document.getElementById('vigEncryptPlaintext').value;
+                let keyword = document.getElementById('vigEncryptKey').value;
+                document.getElementById('vigEncryptResult').innerHTML = vigenereEncrypt(text, keyword);
+              }
+            </script>
+            <button id="btnVigEncrypt" onclick=btnVigEncryptOnClick()>Submit</button>
+            <p id="vigEncryptResult"></p>
+            </div>
+    
+            <h3>Decryption   </h3>
+            <div id="vigDecrypt" class="default">
+      
+            Ciphertext:<br>
+            <textarea type="text" rows=2 cols=80 id="vigDecryptCiphertext"></textarea> <br />
+            One Time Pad:<br>
+            <textarea type="text" rows=2 cols=80 id="vigDecryptKey"></textarea><br>
+            <script>
+              function btnVigDecryptOnClick() {
+                let text = document.getElementById('vigDecryptCiphertext').value;
+                let keyword = document.getElementById('vigDecryptKey').value;
+                document.getElementById('vigDecryptResult').innerHTML = vigenereDecrypt(text, keyword);
+              }
+            </script>
+            <button id="btnVigDecrypt" onclick=btnVigDecryptOnClick()>Submit</button>
+            <p id="vigDecryptResult"></p>
+            </div>
         </div>
+        <h2>How it works</h2>
+        <p>The One Time Pad is just the Vigener cipher except the keyword is a random string of letters of length greater than the plain text.</p>
+        <table>
+            <tr>
+                <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+                <td><h3>Encryption:</h3></td>
+            </tr>
+        </table> 
+        <ol>
+            <li>Count the number of letters in the plain text, and generate a one time pad of that length.</li>
+            <li> Encrypt using the One Time Pad as the keyword.</li>
+            
+        </ol>
 
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+       We will encrypt the message: 
+       <div class="preDiv">
+        Here is a One Time Pad Message.
+       </div>
+       <ol>
+           <LI>This has 24 letters so we generate a One Time Pad of length 24. (Note: you may wish to get help from Google Docs to count letters.) Our One Time Pad is:
+               <div class="preDiv">JXPVA DHVEK PMJDY VSLIC HKCS</div>
+           </LI>
+           <LI>Now we encrypt using the One Time Pad as the key:
+            <div class="preDiv">QBGZI VHJRO IUVHN VVXMU ZKIW.</div>
+           </Li>
+       </ol>
 
+    </div>
 
+    <table>
+        <tr>
+            <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Decryption:</h3></td>
+        </tr>
+    </table> 
+        <ul><li>Decrypt using the One Time Pad as the key.</li></ul>
+        <button type="button" class="collapsible">Example</button>
+        <div class="content">
+        <p>Completing the example above, we decrypt the ciphertext 
+            <div class="preDiv">QBGZI VHJRO IUVHN VVXMU ZKIW.</div>
+        using the One Time Pad  
+        <div class="preDiv">JXPVA DHVEK PMJDY VSLIC HKCS</div>
+        and we get back:
+        <div class="preDiv">herei saone timep admes sage</div>
+        </p>
+        </div>
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
 
-
-
+    <ol>
+        <li> 
+            Each group should decide on a message and create a One Time Pad to encipher the message. Be sure to make sure your One Time Pad is at least as long as your plaintext.
+        </li>
+         <li>Post your message and key in the One Time Pad forum in the Student Messages area of Blackboard.
+        <li>
+        Decipher the messages submitted by the other groups posted in that forum.
+        </LI>
+    </ol>  
         
     </td>
     </tr>
 </table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 </body>
 </html>

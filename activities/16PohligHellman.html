@@ -28,17 +28,7 @@
     <td>
     <h1> The Pohlig Hellman Algorithm</h1>
 
-    <!-- TODO
-
-        1) Input message, clean it. Convert to a list of numbers, consolidate each set of four numbers into a single number but padding single digit numbers with a 0 in front. For instance 
-        abcdefgh ->  1 2 3 4 5 6 7 8 -> 01020304 05060708
-        2) Procedure to find next prime after input n (May just put this somewhere else)
-        3) Procedure to compute the multiplicative inverse of t mod n (This is essentially the extended gcd and might go elsewhere)
-        4) Given a prime p, an exponent t, and list of numbers compute the t-th power mod of each number in the list
-        5) Procedure to reverse step 1
-
-
-    -->
+    <h2>Tools</h2>
     <h3>Next Prime</h3>
     Number:
     <input type="text" id="txtNextPrime">
@@ -68,7 +58,7 @@
     <button id="btnGcd" onclick=btnGcdOnClick()>Submit</button> <br />
     <p id="gcdResult"></p>
 
-    <h3>Number List Conversion</h3>
+    <h3>Convert Text to Numbers (grouping into quadraphs)</h3>
     Text:
     <input type="text" id="txtNumList">
     <script>
@@ -76,7 +66,13 @@
             let text = document.getElementById('txtNumList').value;
             text = cleanText(text);
             let nums = phTxtNums(text);
-            document.getElementById('numListResult').innerHTML = nums;
+            let numsStr = "";
+                    for(let i = 0; i < nums.length; i++) {
+                        numsStr += nums[i];
+                        if(i != nums.length - 1) numsStr += ", ";
+                    }
+
+            document.getElementById('numListResult').innerHTML = numsStr;
         }
     </script>
     <button id="btnNumList" onclick=btnNumListOnClick()>Submit</button> <br />
@@ -104,22 +100,20 @@
     <p id="exponentiateResult1"></p>
 
     <h3>Multiplicative Inverse</h4>
-    Number:
-    <input type="text" id="txtMultInverseNum"> <br />
-    Modulus:
-    <input type="text" id="txtMultInverseMod"> <br />
-    <script>
-        function btnMultInverseOnClick() {
-            let a = parseInt(document.getElementById('txtMultInverseNum').value);
-            let b = parseInt(document.getElementById('txtMultInverseMod').value);
-            let inverse = extendedGcd(a, b)[1];
-            if(inverse < 0) inverse += b;
-            inverse %= b;
-            document.getElementById('multInverseResult').innerHTML = inverse;
-        }
-    </script>
-    <button id="btnMultInverse" onclick=btnMultInverseOnClick()>Submit</button><br />
-    <p id="multInverseResult"></p>
+        Number:
+        <input type="text" id="txtMultInverseNum"> <br />
+        Modulus:
+        <input type="text" id="txtMultInverseMod"> <br />
+        <script>
+            function btnMultInverseOnClick() {
+                let a = parseInt(document.getElementById('txtMultInverseNum').value);
+                let b = parseInt(document.getElementById('txtMultInverseMod').value);
+                let result = multInverseModn(a, b);
+                document.getElementById('multInverseResult').innerHTML = result;        
+            }
+        </script>
+        <button id="btnMultInverse" onclick=btnMultInverseOnClick()>Submit</button><br />
+        <p id="multInverseResult"></p>
 
     <h3>Exponentiation</h3>
     Number List:
@@ -161,8 +155,100 @@
     </script>
     <button id="btnNumTxt" onclick=btnNumTxtOnClick()>Submit</button><br />
     <p id="numTxtResult"></p>
-    </td>
-    </tr>
+    <h2>How it works</h2>
+    <p>The Pohlig-Hellman Cipher is an analogue of the Affine Cipher, except instead of multiplying or adding the key, we raise the plaintext to the key power. We will also implement this as a polygraphic cipher.</p>
+    <table>
+        <tr>
+            <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Encryption:</h3></td>
+        </tr>
+    </table> 
+    <ol>
+
+        <li></li>
+    </ol>
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+   We will encrypt the message: 
+   <div class="preDiv">
+       This cipher is so fine
+
+   </div>
+    <ol>
+      <li> 
+      </li>
+
+    </ol>
+
+    </div>
+
+    <table>
+        <tr>
+            <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Decryption:</h3></td>
+        </tr>
+    </table> 
+    <ol>
+        <li></li>
+    </ol>
+
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>We will decrypt the message from the previous example.</p>
+        <ol>
+        <li>
+        </li>
+        </ol>
+    </div>        
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+    <ol>
+      <li> 
+      Each group should decide on a message and create a One Time Pad to encipher the message. Be sure to make sure your One Time Pad is at least as long as your plaintext.
+    </li>
+     <li>Post your message and key in the One Time Pad forum in the Student Messages area of Blackboard.
+    <li>
+      Decipher the messages submitted by the other groups posted in that forum.
+    </LI>  
+    </ol>
+    
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+
+    </table>
+    <p>The message below was encrypted with an affine cipher. Can you decipher it?</p>
+    <div class="preDiv">
+        NTTOM TGOVO HTREP IFATX EFXDP UUAES FFERC OSFOP COFUF IFCDF HJ
+    </div>
+
+
+
+
+</td>
+</tr>
 </table>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </body>
 </html>
