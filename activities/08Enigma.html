@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Enigma Machine</title>
+    
+    <script src="../jquery.js"></script> 
+    <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+</head>
+
+
+<body>
+    <div id="includedContent"></div>
+
+        
+<table style="width:100%"  cellspacing="0" cellpadding="07" >
+    <col style="width:15%">
+    <col style="width:85%">
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+    <td>
+
+     <h1>The Enigma Machine</h1>   
+    
+     <p>For this activity, we will use an Enigma simulator from another site. You may use either:
+     <ul >
+         <li>
+             <a href="https://www.101computing.net/enigma-machine-emulator/">101 Computing</a> (This one is very pretty.) To access the settings, click on one of the rotor wheels. Be sure to click Apply Settings when you are done.
+         </li>
+        <li><a href="http://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-u_v26_en.html">Daniel Palloks</a> (Doesn't have the look of the actual machine, but a very clean website, and allows you to paste in the messages.)</li>
+     </ul>
+    </p>
+
+    <p>Set up your Enigma machine as follows:
+        <ul>
+            <li>Enigma: M3</li>
+            <li>Reflector (Umkehrwalze): B</li>
+            <li>Wheel order (Walzenlage): III, I, II</li>
+            <li>Ring Settings (Ringstellung): A A A (1, 1, 1)
+                <P> [On the Palloks simulator, click on the Rings button to access these settings.]</P>
+            </li>
+            <li>Indicator Settings (Grundstellung): D E P
+                <p>[On the 101 Computing simulator, these are called the Initial Positions.]</p>
+            </li>
+            <li>Plugboard (Steckerbrett): AW, EH, FR, GO, VY</li>
+            <p>[On the Palloks simulator, for each pair, enter the two letters into a box. When you are done, click Activate.]</p>
+        </ul>       
+
+    </p>
+
+    <table>
+        <tr>
+            <td><img src="../images/thinkingcap.gif" alt="Unlock" ALIGN="middle"  height="60" width="60"></td> 
+            <td><h2>Exercises:</h2></td>
+        </tr>
+
+    </table>
+    <ol>
+        <li>Encipher the message, “Did this work?” with message key QWE.  Set up the Enigma as above. Type QWE twice.  You should get: 
+            <div class="preDiv">KFR CQR</div>  The indicator settings should have moved from DEP to DEV.  Now reset the indicator settings to our message setting QWE.  Now type our message.  You should get: 
+            <div class="preDiv">ESYL SANC YSX</div></li>
+        <li>Let’s decrypt the message:
+            <div class="preDiv">EKX KJT AJMX LVUA</div> 
+            The first six letters represent the message setting.  Reset the Enigma to the original settings above (with DEP as the indicator settings), type these six letters.   They should give you a 3 letter indicator setting followed by a repetition of that setting.  Now switch your Enigma to those indicator settings and type the rest of the message.</li>
+    </ol>
+
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+    <p>It's super easy to mess up a setting on the Enigma machine, so please double check your work before posting it.</p>
+    <ol>
+        <li>Set up your Enigma with the setting at the top of the page.</li>
+        <li>Pick a three letter message setting and type it into your Enigma twice.</li>
+        <li>Reset the Enigma Indicator Settings to the three letters you chose.</li>
+        <li>Type a message.</li>
+        <li>In the Enigma Messages forum of the Student Messages section on Blackboard, post the six letters you got from typing your indicator setting twice followed by the cipher text of your message.</li>
+        <li>Decrypt the messages from the other groups.</li>
+    </ol>
+
+        
+    </td>
+    </tr>
+</table>
+</body>
+</html>

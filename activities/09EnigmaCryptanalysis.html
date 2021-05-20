@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Enigma Cryptanalysis</title>
+    
+    <script src="../jquery.js"></script> 
+    <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+</head>
+
+
+<body>
+    <div id="includedContent"></div>
+
+        
+<table style="width:100%"  cellspacing="0" cellpadding="07" >
+    <col style="width:15%">
+    <col style="width:85%">
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+    <td>
+
+     <h1>Enigma Cryptanalysis</h1>   
+    
+        <p>One of the weaknesses of the Engima machine was that cryptanalysts could ignore the plugboard settings while trying to work out the wheel settings. Once they had those, they could turn their attention to the plugs. In this activity, we will assume we have figured out the wheel settings, and then make guesses to figure out the plugboad settings.</p>
+
+     <p>Make use of one of the following Enigma simulators:
+     <ul >
+         <li>
+             <a href="https://www.101computing.net/enigma-machine-emulator/">101 Computing</a> (This one is very pretty.) To access the settings, click on one of the rotor wheels. Be sure to click Apply Settings when you are done.
+         </li>
+        <li><a href="http://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-u_v26_en.html">Daniel Palloks</a> (Doesn't have the look of the actual machine, but a very clean website, and allows you to paste in the messages.)</li>
+     </ul>
+    </p>
+
+    <p>In all of the examples use the initial set up below. (The messages do <b>not</b> use Message Settings.)
+        <ul>
+            <li>Enigma: M3</li>
+            <li>Reflector (Umkehrwalze): B</li>
+            <li>Wheel order (Walzenlage): III, I, II</li>
+            <li>Ring Settings (Ringstellung): A A A (1, 1, 1)
+            </li>
+            <li>Indicator Settings (Grundstellung): A C C 
+            </li>
+
+        </ul>       
+
+    </p>
+
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>With the rotor settings as above, and the plugboard settings unknown, our ciphertext is:</p>
+            <div class="preDivLeft">KVMDP JMNZH IWLRO QJPRD DAHJB GR</div>
+        <p>We now type this into the Engima with the correct rotor settings and no plugs. We get:</p>
+            <div class="preDivLeft">XHAAN IGMEI SCOMP LAXAL YKACU RA</div>
+        <p>We now look for pieces of words. To help spot these, remove the spaces:</p>
+            <div class="preDivLeft">XHAANIGMEISCOMPLAXALYKACURA</div>
+        <p>We might guess the word "ENIGMA" appears:</p>
+            <div class="preDivLeft">
+                <table>
+                <tr><td>XHA</td><td>ANIGME </td><td>ISCOMPLAXALYKACURA</td></tr>
+                <tr><td><td>ENIGMA </td><td></td></tr>
+                </table>
+            </div>
+        <p> We guess that one of the plugs is AE. We set this plug and type the ciphertext in again:</p>
+            <div class="preDivLeft">XHEEN IGMAI SCOMP LEXEL YSECU RE</div>
+        <p>Making some guesses about the word breaks:</p>
+            <div class="preDivLeft">XHE ENIGMA IS COMPLEXELY SECURE</div>
+        <p>The first word is probabaly "the", which could result with a TX plug. This would also make sense for the occurence of X later.  We get:</p>
+            <div class="preDivLeft">THE ENIGMA IS COMPLETELY SECURE</div>
+            <div class="preDivLeft"></div>
+        <p>It probably goes without saying that some trial and error is needed in general. Sometimes guesses that look good intially turn out to cause problems later, and we have to backtrack.</p>
+    </div>
+
+    <table>
+        <tr>
+            <td><img src="../images/thinkingcap.gif" alt="Unlock" ALIGN="middle"  height="60" width="60"></td> 
+            <td><h2>Exercises:</h2></td>
+        </tr>
+
+    </table>
+    <ol>
+        <li> One plug:
+            <div class="preDivLeft">UMPX FNBQ XHFU LVST OHHC RSTJ SSXV MZED GNFG HURB PQEG FYTG</div>
+        </li>
+        <li> Two plugs:
+            <div class="preDivLeft">YGRD GLDN WTOE JPYC DACA YOCE RBOG VZAE HKLN BAZG GUYN TROJ ILDQ EKLX FSKG EJTG IMFN RV</div>
+        </li>
+        <li> One plug (but the message is in German):
+            <div class="preDivLeft">WJRP XDIS DGPH OFQK C</div>
+        </li>
+        <li> Three plugs:
+            <div class="preDivLeft">EIAL HSZR YEJI BGRO EKJJ RTWU DHLO TUQE FLNV FKAO DAQN WIGF ZXKV JXPD EJAC RWVO</div>
+        </li>
+        <li> Four plugs
+            <div class="preDivLeft">QVJJ BSGJ UZWH ZFEO RWHI JPQP LKJZ HFSV UZVJ EZWQ BTXH MPGR PRQH FSJP FPUR ASYU MFGX DGMH PZPQ DZAG YTPA EFRT DYBD DZOC ZEAM KAOF YKYU BCUZ JFKP YDSQ VENJ JSIY APMB KVTN ZSBH RESS CHKZ LPSZ FPMQ EURT SZEQ KGXQ VPVQ RWVT WDFS NXMJ XCFR HJCR DZPA SFUP UZPQ IAYM AFJH BIDC QWMO YEIC ZXBH CYQZ PVWM NESR WXUB IBIA SJFR KBBE NUXL ZKRD HZWM SAZD CSCC XGGF EBTY MDJQ BBIU LKTI OCVY EMZI PYZZ UWBT FYKA CRYB PAVX CURK JDGX FSBT IZWY</div>
+        </li>
+    </ol>
+
+
+        
+    </td>
+    </tr>
+</table>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
+
+</body>
+</html>

@@ -93,7 +93,12 @@
             let t = parseInt(document.getElementById('txtExponentiatePow1').value);
             let p = parseInt(document.getElementById('txtExponentiateMod1').value);
             let result = phExponentiate(nums, t, p);
-            document.getElementById('exponentiateResult1').innerHTML = result;
+            let resultNumsStr = "";
+                    for(let i = 0; i < result.length; i++) {
+                        resultNumsStr += result[i];
+                        if(i != result.length - 1) resultNumsStr += ", ";
+                    }
+            document.getElementById('exponentiateResult1').innerHTML = resultNumsStr;
         }
     </script>
     <button id="btnExponentiate1" onclick=btnExponentiate1OnClick()>Submit</button><br />
@@ -133,7 +138,12 @@
                 nums[i] = parseInt(nums[i]);
             }
             let result = phExponentiate(nums, t, p);
-            document.getElementById('exponentiateResult2').innerHTML = result;
+            let resultNumsStr = "";
+                    for(let i = 0; i < result.length; i++) {
+                        resultNumsStr += result[i];
+                        if(i != result.length - 1) resultNumsStr += ", ";
+                    }
+            document.getElementById('exponentiateResult2').innerHTML = resultNumsStr;
         }
     </script>
     <button id="btnExponentiate2" onclick=btnExponentiate2OnClick()>Submit</button><br />
@@ -156,27 +166,38 @@
     <button id="btnNumTxt" onclick=btnNumTxtOnClick()>Submit</button><br />
     <p id="numTxtResult"></p>
     <h2>How it works</h2>
-    <p>The Pohlig-Hellman Cipher is an analogue of the Affine Cipher, except instead of multiplying or adding the key, we raise the plaintext to the key power. We will also implement this as a polygraphic cipher.</p>
+    <p>The Pohlig-Hellman Cipher is an analogue of the Affine Cipher, except instead of multiplying or adding the key, we raise the plaintext to the key power. We will also implement this as a polygraphic cipher, putting the letters into groups of four.</p>
     <table>
         <tr>
             <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
             <td><h3>Encryption:</h3></td>
         </tr>
     </table> 
+    <p>To keep thing simple, we will only encrypt letters (no punctuation, spacing, letter case, etc.)</p>
     <ol>
+        <li>The sender converts the plaintext to numbers. We will group into quadgraphs and convert each letter in the basic way. So for instance, "abcd" will transform into 01020304</li>
+        <li>The sender and receiver agree on a prime </i>p</i> bigger than the largest possible quadgraph number (i.e. bigger than 26262626). They also agree on an exponent <i>t</i> that satisfies gcd(<i>t</i>, <i>p</i>-1) =1.
+        </li>
+        <li> For each quadgraph number <i>b</i>, the quantity <i>a<sup>t</sup></i> mod <i>p</i> is computed. The list of these numbers constitutes the ciphertext.
 
-        <li></li>
+        </li>
     </ol>
     <button type="button" class="collapsible">Example</button>
     <div class="content">
    We will encrypt the message: 
    <div class="preDiv">
-       This cipher is so fine
-
+    Are quadgraphic substitution ciphers really secure?
    </div>
     <ol>
-      <li> 
+        <li>We use the Next Prime tool to find the next prime after 45387487855:</li>
+        <div class="preDiv">45387487861</div>
+        <li>We select 39119 for our exponent, use the GCD tool to check that gcd(39119,45387487860)=1.</li>
+      <li>Using the Convert Text to Numbers tool for our plaintext, we get:
+          <div class="preDiv">1180517, 21010407, 18011608, 9031921, 2192009, 20212009, 15140309, 16080518, 19180501, 12122519, 5032118, 5171717</div>
       </li>
+        <li>We use the Exponentiation tool to exponentiate this list of numbers using our exponent 39119, mod our prime 45387487861:
+            <div class="preDiv">9385865726, 14364859463, 37566695342, 2264488367,34081733951, 31823904148, 18302916695, 30483318875, 873511962, 20155809199, 42408578759, 8487902403</div>
+        This is our ciphertext.</li>
 
     </ol>
 
@@ -189,15 +210,20 @@
         </tr>
     </table> 
     <ol>
-        <li></li>
+        <li>We first compute the multicative inverse of the encrypting exponent, <i>t</i></li> mod <i>p</i>-1. Call this inverse <i>u</i>(Note the our stipulation that gcd(<i>t</i>, <i>p</i>-1) = 1, will guarantee the inverse exists.)
+        <li>For each number <i>b</i> in the list of ciphertext numbers, compute <i>b<sup>u</sup></i> mod <i>p</i>.
+        </li>
+        <li>Convert the quadgraph numbers back to letters.</li>
     </ol>
 
     <button type="button" class="collapsible">Example</button>
     <div class="content">
         <p>We will decrypt the message from the previous example.</p>
         <ol>
-        <li>
-        </li>
+            <li>We use the Mulitplicative inverse tool to find the inverse of our exponent 39119 mod 45387487860 (note that is <i>p</i>-1).  <div class="preDiv">5112024119</div></li>
+            <li>We use the Exponentiation tool to exponentiate the ciphertext list of numbers using the inverse exponent 5112024119, mod our prime 45387487861:<div class="preDiv">1180517, 21010407, 18011608, 9031921,2192009, 20212009, 15140309, 16080518, 19180501, 12122519, 5032118, 5171717</div></li>
+            <li>We use the Numbers to Text tool to convert back to letters:
+                <div class="preDiv"></div>AREQ UADG RAPH ICSU BSTI TUTI ONCI PHER SREA LLYS ECUR EQQQ</li>
         </ol>
     </div>        
     <table>
@@ -207,13 +233,13 @@
         </tr>
     </table>
     <ol>
-      <li> 
-      Each group should decide on a message and create a One Time Pad to encipher the message. Be sure to make sure your One Time Pad is at least as long as your plaintext.
-    </li>
-     <li>Post your message and key in the One Time Pad forum in the Student Messages area of Blackboard.
-    <li>
-      Decipher the messages submitted by the other groups posted in that forum.
-    </LI>  
+      <li> Choose a prime number <i>p</i> than 26262626 using the Next Prime tool.
+      </li> 
+      <li>Choose an exponent <i>t</i> and check that gcd(<i>t</i>, <i>p</i>-1) = 1. If it isn't, pick a different value for <i>t</i>. (Note: Be careful to note here that you are computing the gcd with <i>p</i>-1, not <i>p</i>.) </li>
+      <li>Decide on a message for your group and use the Convert Text to Numbers tool above.</li>
+      <li>Use the Exponentiation tool to raise each number in your list to your exponent, mod your prime. Note that you can enter your entire list of numbers in at the same.</li>
+      <li>The output from the previous step is your ciphertext. Post this in Pohlig-Hellman Cipher forum of the Messages section on Blackboard along with your prime and your exponent.</li>
+      <li>Decipher the other messages using the tools above.</li>
     </ol>
     
     <table>
@@ -223,10 +249,12 @@
         </tr>
 
     </table>
-    <p>The message below was encrypted with an affine cipher. Can you decipher it?</p>
+    <p>Below is a message enciphered with <i>p</i> = 30000001.  The value of the exponent is unknown.  The first word in the plaintext is "good".</p>
     <div class="preDiv">
-        NTTOM TGOVO HTREP IFATX EFXDP UUAES FFERC OSFOP COFUF IFCDF HJ
+        15108464, 29415186, 20089497, 12324270, 17204955, 28765499, 
+            22771481, 8042486
     </div>
+    <p>You will need to solve discrete logarithm problem, but alas the numbers are too big for the tool on this site. You might use the <a href="https://www.alpertron.com.ar/DILOG.HTM">one here</a>, or search the internet for a different.</p>
 
 
 

@@ -600,7 +600,7 @@ function phNumsTxt(nums) {
             result += String.fromCharCode(ch);
         }
     }
-    return result;
+    return spaceText(result,4);
 }
 
 /**
