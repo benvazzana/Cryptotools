@@ -29,15 +29,165 @@
 
     <h1>The Playfair Cipher</h1>
 
-    <!-- We'll do this by hand so we won't need anything new-->
+    <p>We're going to this one by hand, so there are no tools for this one.</p> 
 
 
 
+    <h2>How it works</h2>
+    <p>The sender and receiver decide ona key, which is a 5x5 table, with each entry containing a distint letter of the alphabet. Note that means we'll be missing one letter. In our implementation, we'll leave out the letter J. If there is a J in our message, we can either encipher it as an I or just leave it out and assumer the receiver will be able to make sense of it. </p>
+    <p>To make the key easy to remember, a trick is to use a keyword in the same way we did for creating a Monoalphabetic Subtitution Key. For example, if our keyword is "PLAYFAIR", we first delete the exta A. We then fill in the table in the upper left corner:</p>
 
 
+    <table class="equal-width5" border="1">
+        <tr><td>P</td><td>L</td><td>A</td><td>Y</td><td>F</td></tr>
+        <tr><td>I</td><td>R</td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp </td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp </td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp </td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <p> Now we complete the table with the rest of the alphabet (skipping J):</p>
+    <table class="equal-width5" border="1">
+        <tr><td>P</td><td>L</td><td>A</td><td>Y</td><td>F</td></tr>
+        <tr><td>I</td><td>R</td><td>B</td><td>C</td><td>D</td></tr>
+        <tr><td>E</td><td>G</td><td>H</td><td>K</td><td>M</td></tr>
+        <tr><td>N</td><td>O</td><td>Q</td><td>S</td><td>T</td></tr>
+        <tr><td>U</td><td>V</td><td>W</td><td>X</td><td>Z</td></tr>
+    </table>
+
+
+    <table>
+        <tr>
+            <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Encryption:</h3></td>
+        </tr>
+    </table> 
+    <p>This is a bigraphic substitution cipher (i.e. we replace each pair of letters with a different pair of letters.) So, first break the plaintext into pairs. If there are an odd number of letters, pair the last letter with a Q. Each pair is encipherd as follows:</p>
+    <ol>
+        <li>If both letters of the diagram lie in the same row, then each letter is enciphered by the letter immediately to its right (cycling back to the first letter in the row, if needed).</li>
+
+        <li>
+            If both letters of the diagram lie in the same column, then each letter is enciphered by the letter immediately below it (cycling back to the first letter in the column, if needed). 
+        </li>
+        <li>
+            In the remaining case, each letter is exchanged by the letter in the same row that lies at the intersection of its row and the other letter's column. 
+        </li>
+        <li>For a pair where both letters are the same, change the second letter to X and appply the appropriate rule above.</li>
+
+    </ol>
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>Using the key above, we will encrypt the message: </p>
+        <div class="preDiv">
+            Did this work
+        </div>
+        <p>We break the text into pairs and add an extra Q:</p>
+        <div class="preDiv">
+            DI DT HI SW OR KQ
+        </div>
+        <p>Now we ecrypt each pair:</p>
+        <ul>
+            <li><samp>DI</samp>: These are both in row 2, so we shift each to the right to get <samp>IR</samp></li>
+            <li><samp>DT</samp>: These are in column 5, so we shift each down one spot to get <samp>MZ</samp></li>
+            <li><samp>HI</samp>: We look at the rectangle that has these two lettes in the corners, and we swap to the opposite corners. We get <samp>EB</samp></li>
+            <li><samp>SW</samp>: Opposite corners gives <samp>QX</samp></li>
+            <li><samp>OR</samp>: Shift down to get <samp>VG</samp></li>
+            <li><samp>KQ</samp>: Opposite corners gives <samp>HS</samp></li>
+        </ul>
+        <p> So our ciphertext is:</p>
+        <div class="preDivLeft">IR MZ EB QX VG HS</div>
+    </div>
+
+    <table>
+        <tr>
+            <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Decryption:</h3></td>
+        </tr>
+    </table> 
+    <ol>
+        <p>Reverse the encryption procedure for each pair of letters:</p>
+        <ol>
+            <li>If both letters of the diagram lie in the same row, then each letter is enciphered by the letter immediately to its left (cycling back to the last letter in the row, if needed).</li>
+    
+            <li>
+                If both letters of the diagram lie in the same column, then each letter is enciphered by the letter immediately abovee it (cycling back to the last letter in the column, if needed). 
+            </li>
+            <li>
+                In the remaining case, each letter is exchanged by the letter in the same row that lies at the intersection of its row and the other letter's column. 
+            </li>
+            <p>Note that an X in the second spot of a pair may have resulted from case 4 above. Consider whether it makes sense to replace it with first letter in the pair. Also, consider whether there are missing J's.</p>
+    
+        </ol>
+    </ol>
+
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>Using the key above, we will decrypt the following:</p>
+        <div class="preDivLeft">PK NC ZM RI</div>
+        <ul>
+        <li><samp>PK</samp>: Switch to opposite corners to get <samp>YE</samp></li>
+        <li><samp>NC</samp>: Switch to opposite corners to get <samp>SI</samp></li>
+        <li><samp>ZM</samp>: Same column, so shift up to get <samp>TD</samp></li>
+        <li><samp>RI</samp>: Same row, so shift left to get <samp>ID</samp></li>
+        </ul>
+        <p>The plaintext is:</p>
+        <div class="preDivLeft">Yes it did</div>
+    </div>        
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+
+    <ol>
+        <li> Choose a keyword and create your Playfair square.
+        </li>
+        <li>Decide on a message, and encipher it using your key.</li>
+        <li>In the Playfair Cipher forum of the Student Messages section of Blackboard, post your message and your keyword</li>
+        <li>Decipher the messages from the other groups.</li>
+    </ol>   
+    
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+
+    </table>
+    <P>Cryptanalyze the following Playfair enciphered message:</P>
+    <div class="preDivLeft">
+        VG LT NM OZ EI IM BP
+    </div>
+    <p>They key that was used for this message was also used to encrypt the following (lower case is plaintext, upper case is ciphertext):
+    </p>
+    <div class="preDivLeft">
+        th eq ui ck br ow nf ox um ps ov er th el az yd og is as   </div>
+        <div class="preDivLeft">
+        BQ HM MD KS CB RO OA TW MP QU NW GI BQ GE DA ZC RP CM FU 
+        <div class="preDivLeft">
+        en te nc et ha th as ev er yl et te ro ft he al ph ab et</div>
+        <div class="preDivLeft">
+        MI NH FI HN LT BQ FU MN GI ZK HN NH GR AF KG DU QG TD HN
+        </div>
         
     </td>
     </tr>
 </table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 </body>
 </html>
