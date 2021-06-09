@@ -52,28 +52,42 @@
         Text:
         <input type="text" id="txtHill"> <br />
         <p id="matWarning"></p>
-        Matrix (Enter as a list: a, b, c, d):
-        <input type="text" id="txtMatrix"> <br />
-        <button id="btnSubmit" onclick=btnSubmitOnClick()>Submit</button>
+        Matrix: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix11"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix12"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix21"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix22"></input></td>
+            </tr>
+        </table>
+ 
+ 
+  
         <script>
             function btnSubmitOnClick() {
                 let text = document.getElementById('txtHill').value;
-                let matStr = document.getElementById('txtMatrix').value;
-                matStr = removeSpaces(matStr);
-                let matListStr = matStr.split(',');
                 let mat2 = [];
-                for(let i = 0; i < matListStr.length; i++) {
-                    mat2.push(matListStr[i]);
-                }
+                mat2[0] = document.getElementById('txtMatrix11').value;
+                mat2[1] = document.getElementById('txtMatrix12').value;
+                mat2[2] = document.getElementById('txtMatrix21').value;
+                mat2[3] = document.getElementById('txtMatrix22').value;
+
                 let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
-                if(det == 0) {
-                    document.getElementById('matWarning').innerHTML = "WARNING: Matrix is not invertible!";
+                if(det % 26 == 0 ) {
+                    document.getElementById('hillResult').innerHTML = "WARNING: Matrix is not invertible!";
                 }
-                document.getElementById('hillResult').innerHTML = hillCipher(text, mat2);
+                else{document.getElementById('hillResult').innerHTML = hillCipher(text, mat2);}
+                
             }
         </script>
+              <button id="btnSubmit" onclick=btnSubmitOnClick()>Submit</button>
         <p id="hillResult"></p>
+ 
     </div>
+
     <h2>How it works</h2>
     <p>The Hill Cipher is a polgraphic substitution cipher. In this implementation, letters will be encrypted in pairs.</p>
     <table>

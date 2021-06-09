@@ -604,6 +604,89 @@ function phNumsTxt(nums) {
 }
 
 /**
+ * Converts a string of text into a list of numbers by grouping
+ * characters into groups of 4, converting characters to ASCII codes filling in 0's in front of single
+ * digits
+ * @param {String} message input plaintext
+ * @returns {Array<Number>} list of numbers
+ */
+
+
+function phTxtNumsAscii(message) {
+    let nExtraCharacters = (4 - (message.length % 4)) % 4;
+    for(let i = 0; i < nExtraCharacters; i++) {
+        message += "Q";
+    }
+    let nums = textToNumAscii(message);
+    let groupedNumStrs = [];
+    for(let i = 0; i < message.length; i += 4) {
+        let str = "";
+        for(let j = 0; j < 4; j++) {
+            let n = nums[i + j];
+            if(n < 10) str += ("00" + n.toString());
+            else 
+              if(n < 100) str += ("0" + n.toString());
+              else str += n.toString();
+        }
+        groupedNumStrs.push(str);
+    }
+    let groupedNums = [];
+    for(let i = 0; i < groupedNumStrs.length; i++) {
+        groupedNums.push(parseInt(groupedNumStrs[i]));
+    }
+    return groupedNums;
+}
+
+/**
+ * Converts a string into a list of ASCII code numbers
+ * @param {String} str string
+ * @returns {Array<Number>} resulting list of numbers
+ */
+
+function textToNumAscii(str) {
+    let result = [];
+    for(let i = 0; i < str.length; i++) {
+        result.push(str.charCodeAt(i));
+    }
+    return result;
+}
+
+
+
+/**
+ * Converts a list of numbers into characters by splitting
+ * each number into 4 sections, getting a single ASCII character from
+ * each section
+ * @param {Array<Number>} nums input list of numbers
+ * @returns {String} resulting string
+ */
+
+function phNumsTxtAscii(nums) {
+    let result = "";
+    for(let i = 0; i < nums.length; i++) {
+        let n = nums[i];
+        let numStr = n.toString();
+        if(numStr.length < 12) {
+          if(numStr.length < 11) {
+            numStr = "00" + numStr;
+          } else
+            numStr = "0" + numStr;
+        }
+        for(let j = 0; j < 4; j++) {
+            let charNumStr = numStr.substr(j * 3, 3);
+            let charNum = parseInt(charNumStr);
+            result += String.fromCharCode(charNum);
+        }
+    }
+    return (result);
+}
+
+
+
+
+
+
+/**
  * For each number in the list of numbers, this function calculates
  * list[i]^t mod n, returning it as a separate list
  * @param {Array<Number>} nums 
@@ -642,6 +725,21 @@ function gcd(a, b) {
 }
 
 /**
+ * This function computes the gcd of a list of integers 
+ * @param {Array<Number>} x 
+ */
+function gcdList(x) {
+    let g = gcd(x[0],x[1]);
+    for(let i = 2; i < x.length; i++){
+      g = gcd(g,x[i])
+    }
+    return(g);
+  }
+
+  
+
+
+/**
  * This function computes the gcd of 2 integers, a and b, along with
  * 2 integers, x and y, such that ax + by = gcd(a, b) using Euler's
  * extended algorithm
@@ -667,7 +765,8 @@ function extendedGcd(a, b) {
  * @param {Number} n modulus
  * @return {Number} a^k modulus n
  */
-function successiveSquare(a, k, n) {
+/**
+ * function successiveSquare(a, k, n) {
     let largest2Pow = 1;
     while(largest2Pow < k) largest2Pow *= 2;
     largest2Pow /= 2;
@@ -702,6 +801,42 @@ function successiveSquare(a, k, n) {
     }
     return result;
 }
+*/
+
+function successiveSquare(a, k, n) {
+    let largest2Pow = 1n;
+    while(largest2Pow < k) largest2Pow *= 2n;
+    largest2Pow /= 2n;
+    
+    let powerTable = {};
+    for(let i = 1n; i <= largest2Pow; i *= 2n) {
+        if(i == 1) {
+            powerTable[i] = BigInt(a);
+        } else {
+            const base = BigInt(powerTable[i / 2n]);
+            let result = (base ** 2n) % BigInt(n);
+            powerTable[i] = result;
+        }
+    }
+        let exponent = BigInt(k);
+    let pow = largest2Pow;
+    let powers = [];
+    while(pow > 0) {
+        powers.push(pow);
+        exponent -= pow;
+        while(pow > exponent) {
+            pow /= 2n;
+        }
+    }
+    let result = 1n;
+    for(let i = 0; i < powers.length; i++) {
+        exponent = powers[i];
+        result *= powerTable[exponent];
+        result %= BigInt(n);
+    }
+    return result;
+}
+
 
 /**
  * This function generates a key for a binary cipher given a prime
@@ -721,7 +856,7 @@ function generateBinaryOneTimePad(p, s, m) {
 }
 
 /**
- * Given an integer, n, thsi function returns the next prime number
+ * Given an integer, n, this function returns the next prime number
  * found after n. If n itself is prime, the following prime number
  * will be returned.
  * @param {Number} n input integer 
@@ -736,6 +871,28 @@ function findNextPrime(n) {
     }
     return n;
 }
+
+/**
+ * Given a Big integer, n, this function returns the next prime number
+ * found after n. If n itself is prime, the following prime number
+ * will be returned.
+ * @param {Big Integr} n input integer 
+ */
+
+function findNextPrimeBig(n) {
+    let found = false;
+    while(!found) {
+        n++;
+        if(isPrimeBig(n)) {
+            found = true;
+        }
+    }
+    return n;
+}
+
+
+
+
 
 /**
  * This function determines whether or not a given positive whole
@@ -767,12 +924,41 @@ function isPrime(n) {
 }
 
 /**
+ * This function determines whether or not a given Big Integer is prime (not 100% effective, tests primes with number
+ * theory based predictions for large number efficiency)
+ * @param {Big Integer} n input number
+ * @return {Boolean} true if prime, false if not
+ */
+function isPrimeBig(n) {
+    let s = n - 1n;
+    let r = 0;
+    while(s % 2n == 0) {
+        r++;
+        s = s/2n;
+    }
+    let result = false;
+    let a = 2n;
+    if(successiveSquare(a, s, n) == 1n) result = true;
+    for(let i = 0; i < r; i++) {
+        if(successiveSquare(a, (BigInt(2**i)) * s, n) == n - 1n) result = true;
+    }
+    a = 3;
+    if(successiveSquare(a, s, n) == 1) result = true;
+    for(let i = 0; i < r; i++) {
+        if(successiveSquare(a, (BigInt(2**i)) * s, n) == n - 1n) result = true;
+    }
+
+    return result;
+}
+
+
+/**
  * This function returns the multiplicative inverse of a mod n. If gcd(a,n) is not 1, warning that a is not invertible is returned.
  * @param {Number} a input number
  * @param {Number} n input number
  */
  function multInverseModn(a,n) {
-    let result = "The number is not invertible."
+    let result = "The number is not invertible.";
     let g = extendedGcd(a, n);
     if(g[0] == 1) {
         let inverse = extendedGcd(a, n)[1];
@@ -793,3 +979,112 @@ function isPrime(n) {
     return possibleKeys;
 }
 
+/**
+ * This function computes the gcd of 2  Big Integers recursively using
+ * Euler's algorithm
+ * @param {BigInteger} a 
+ * @param {BigInteger} b 
+ */
+ function gcdBig(a, b) {
+    if(a == 0) return b;
+    return gcdBig(b % a, a);
+}
+
+
+/**
+ * This function returns the extended GCD of a and b using Big Integers. The inputs must be Big Integers.
+ * @param {BigInt} a input number
+ * @param {BigInt} b input number
+ */
+
+function extendedGcdBig(a, b) {
+    if(a == 0) return [b, BigInt(0), BigInt(1)];
+
+    let list = extendedGcdBig(b % a, a);
+
+    let x = list[2] - ((b-(b % a))/a) * list[1];
+    let y = list[1];
+
+    return [list[0], x, y];
+}
+
+/**
+ * This function returns the multiplicative inverse of a mod n using Big Integers. The inputs must be Big Integers. If gcd(a,n) is not 1, warning that a is not invertible is returned.
+ * @param {BigInt} a input number
+ * @param {BigInt} n input number
+ */
+
+ function multInverseModnBig(a,n) {
+    let result = "The number is not invertible.";
+    let g = extendedGcdBig(a, n);
+    if(g[0] == 1) {
+        let inverse = extendedGcdBig(a, n)[1];
+        if(inverse < 0) inverse += n;
+        inverse %= n;
+        result= inverse;
+    }
+    return result
+ }
+
+/**
+ * This function returns floor value of the square root of a Big Integer.
+ * @param {BigInt} value input number
+ */
+
+ function sqrt(value) {
+    if (value < 0n) {
+        throw 'square root of negative numbers is not supported'
+    }
+
+    if (value < 2n) {
+        return value;
+    }
+
+    function newtonIteration(n, x0) {
+        const x1 = ((n / x0) + x0) >> 1n;
+        if (x0 === x1 || x0 === (x1 - 1n)) {
+            return x0;
+        }
+        return newtonIteration(n, x1);
+    }
+
+    return newtonIteration(value, 1n);
+}
+
+
+/**
+ * This function returns the list of factors of  a Big Integer.
+ * @param {BigInt} n input number
+ */
+
+function factor(n){
+    let result = [];
+    let factor = 2n;
+    let number = BigInt(n);
+    while (factor <= sqrt(number))
+    if (number % factor == 0n) {
+      result.push(factor);
+      number = number / factor;
+    } else {
+    factor++};
+    if ( number > 1 ) result.push(number);
+    return(result)
+}
+
+/**
+ * This function returns the smallest prime factor of a Big Integer.
+ * @param {BigInt} n input number
+ */
+
+
+function primeFactor(n){
+    let number = BigInt(n);
+    let factor = BigInt(2);
+    while ((factor <= sqrt(number)) && (number % factor != 0)){
+      factor++
+    }
+    if ((number % factor) == 0) {
+      return(factor)
+      } else {return(number)
+      }
+}

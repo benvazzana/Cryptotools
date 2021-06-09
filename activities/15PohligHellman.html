@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Pohlig Hellman Algorithm</title>
+    
+    <script src="../jquery.js"></script> 
+    <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+</head>
+
+
+<body>
+    <div id="includedContent" class="default"></div>
+
+        
+<table style="width:100%"  cellspacing="0" cellpadding="07" >
+    <col style="width:15%">
+    <col style="width:85%">
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+    <td>
+    <h1> The Pohlig Hellman Algorithm</h1>
+
+    <h2>Tools</h2>
+    <h3>Next Prime</h3>
+    Number:
+    <input type="text" id="txtNextPrime">
+    <script>
+        function btnNextPrimeOnClick() {
+            let n = BigInt(document.getElementById('txtNextPrime').value);
+            let p = findNextPrimeBig(n);
+            let result ="prime = ";
+            result += p;
+            document.getElementById('nextPrimeResult').innerHTML = result;
+        }
+    </script>
+    <button id="btnNextPrime" onclick=btnNextPrimeOnClick()>Submit</button> <br />
+
+    <p id="nextPrimeResult"></p>
+
+    <h3>GCD </h3>
+    First number:
+    <input type="text" id="txtGcdBigA"> <br />
+    Second number:
+    <input type="text" id="txtGcdBigB"> <br />
+    <script>
+        function btnGcdBigOnClick() {
+            let a = BigInt(document.getElementById('txtGcdBigA').value);
+            let b = BigInt(document.getElementById('txtGcdBigB').value);
+            let result = "gcd = ";
+            result += gcdBig(a, b);
+            document.getElementById('gcdBigResult').innerHTML = result;
+        }
+    </script>
+    <button id="btnGcdBig" onclick=btnGcdBigOnClick()>Submit</button> <br />
+    <p id="gcdBigResult"></p>
+
+
+
+    <h3>Convert Text to ASCII Numbers (grouping into quadraphs)</h3>
+    Text:
+    <input type="text" id="txtNumListAscii">
+    <script>
+        function btnNumListAsciiOnClick() {
+            let text = document.getElementById('txtNumListAscii').value;
+            let nums = phTxtNumsAscii(text);
+            let numsStr = "";
+                    for(let i = 0; i < nums.length; i++) {
+                        numsStr += nums[i];
+                        if(i != nums.length - 1) numsStr += ", ";
+                    }
+
+
+            document.getElementById('numListAsciiResult').innerHTML = numsStr;
+        }
+    </script>
+    <button id="btnNumListAscii" onclick=btnNumListAsciiOnClick()>Submit</button> <br />
+    <p id="numListAsciiResult"></p>
+
+
+    <h3>Exponentiation (Encrypt) </h3>
+    Number List:
+    <input type="text" id="txtExponentiateNums1Big"> <br />
+    Exponent:
+    <input type="text" id="txtExponentiatePow1Big"> <br />
+    Modulus (<i>p</i>):
+    <input type="text" id="txtExponentiateMod1Big"> <br />
+    <script>
+        function btnExponentiate1BigOnClick() {
+            let numsStr = document.getElementById('txtExponentiateNums1Big').value;
+            numsStr = removeSpaces(numsStr);
+            let nums = numsStr.split(',');
+            let t = (document.getElementById('txtExponentiatePow1Big').value);
+            let p = (document.getElementById('txtExponentiateMod1Big').value);
+
+            let result = phExponentiate(nums, t, p);
+            let resultNumsStr = "";
+                    for(let i = 0; i < result.length; i++) {
+                        resultNumsStr += result[i];
+                        if(i != result.length - 1) resultNumsStr += ", ";
+                    }
+            document.getElementById('exponentiateResult1Big').innerHTML = resultNumsStr;
+        }
+    </script>
+    <button id="btnExponentiate1Big" onclick=btnExponentiate1BigOnClick()>Submit</button><br />
+    <p id="exponentiateResult1Big"></p>
+
+
+    <h3>Multiplicative Inverse </h4>
+        Number:
+        <input type="text" id="txtMultInverseNumBig"> <br />
+        Modulus (<i>p</i> - 1):
+        <input type="text" id="txtMultInverseModBig"> <br />
+        <script>
+            function btnMultInverseBigOnClick() {
+                let a = BigInt(document.getElementById('txtMultInverseNumBig').value);
+                let b = BigInt(document.getElementById('txtMultInverseModBig').value);
+                let result = "Inverse = ";
+                result += multInverseModnBig(a, b);
+                document.getElementById('multInverseResultBig').innerHTML = result;        
+            }
+        </script>
+        <button id="btnMultInverseBig" onclick=btnMultInverseBigOnClick()>Submit</button><br />
+        <p id="multInverseResultBig"></p>
+
+        <h3>Exponentiation (Decrypt) </h3>
+        Number List:
+        <input type="text" id="txtExponentiateNums2Big"> <br />
+        Exponent:
+        <input type="text" id="txtExponentiatePow2Big"> <br />
+        Modulus (<i>p</i>):
+        <input type="text" id="txtExponentiateMod2Big"> <br />
+        <script>
+            function btnExponentiate2BigOnClick() {
+                let numsStr = document.getElementById('txtExponentiateNums2Big').value;
+                numsStr = removeSpaces(numsStr);
+                let nums = numsStr.split(',');
+                let t = (document.getElementById('txtExponentiatePow2Big').value);
+                let p = (document.getElementById('txtExponentiateMod2Big').value);
+                let result = phExponentiate(nums, t, p);
+                let resultNumsStr = "";
+                        for(let i = 0; i < result.length; i++) {
+                            resultNumsStr += result[i];
+                            if(i != result.length - 1) resultNumsStr += ", ";
+                        }
+                document.getElementById('exponentiateResult2Big').innerHTML = resultNumsStr;
+            }
+        </script>
+        <button id="btnExponentiate2Big" onclick=btnExponentiate2BigOnClick()>Submit</button><br />
+        <p id="exponentiateResult2Big"></p>
+
+
+
+    <h3>ASCII Numbers (as quadgraphs) to Text</h4>
+        <input type="text" id="txtNumTextAscii"> <br />
+        <script>
+            function btnNumTxtAsciiOnClick() {
+                let numsStr = document.getElementById('txtNumTextAscii').value;
+                numsStr = removeSpaces(numsStr);
+                let nums = numsStr.split(',');
+                for(let i = 0; i < nums.length; i++) {
+                    nums[i] = parseInt(nums[i]);
+                }
+                let result = phNumsTxtAscii(nums);
+                document.getElementById('numTxtAsciiResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnNumTxtAscii" onclick=btnNumTxtAsciiOnClick()>Submit</button><br />
+        <p id="numTxtAsciiResult"></p>
+
+
+
+    <h2>How it works</h2>
+    <p>The Pohlig-Hellman Cipher is an analogue of the Affine Cipher, except instead of multiplying or adding the key, we raise the plaintext to the key power. We will also implement this as a polygraphic cipher, putting the letters into groups of four.</p>
+    <table>
+        <tr>
+            <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Encryption:</h3></td>
+        </tr>
+    </table> 
+
+    <ol>
+        <li>The sender converts the plaintext to numbers. We will group into quadgraphs and convert each letter to its ASCII number. So for instance, "aAbB" will transform into 097065098066</li>
+        <li>The sender and receiver agree on a prime </i>p</i> bigger than the largest possible quadgraph number (i.e. bigger than 127127127127). They also agree on an exponent <i>t</i> that satisfies gcd(<i>t</i>, <i>p</i>-1) =1.
+        </li>
+        <li> For each quadgraph number <i>b</i>, the quantity <i>a<sup>t</sup></i> mod <i>p</i> is computed. The list of these numbers constitutes the ciphertext.
+
+        </li>
+    </ol>
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+   We will encrypt the message: 
+   <div class="preDiv">
+    Are quadgraphic substitution ciphers really secure?
+   </div>
+    <ol>
+        <li>We use the Next Prime tool to find the next prime after 444333222111:</li>
+        <div class="preDiv">444333222169</div>
+        <li>We select 39119 for our exponent, use the GCD tool to check that gcd(39119,444333222168)=1.</li>
+      <li>Using the Convert Text to Numbers tool for our plaintext, we get:
+          <div class="preDiv">65114101032, 113117097100, 103114097112, 104105099032, 115117098115, 116105116117, 116105111110, 32099105112, 104101114115, 32114101097, 108108121032, 115101099117, 114101063081</div>
+      </li>
+        <li>We use the Exponentiation tool to exponentiate this list of numbers using our exponent 39119, mod our prime 444333222169:
+            <div class="preDiv">266634625402, 397740905975, 164605235066, 185879077723, 162358056720, 89906036286, 183378339205, 225303301048, 214797823889, 412924908038, 378353802551, 256886955254, 173450632979</div>
+        This is our ciphertext.</li>
+
+    </ol>
+
+    </div>
+
+    <table>
+        <tr>
+            <td><img src="../images/unlock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
+            <td><h3>Decryption:</h3></td>
+        </tr>
+    </table> 
+    <ol>
+        <li>We first compute the multicative inverse of the encrypting exponent, <i>t</i></li> mod <i>p</i>-1. Call this inverse <i>u</i> (Note the our stipulation that gcd(<i>t</i>, <i>p</i>-1) = 1, will guarantee the inverse exists.)
+        <li>For each number <i>b</i> in the list of ciphertext numbers, compute <i>b<sup>u</sup></i> mod <i>p</i>.
+        </li>
+        <li>Convert the quadgraph numbers back to letters.</li>
+    </ol>
+
+    <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>We will decrypt the message from the previous example.</p>
+        <ol>
+            <li>We use the Mulitplicative inverse tool to find the inverse of our exponent 39119 mod 444333222168 (note that is <i>p</i>-1).  <div class="preDiv">103964364695</div></li>
+            <li>We use the Exponentiation tool to exponentiate the ciphertext list of numbers using the inverse exponent 103964364695, mod our prime 444333222169:<div class="preDiv">65114101032, 113117097100, 103114097112, 104105099032, 115117098115, 116105116117, 116105111110, 32099105112, 104101114115, 32114101097, 108108121032, 115101099117, 114101063081</div></li>
+            <li>We use the Numbers to Text tool to convert back to letters:
+                <div class="preDiv"></div>Are quadgraphic substitution ciphers really secure?Q</li>
+        </ol>
+    </div>        
+    <table>
+        <tr>
+            <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Group Message Exchange</h2></td>
+        </tr>
+    </table>
+    <ol>
+      <li> Choose a prime number <i>p</i> than 127127127127 using the Next Prime tool.
+      </li> 
+      <li>Choose an exponent <i>t</i> and check that gcd(<i>t</i>, <i>p</i>-1) = 1. If it isn't, pick a different value for <i>t</i>. (Note: Be careful to note here that you are computing the gcd with <i>p</i>-1, not <i>p</i>.) </li>
+      <li>Decide on a message for your group and use the Convert Text to Numbers tool above.</li>
+      <li>Use the Exponentiation tool to raise each number in your list to your exponent, mod your prime. Note that you can enter your entire list of numbers in at the same.</li>
+      <li>The output from the previous step is your ciphertext. Post this in Pohlig-Hellman Cipher forum of the Messages section on Blackboard along with your prime and your exponent.</li>
+      <li>Decipher the other messages using the tools above.</li>
+    </ol>
+    
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+
+    </table>
+    <p>Below is a message enciphered with <i>p</i> = 1234567890133.  The value of the exponent is unknown.  The first word in the plaintext is "good".</p>
+    <div class="preDiv">
+        1064553530131, 441231004543, 120996833004, 953500001505, 42853016650, 31439752132, 1220041572602, 105279116356, 825948815128, 1233249092316
+    </div>
+    <p>You will need to solve discrete logarithm problem, but alas the numbers are too big for the tool on this site. You might use the <a href="https://www.alpertron.com.ar/DILOG.HTM" target="_blank">one here</a>, or search the internet for a different.</p>
+
+
+
+
+</td>
+</tr>
+</table>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
+</html>
+
+<!--  Old commands for simple character code
+
+
+
+<h3>Convert Text to Numbers (grouping into quadraphs)</h3>
+Text:
+<input type="text" id="txtNumList">
+<script>
+    function btnNumListOnClick() {
+        let text = document.getElementById('txtNumList').value;
+        text = cleanText(text);
+        let nums = phTxtNums(text);
+        let numsStr = "";
+                for(let i = 0; i < nums.length; i++) {
+                    numsStr += nums[i];
+                    if(i != nums.length - 1) numsStr += ", ";
+                }
+
+        document.getElementById('numListResult').innerHTML = numsStr;
+    }
+</script>
+<button id="btnNumList" onclick=btnNumListOnClick()>Submit</button> <br />
+<p id="numListResult"></p>
+
+
+    <h3>Numbers to Text</h4>
+    <input type="text" id="txtNumText"> <br />
+    <script>
+        function btnNumTxtOnClick() {
+            let numsStr = document.getElementById('txtNumText').value;
+            numsStr = removeSpaces(numsStr);
+            let nums = numsStr.split(',');
+            for(let i = 0; i < nums.length; i++) {
+                nums[i] = parseInt(nums[i]);
+            }
+            let result = phNumsTxt(nums);
+            document.getElementById('numTxtResult').innerHTML = result;
+        }
+    </script>
+    <button id="btnNumTxt" onclick=btnNumTxtOnClick()>Submit</button><br />
+    <p id="numTxtResult"></p>
+-->

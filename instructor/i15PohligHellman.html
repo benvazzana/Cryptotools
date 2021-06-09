@@ -28,9 +28,13 @@
     </td>
         
     <td>
-
-
         <h1>The Pohlig-Hellman Cipher (Instructor)</h1>
+        <h3>Cryptanalysis Challenge</h3>
+        <p>The encrypting exponent was 1234567.</p>
+        <div class="preDivLeft">Good work. You are an ace cryptanalyst.</div>
+
+
+
         <h4>Group 1</h4>
         <div id="instructorPHDecrypt1" class="default">
             Ciphertext:
@@ -40,21 +44,18 @@
             Exponent:
             <input type="text" id="exponentInput1">
             <script>
-                function btnPHDecryptClick() {
+                function btnPHDecryptClick1() {
                     let numsStr = document.getElementById('cipherTextInput1').value;
                         numsStr = removeSpaces(numsStr);
                     let nums = numsStr.split(',');
-                    let t = parseInt(document.getElementById('exponentInput1').value);
-                    let p = parseInt(document.getElementById('primeInput1').value);
-                    let u = multInverseModn(t,p-1);
-                    for(let i = 0; i < nums.length; i++) {
-                        nums[i] = parseInt(nums[i]);
-                    }
+                    let t = BigInt(document.getElementById('exponentInput1').value);
+                    let p = BigInt(document.getElementById('primeInput1').value);
+                    let u = multInverseModnBig(t,p-1n);
                     let numPlain = phExponentiate(nums, u, p);
-                    document.getElementById("plainTextResult1").innerText =phNumsTxt(numPlain);
+                    document.getElementById("plainTextResult1").innerText =phNumsTxtAscii(numPlain);
                 }
             </script>
-            <button id="PHDecrypt1" onclick=btnPHDecryptClick()>Submit</button>
+            <button id="PHDecrypt1" onclick=btnPHDecryptClick1()>Submit</button>
             <p id="plainTextResult1"></p>            
         </div>
 
@@ -67,21 +68,18 @@
             Exponent:
             <input type="text" id="exponentInput2">
             <script>
-                function btnPHDecryptClick() {
+                function btnPHDecryptClick2() {
                     let numsStr = document.getElementById('cipherTextInput2').value;
                         numsStr = removeSpaces(numsStr);
                     let nums = numsStr.split(',');
-                    let t = parseInt(document.getElementById('exponentInput2').value);
-                    let p = parseInt(document.getElementById('primeInput2').value);
-                    let u = multInverseModn(t,p-1);
-                    for(let i = 0; i < nums.length; i++) {
-                        nums[i] = parseInt(nums[i]);
-                    }
+                    let t = BigInt(document.getElementById('exponentInput2').value);
+                    let p = BigInt(document.getElementById('primeInput2').value);
+                    let u = multInverseModnBig(t,p-1n);
                     let numPlain = phExponentiate(nums, u, p);
-                    document.getElementById("plainTextResult2").innerText =phNumsTxt(numPlain);
+                    document.getElementById("plainTextResult2").innerText =phNumsTxtAscii(numPlain);
                 }
             </script>
-            <button id="PHDecrypt2" onclick=btnPHDecryptClick()>Submit</button>
+            <button id="PHDecrypt2" onclick=btnPHDecryptClick2()>Submit</button>
             <p id="plainTextResult2"></p>            
         </div>
 
@@ -94,21 +92,18 @@
             Exponent:
             <input type="text" id="exponentInput3">
             <script>
-                function btnPHDecryptClick() {
+                function btnPHDecryptClick3() {
                     let numsStr = document.getElementById('cipherTextInput3').value;
                         numsStr = removeSpaces(numsStr);
                     let nums = numsStr.split(',');
-                    let t = parseInt(document.getElementById('exponentInput3').value);
-                    let p = parseInt(document.getElementById('primeInput3').value);
-                    let u = multInverseModn(t,p-1);
-                    for(let i = 0; i < nums.length; i++) {
-                        nums[i] = parseInt(nums[i]);
-                    }
+                    let t = BigInt(document.getElementById('exponentInput3').value);
+                    let p = BigInt(document.getElementById('primeInput3').value);
+                    let u = multInverseModnBig(t,p-1n);
                     let numPlain = phExponentiate(nums, u, p);
-                    document.getElementById("plainTextResult3").innerText =phNumsTxt(numPlain);
+                    document.getElementById("plainTextResult3").innerText =phNumsTxtAscii(numPlain);
                 }
             </script>
-            <button id="PHDecrypt3" onclick=btnPHDecryptClick()>Submit</button>
+            <button id="PHDecrypt3" onclick=btnPHDecryptClick3()>Submit</button>
             <p id="plainTextResult3"></p>            
         </div>
 
@@ -121,21 +116,18 @@
             Exponent:
             <input type="text" id="exponentInput4">
             <script>
-                function btnPHDecryptClick() {
+                function btnPHDecryptClick4() {
                     let numsStr = document.getElementById('cipherTextInput4').value;
                         numsStr = removeSpaces(numsStr);
                     let nums = numsStr.split(',');
-                    let t = parseInt(document.getElementById('exponentInput4').value);
-                    let p = parseInt(document.getElementById('primeInput4').value);
-                    let u = multInverseModn(t,p-1);
-                    for(let i = 0; i < nums.length; i++) {
-                        nums[i] = parseInt(nums[i]);
-                    }
+                    let t = BigInt(document.getElementById('exponentInput4').value);
+                    let p = BigInt(document.getElementById('primeInput4').value);
+                    let u = multInverseModnBig(t,p-1n);
                     let numPlain = phExponentiate(nums, u, p);
-                    document.getElementById("plainTextResult4").innerText =phNumsTxt(numPlain);
+                    document.getElementById("plainTextResult4").innerText =phNumsTxtAscii(numPlain);
                 }
             </script>
-            <button id="PHDecrypt4" onclick=btnPHDecryptClick()>Submit</button>
+            <button id="PHDecrypt4" onclick=btnPHDecryptClick4()>Submit</button>
             <p id="plainTextResult4"></p>            
         </div>
 
@@ -148,21 +140,18 @@
             Exponent:
             <input type="text" id="exponentInput5">
             <script>
-                function btnPHDecryptClick() {
+                function btnPHDecryptClick5() {
                     let numsStr = document.getElementById('cipherTextInput5').value;
                         numsStr = removeSpaces(numsStr);
                     let nums = numsStr.split(',');
-                    let t = parseInt(document.getElementById('exponentInput5').value);
-                    let p = parseInt(document.getElementById('primeInput5').value);
-                    let u = multInverseModn(t,p-1);
-                    for(let i = 0; i < nums.length; i++) {
-                        nums[i] = parseInt(nums[i]);
-                    }
+                    let t = BigInt(document.getElementById('exponentInput5').value);
+                    let p = BigInt(document.getElementById('primeInput5').value);
+                    let u = multInverseModnBig(t,p-1n);
                     let numPlain = phExponentiate(nums, u, p);
-                    document.getElementById("plainTextResult5").innerText =phNumsTxt(numPlain);
+                    document.getElementById("plainTextResult5").innerText =phNumsTxtAscii(numPlain);
                 }
             </script>
-            <button id="PHDecrypt5" onclick=btnPHDecryptClick()>Submit</button>
+            <button id="PHDecrypt5" onclick=btnPHDecryptClick5()>Submit</button>
             <p id="plainTextResult5"></p>            
         </div>
 
@@ -175,21 +164,18 @@
             Exponent:
             <input type="text" id="exponentInput6">
             <script>
-                function btnPHDecryptClick() {
+                function btnPHDecryptClick6() {
                     let numsStr = document.getElementById('cipherTextInput6').value;
                         numsStr = removeSpaces(numsStr);
                     let nums = numsStr.split(',');
-                    let t = parseInt(document.getElementById('exponentInput6').value);
-                    let p = parseInt(document.getElementById('primeInput6').value);
-                    let u = multInverseModn(t,p-1);
-                    for(let i = 0; i < nums.length; i++) {
-                        nums[i] = parseInt(nums[i]);
-                    }
+                    let t = BigInt(document.getElementById('exponentInput6').value);
+                    let p = BigInt(document.getElementById('primeInput6').value);
+                    let u = multInverseModnBig(t,p-1n);
                     let numPlain = phExponentiate(nums, u, p);
-                    document.getElementById("plainTextResult6").innerText =phNumsTxt(numPlain);
+                    document.getElementById("plainTextResult6").innerText =phNumsTxtAscii(numPlain);
                 }
             </script>
-            <button id="PHDecrypt6" onclick=btnPHDecryptClick()>Submit</button>
+            <button id="PHDecrypt6" onclick=btnPHDecryptClick6()>Submit</button>
             <p id="plainTextResult6"></p>            
         </div>
 

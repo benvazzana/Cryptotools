@@ -118,119 +118,162 @@
           </table>  
         </p>
 
+        <h3>GCD of a List</h3>
+
+        <div id="listGCD" class="default">
+          List of numbers (e.g. 4, 5, 8): 
+          <input type="text" id="listGCDInput"><br>
+          <script>
+              function btnListGCDClick() {
+                  let text = document.getElementById("listGCDInput").value;;
+                  let numsTxt = text.split(',');
+                  let nums = [];
+                  for(let i = 0; i < numsTxt.length; i++) {
+                      nums.push(parseInt(numsTxt[i]));
+                  }
+                  document.getElementById("lblListGCDResult").innerText = gcdList(nums);
+              }
+          </script>
+          <button id="btnListGCD" onclick=btnListGCDClick()>Submit</button>
+          <p id="lblListGCDResult"></p>
+      </div>
+
+
         <h3>Subtext Frequency Analysis  </h3>
         <div id="subtextFreqAnalysis" class="default">
   
         Ciphertext:
         <textarea type="text" rows=4 cols=100 id="freqAnalysisCiphertext"></textarea> <br>
-        Keyword length
+        Keyword length:
         <input type="text" id="keywordLength">
+        Keyword guess:
+        <input type="text" id="keywordGuess">
         <script>
           function btnSubtextClick() {
             let n = parseInt(document.getElementById("keywordLength").value);
             let text = cleanText(document.getElementById("freqAnalysisCiphertext").value);
             let table = document.getElementById("freq_Analysis_Table");
+            let keyword = document.getElementById("keywordGuess").value;
+            for(i = keyword.length; i < n; i++){
+              keyword +="A";
+            }
+            keyword = keyword.toUpperCase();
             for(let i = 0; i < n; i++) {
+              let start = keyword.charCodeAt(i)-65;
               let subtext = "";
               for(let j = i; j < text.length; j += n) {
                 subtext = subtext.concat(text.charAt(j));
               }
               let dict = frequencyAnalysis(subtext, 1);
               for(let j = 0; j < 26; j++) {
+  
                 let row = table.rows[j + 1];
+                let cell2 = row.insertCell();
+                let char2 = String.fromCharCode(65 + ((j + start) % 26));
+                cell2.innerHTML = char2;
                 let cell = row.insertCell();
-                let char = String.fromCharCode(65 + j);
-                let value = dict[char];
-                if(dict.hasOwnProperty(char)) {
-                  cell.innerHTML = dict[char];
-                } else {
-                  cell.innerHTML = 0;
+                let char = String.fromCharCode(65 + ((j + start) % 26));
+                let value = Math.round(dict[char]);
+                let Xs = "";
+                let i = 0;
+                for (let i = 0; i<=value; i++) {
+                  Xs += "x";                 
                 }
+                if(dict.hasOwnProperty(char)) {
+                  cell.innerHTML = Xs;
+                } else {
+                  cell.innerHTML = "";
+                }
+
               }
             }
           }
         </script>
         <button id="btnSubtext" onclick=btnSubtextClick()>Submit</button>
         </div>
+
+        <p></p>
+        <button onClick="window.location.reload();">Refresh Table</button>
+
         <p>
           <table id="freq_Analysis_Table">       <tr>
             <td><h3>Letter</h3></td>
             <td><h3>Rel. Freq.</h3></td>
         </tr>
         <tr>
-        <td>a</td><td></td>
+        <td>a</td><td>xxxxxxxx</td>
         </tr>
         <tr>
-          <td>b</td><td></td>
+          <td>b</td><td>xx</td>
         </tr>
         <tr>
-          <td>c</td><td></td>
+          <td>c</td><td>xxx</td>
         </tr>
         <tr>
-          <td>d</td><td></td>
+          <td>d</td><td>xxxx</td>
         </tr>
         <tr>
-          <td>e</td><td></td>
+          <td>e</td><td>xxxxxxxxxxxxx</td>
         </tr>
         <tr>
-          <td>f</td><td></td>
+          <td>f</td><td>xx</td>
         </tr>
         <tr>
-          <td>g</td><td></td>
+          <td>g</td><td>xx</td>
         </tr>
         <tr>
-          <td>h</td><td></td>
+          <td>h</td><td>xxxxxx</td>
         </tr>
         <tr>
-          <td>i</td><td></td>
+          <td>i</td><td>xxxxxxx</td>
         </tr>
         <tr>
           <td>j</td><td></td>
         </tr>
         <tr>
-          <td>k</td><td></td>
+          <td>k</td><td>x</td>
         </tr>
         <tr>
-          <td>l</td><td></td>
+          <td>l</td><td>xxxx</td>
         </tr>
         <tr>
-          <td>m</td><td></td>
+          <td>m</td><td>xx</td>
         </tr>
         <tr>
-          <td>n</td><td></td>
+          <td>n</td><td>xxxxxxx</td>
         </tr>
         <tr>
-          <td>o</td><td></td>
+          <td>o</td><td>xxxxxxxx</td>
         </tr>
         <tr>
-          <td>p</td><td></td>
+          <td>p</td><td>xx</td>
         </tr>
         <tr>
           <td>q</td><td></td>
         </tr>
         <tr>
-          <td>r</td><td></td>
+          <td>r</td><td>xxxxxx</td>
         </tr>
         <tr>
-          <td>s</td><td></td>
+          <td>s</td><td>xxxxxx</td>
         </tr>
         <tr>
-          <td>t</td><td></td>
+          <td>t</td><td>xxxxxxxxx</td>
         </tr>
         <tr>
-          <td>u</td><td></td>
+          <td>u</td><td>xxx</td>
         </tr>
         <tr>
-          <td>v</td><td></td>
+          <td>v</td><td>x</td>
         </tr>
         <tr>
-          <td>w</td><td></td>
+          <td>w</td><td>xx</td>
         </tr>
         <tr>
           <td>x</td><td></td>
         </tr>
         <tr>
-          <td>y</td><td></td>
+          <td>y</td><td>xx</td>
         </tr>
         <tr>
           <td>z</td><td></td>

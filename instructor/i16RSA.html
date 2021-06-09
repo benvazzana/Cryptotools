@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>RSA (Instructor)</title>
+        <script src="../jquery.js"></script> 
+        <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+        </script> 
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+    </head>
+
+<body>
+
+    <div id="includedContent"></div>
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>RSA (Instructor)</h1>
+        <h3>Cryptanalysis Challenge</h3>
+        <p>The primes were: p = 100000000000000000000000000000049, q = 10000000000000000000000000000000000043</p>
+        <div class="preDivLeft">Wow! This n had 70 digits.</div>
+
+        <h4>Group 1</h4>
+
+        <div id="instructorRSADecryptNoPrimes1" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInputNoPrimes1">
+            Modulus: 
+            <input type="text" id="modulusInputNoPrimes1a">
+            Exponent:
+            <input type="text" id="exponentInputNoPrimes1">
+            <script>
+                function btnRSADecryptClickNoPrimes1() {
+                    let numsStr = document.getElementById('cipherTextInputNoPrimes1').value;
+                        numsStr = removeSpaces(numsStr);
+                    let nums = numsStr.split(',');
+                    let t = BigInt(document.getElementById('exponentInputNoPrimes1').value);
+                    let n = BigInt(document.getElementById('modulusInputNoPrimes1a').value);
+                    let p = primeFactor(n);
+                    let q = n/p;
+                    let phi = (p-1n)*(q-1n);
+                    let u = multInverseModnBig(t, phi);
+                    let numPlain = phExponentiate(nums, u, n);
+                    document.getElementById("plainTextResultNoPrimes1").innerText =phNumsTxtAscii(numPlain);
+                }
+            </script>
+            <button id="RSADecryptNoPrimes1" onclick=btnRSADecryptClickNoPrimes1()>Submit</button>
+            <p id="plainTextResultNoPrimes1"></p>            
+        </div>
+
+        <div id="instructorRSADecrypt1" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput1">
+            First Prime: 
+            <input type="text" id="primeInput1a">
+            Second Prime: 
+            <input type="text" id="primeInput1b">
+            Exponent:
+            <input type="text" id="exponentInput1">
+            <script>
+                function btnRSADecryptClick1() {
+                    let numsStr = document.getElementById('cipherTextInput1').value;
+                        numsStr = removeSpaces(numsStr);
+                    let nums = numsStr.split(',');
+                    let t = BigInt(document.getElementById('exponentInput1').value);
+                    let primeStra = document.getElementById('primeInput1a').value;
+                    primeStra = removeSpaces(primeStra);
+                    let p = BigInt(primeStra);
+                    let primeStrb = document.getElementById('primeInput1b').value;
+                    primeStrb = removeSpaces(primeStrb);
+                    let q = BigInt(primeStrb);
+                    let n = p * q;
+                    let phi = (p-1n)*(q-1n);
+                    let u = multInverseModnBig(t, phi);
+                    let numPlain = phExponentiate(nums, u, n);
+                    document.getElementById("plainTextResult1").innerText =phNumsTxtAscii(numPlain);
+                }
+            </script>
+            <button id="RSADecrypt1" onclick=btnRSADecryptClick1()>Submit</button>
+            <p id="plainTextResult1"></p>            
+        </div>
+	
+        <h4>Group 2</h4>
+
+        <div id="instructorRSADecryptNoPrimes2" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInputNoPrimes2">
+            Modulus: 
+            <input type="text" id="modulusInputNoPrimes2a">
+            Exponent:
+            <input type="text" id="exponentInputNoPrimes2">
+            <script>
+                function btnRSADecryptClickNoPrimes2() {
+                    let numsStr = document.getElementById('cipherTextInputNoPrimes2').value;
+                        numsStr = removeSpaces(numsStr);
+                    let nums = numsStr.split(',');
+                    let t = BigInt(document.getElementById('exponentInputNoPrimes2').value);
+                    let n = BigInt(document.getElementById('modulusInputNoPrimes2a').value);
+                    let p = primeFactor(n);
+                    let q = n/p;
+                    let phi = (p-1n)*(q-1n);
+                    let u = multInverseModnBig(t, phi);
+                    let numPlain = phExponentiate(nums, u, n);
+                    document.getElementById("plainTextResultNoPrimes2").innerText =phNumsTxtAscii(numPlain);
+                }
+            </script>
+            <button id="RSADecryptNoPrimes2" onclick=btnRSADecryptClickNoPrimes2()>Submit</button>
+            <p id="plainTextResultNoPrimes2"></p>            
+        </div>
+
+        <div id="instructorRSADecrypt2" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput2">
+            First Prime: 
+            <input type="text" id="primeInput2a">
+            Second Prime: 
+            <input type="text" id="primeInput2b">
+            Exponent:
+            <input type="text" id="exponentInput2">
+            <script>
+                function btnRSADecryptClick2() {
+                    let numsStr = document.getElementById('cipherTextInput2').value;
+                        numsStr = removeSpaces(numsStr);
+                    let nums = numsStr.split(',');
+                    let t = BigInt(document.getElementById('exponentInput2').value);
+                    let primeStra = document.getElementById('primeInput2a').value;
+                    primeStra = removeSpaces(primeStra);
+                    let p = BigInt(primeStra);
+                    let primeStrb = document.getElementById('primeInput2b').value;
+                    primeStrb = removeSpaces(primeStrb);
+                    let q = BigInt(primeStrb);
+                    let n = p * q;
+                    let phi = (p-1n)*(q-1n);
+                    let u = multInverseModnBig(t, phi);
+                    let numPlain = phExponentiate(nums, u, n);
+                    document.getElementById("plainTextResult2").innerText =phNumsTxtAscii(numPlain);
+                }
+            </script>
+            <button id="RSADecrypt2" onclick=btnRSADecryptClick2()>Submit</button>
+            <p id="plainTextResult2"></p>   
+
+            <h4>Group 3</h4>
+
+            <div id="instructorRSADecryptNoPrimes3" class="default">
+                Ciphertext:
+                <input type="text" id="cipherTextInputNoPrimes3">
+                Modulus: 
+                <input type="text" id="modulusInputNoPrimes3a">
+                Exponent:
+                <input type="text" id="exponentInputNoPrimes3">
+                <script>
+                    function btnRSADecryptClickNoPrimes3() {
+                        let numsStr = document.getElementById('cipherTextInputNoPrimes3').value;
+                            numsStr = removeSpaces(numsStr);
+                        let nums = numsStr.split(',');
+                        let t = BigInt(document.getElementById('exponentInputNoPrimes3').value);
+                        let n = BigInt(document.getElementById('modulusInputNoPrimes3a').value);
+                        let p = primeFactor(n);
+                        let q = n/p;
+                        let phi = (p-1n)*(q-1n);
+                        let u = multInverseModnBig(t, phi);
+                        let numPlain = phExponentiate(nums, u, n);
+                        document.getElementById("plainTextResultNoPrimes3").innerText =phNumsTxtAscii(numPlain);
+                    }
+                </script>
+                <button id="RSADecryptNoPrimes3" onclick=btnRSADecryptClickNoPrimes3()>Submit</button>
+                <p id="plainTextResultNoPrimes3"></p>            
+            </div>
+    
+            <div id="instructorRSADecrypt3" class="default">
+                Ciphertext:
+                <input type="text" id="cipherTextInput3">
+                First Prime: 
+                <input type="text" id="primeInput3a">
+                Second Prime: 
+                <input type="text" id="primeInput3b">
+                Exponent:
+                <input type="text" id="exponentInput3">
+                <script>
+                    function btnRSADecryptClick3() {
+                        let numsStr = document.getElementById('cipherTextInput3').value;
+                            numsStr = removeSpaces(numsStr);
+                        let nums = numsStr.split(',');
+                        let t = BigInt(document.getElementById('exponentInput3').value);
+                        let primeStra = document.getElementById('primeInput3a').value;
+                        primeStra = removeSpaces(primeStra);
+                        let p = BigInt(primeStra);
+                        let primeStrb = document.getElementById('primeInput3b').value;
+                        primeStrb = removeSpaces(primeStrb);
+                        let q = BigInt(primeStrb);
+                        let n = p * q;
+                        let phi = (p-1n)*(q-1n);
+                        let u = multInverseModnBig(t, phi);
+                        let numPlain = phExponentiate(nums, u, n);
+                        document.getElementById("plainTextResult3").innerText =phNumsTxtAscii(numPlain);
+                    }
+                </script>
+                <button id="RSADecrypt3" onclick=btnRSADecryptClick3()>Submit</button>
+                <p id="plainTextResult3"></p>     
+
+                <h4>Group 4</h4>
+
+                <div id="instructorRSADecryptNoPrimes4" class="default">
+                    Ciphertext:
+                    <input type="text" id="cipherTextInputNoPrimes4">
+                    Modulus: 
+                    <input type="text" id="modulusInputNoPrimes4a">
+                    Exponent:
+                    <input type="text" id="exponentInputNoPrimes4">
+                    <script>
+                        function btnRSADecryptClickNoPrimes4() {
+                            let numsStr = document.getElementById('cipherTextInputNoPrimes4').value;
+                                numsStr = removeSpaces(numsStr);
+                            let nums = numsStr.split(',');
+                            let t = BigInt(document.getElementById('exponentInputNoPrimes4').value);
+                            let n = BigInt(document.getElementById('modulusInputNoPrimes4a').value);
+                            let p = primeFactor(n);
+                            let q = n/p;
+                            let phi = (p-1n)*(q-1n);
+                            let u = multInverseModnBig(t, phi);
+                            let numPlain = phExponentiate(nums, u, n);
+                            document.getElementById("plainTextResultNoPrimes4").innerText =phNumsTxtAscii(numPlain);
+                        }
+                    </script>
+                    <button id="RSADecryptNoPrimes4" onclick=btnRSADecryptClickNoPrimes4()>Submit</button>
+                    <p id="plainTextResultNoPrimes4"></p>            
+                </div>
+        
+                <div id="instructorRSADecrypt4" class="default">
+                    Ciphertext:
+                    <input type="text" id="cipherTextInput4">
+                    First Prime: 
+                    <input type="text" id="primeInput4a">
+                    Second Prime: 
+                    <input type="text" id="primeInput4b">
+                    Exponent:
+                    <input type="text" id="exponentInput4">
+                    <script>
+                        function btnRSADecryptClick4() {
+                            let numsStr = document.getElementById('cipherTextInput4').value;
+                                numsStr = removeSpaces(numsStr);
+                            let nums = numsStr.split(',');
+                            let t = BigInt(document.getElementById('exponentInput4').value);
+                            let primeStra = document.getElementById('primeInput4a').value;
+                            primeStra = removeSpaces(primeStra);
+                            let p = BigInt(primeStra);
+                            let primeStrb = document.getElementById('primeInput4b').value;
+                            primeStrb = removeSpaces(primeStrb);
+                            let q = BigInt(primeStrb);
+                            let n = p * q;
+                            let phi = (p-1n)*(q-1n);
+                            let u = multInverseModnBig(t, phi);
+                            let numPlain = phExponentiate(nums, u, n);
+                            document.getElementById("plainTextResult4").innerText =phNumsTxtAscii(numPlain);
+                        }
+                    </script>
+                    <button id="RSADecrypt4" onclick=btnRSADecryptClick4()>Submit</button>
+                    <p id="plainTextResult4"></p>    
+
+
+                    <h4>Group 5</h4>
+
+                    <div id="instructorRSADecryptNoPrimes5" class="default">
+                        Ciphertext:
+                        <input type="text" id="cipherTextInputNoPrimes5">
+                        Modulus: 
+                        <input type="text" id="modulusInputNoPrimes5a">
+                        Exponent:
+                        <input type="text" id="exponentInputNoPrimes5">
+                        <script>
+                            function btnRSADecryptClickNoPrimes5() {
+                                let numsStr = document.getElementById('cipherTextInputNoPrimes5').value;
+                                    numsStr = removeSpaces(numsStr);
+                                let nums = numsStr.split(',');
+                                let t = BigInt(document.getElementById('exponentInputNoPrimes5').value);
+                                let n = BigInt(document.getElementById('modulusInputNoPrimes5a').value);
+                                let p = primeFactor(n);
+                                let q = n/p;
+                                let phi = (p-1n)*(q-1n);
+                                let u = multInverseModnBig(t, phi);
+                                let numPlain = phExponentiate(nums, u, n);
+                                document.getElementById("plainTextResultNoPrimes5").innerText =phNumsTxtAscii(numPlain);
+                            }
+                        </script>
+                        <button id="RSADecryptNoPrimes5" onclick=btnRSADecryptClickNoPrimes5()>Submit</button>
+                        <p id="plainTextResultNoPrimes5"></p>            
+                    </div>
+            
+                    <div id="instructorRSADecrypt5" class="default">
+                        Ciphertext:
+                        <input type="text" id="cipherTextInput5">
+                        First Prime: 
+                        <input type="text" id="primeInput5a">
+                        Second Prime: 
+                        <input type="text" id="primeInput5b">
+                        Exponent:
+                        <input type="text" id="exponentInput5">
+                        <script>
+                            function btnRSADecryptClick5() {
+                                let numsStr = document.getElementById('cipherTextInput5').value;
+                                    numsStr = removeSpaces(numsStr);
+                                let nums = numsStr.split(',');
+                                let t = BigInt(document.getElementById('exponentInput5').value);
+                                let primeStra = document.getElementById('primeInput5a').value;
+                                primeStra = removeSpaces(primeStra);
+                                let p = BigInt(primeStra);
+                                let primeStrb = document.getElementById('primeInput5b').value;
+                                primeStrb = removeSpaces(primeStrb);
+                                let q = BigInt(primeStrb);
+                                let n = p * q;
+                                let phi = (p-1n)*(q-1n);
+                                let u = multInverseModnBig(t, phi);
+                                let numPlain = phExponentiate(nums, u, n);
+                                document.getElementById("plainTextResult5").innerText =phNumsTxtAscii(numPlain);
+                            }
+                        </script>
+                        <button id="RSADecrypt5" onclick=btnRSADecryptClick5()>Submit</button>
+                        <p id="plainTextResult5"></p>  
+
+                        <h4>Group 6</h4>
+
+                        <div id="instructorRSADecryptNoPrimes6" class="default">
+                            Ciphertext:
+                            <input type="text" id="cipherTextInputNoPrimes6">
+                            Modulus: 
+                            <input type="text" id="modulusInputNoPrimes6a">
+                            Exponent:
+                            <input type="text" id="exponentInputNoPrimes6">
+                            <script>
+                                function btnRSADecryptClickNoPrimes6() {
+                                    let numsStr = document.getElementById('cipherTextInputNoPrimes6').value;
+                                        numsStr = removeSpaces(numsStr);
+                                    let nums = numsStr.split(',');
+                                    let t = BigInt(document.getElementById('exponentInputNoPrimes6').value);
+                                    let n = BigInt(document.getElementById('modulusInputNoPrimes6a').value);
+                                    let p = primeFactor(n);
+                                    let q = n/p;
+                                    let phi = (p-1n)*(q-1n);
+                                    let u = multInverseModnBig(t, phi);
+                                    let numPlain = phExponentiate(nums, u, n);
+                                    document.getElementById("plainTextResultNoPrimes6").innerText =phNumsTxtAscii(numPlain);
+                                }
+                            </script>
+                            <button id="RSADecryptNoPrimes6" onclick=btnRSADecryptClickNoPrimes6()>Submit</button>
+                            <p id="plainTextResultNoPrimes6"></p>            
+                        </div>
+                
+                        <div id="instructorRSADecrypt6" class="default">
+                            Ciphertext:
+                            <input type="text" id="cipherTextInput6">
+                            First Prime: 
+                            <input type="text" id="primeInput6a">
+                            Second Prime: 
+                            <input type="text" id="primeInput6b">
+                            Exponent:
+                            <input type="text" id="exponentInput6">
+                            <script>
+                                function btnRSADecryptClick6() {
+                                    let numsStr = document.getElementById('cipherTextInput6').value;
+                                        numsStr = removeSpaces(numsStr);
+                                    let nums = numsStr.split(',');
+                                    let t = BigInt(document.getElementById('exponentInput6').value);
+                                    let primeStra = document.getElementById('primeInput6a').value;
+                                    primeStra = removeSpaces(primeStra);
+                                    let p = BigInt(primeStra);
+                                    let primeStrb = document.getElementById('primeInput6b').value;
+                                    primeStrb = removeSpaces(primeStrb);
+                                    let q = BigInt(primeStrb);
+                                    let n = p * q;
+                                    let phi = (p-1n)*(q-1n);
+                                    let u = multInverseModnBig(t, phi);
+                                    let numPlain = phExponentiate(nums, u, n);
+                                    document.getElementById("plainTextResult6").innerText =phNumsTxtAscii(numPlain);
+                                }
+                            </script>
+                            <button id="RSADecrypt6" onclick=btnRSADecryptClick6()>Submit</button>
+                            <p id="plainTextResult6"></p>      
+
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>

@@ -36,12 +36,18 @@
         <h2>Tools</h2>
 
         <div id="textToNum" class="default">
-          <h4>Text to Numbers</h4>
+            <h4>Text to Numbers:</h4>
             Text: <input type="text" id="txtNumInput">
             <script>
                 function btnTxtNumClick() {
                     const text = document.getElementById("txtNumInput").value;
-                    document.getElementById("lblTxtNumResult").innerText = "" + textToNum(text);
+                    let nums = textToNum(text);
+                    let numsStr = "";
+                    for(let i = 0; i < nums.length; i++) {
+                        numsStr += nums[i];
+                        if(i != nums.length - 1) numsStr += ", ";
+                    }
+                    document.getElementById("lblTxtNumResult").innerText = "" + numsStr;
                 }
             </script>
             <button id="btnTxtNum" onclick=btnTxtNumClick()>Submit</button>
