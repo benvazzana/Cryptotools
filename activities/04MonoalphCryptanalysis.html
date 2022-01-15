@@ -28,7 +28,201 @@
     <td>
         <h1>Monoalphabetic Substitution Cryptanalysis</h1>
         <h2>Tools</h2>
-        <p>The  key tool needed for cryptanalysis of monoalphabetic subtitution ciphers is the <a href="../tools/FrequencyAnalysis.html">Frequency Analysis</a> of individual letters and digraphs. You can acess this in the tools menu above. </p> 
+
+        <p>Frequency analysis of text:</p>
+       <textarea type="text" rows=4 cols=100 id="inputFreqAnalysis"></textarea> <br />
+       <script>
+         function freqAnalysisOnClick() {
+          let text = document.getElementById("inputFreqAnalysis").value;
+          let txtClean = cleanText(text);
+          let dict = frequencyAnalysis(txtClean, 1);
+          outputTable(dict, 1, "freq_Analysis_Table");
+          dict = frequencyAnalysis(txtClean, 2);
+          outputTable(dict, 2, "freq_Analysis_Table");
+          dict = frequencyAnalysis(txtClean, 3);
+          outputTable(dict, 3, "freq_Analysis_Table");
+         }
+       </script>
+       <button onclick=freqAnalysisOnClick()>Submit</button>
+       
+     <P></P>   
+     <table id="freq_Analysis_Table"> 
+        <tr>
+          <td colspan="2"style="width:180px"><h2>Expected</h2></td>
+          <td colspan="2"style="width:180px"><h2>Ciphertext</h2></td>
+          <td colspan="2"style="width:180px"><h2>Digraphs</h2></td>
+          <td colspan="2"style="width:180px"><h2>Trigraphs</h2></td>
+        </tr>
+
+        <tr>
+            <td><h3>Letter</h3></td>
+            <td><h3>Rel. Freq.</h3></td>
+            <td><h3>Letter</h3></td>
+            <td><h3>Rel. Freq.</h3></td>
+            <td><h3>Digraph</h3></td>
+            <td><h3>Frequency</h3></td>
+            <td><h3>Trigraphs</h3></td>
+            <td><h3>Frequency</h3></td>
+        </tr>
+        <tr>
+          <td>e</td><td>12.7</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>t</td><td>9.1</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>a</td><td>8.2</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>o</td><td>7.5</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>i</td><td>7.0</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>n</td><td>6.7</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>s</td><td>6.3</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>h</td><td>6.1</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>r</td><td>6.0</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>d</td><td>4.3</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>l</td><td>4.0</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>c</td><td>2.8</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>u</td><td>2.8</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>m</td><td>2.4</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>w</td><td>2.4</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>f</td><td>2.2</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>g</td><td>2.0</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>y</td><td>2.0</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>p</td><td>1.9</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>b</td><td>1.5</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>v</td><td>1.0</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>k</td><td>0.8</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>j</td><td>0.2</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>x</td><td>0.2</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>q</td><td>0.1</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>z</td><td>0.1</td>
+          <td></td><td></td>
+          <td></td><td></td>
+          <td></td><td></td>
+        </tr>
+     </table>  
+    
+      
         <p>You may wish to make a copy of <a href="https://docs.google.com/spreadsheets/d/1S3YaDB1LH5EaRHGw053pImRFrCS-y_fAXPSIu0ndlaU/edit?usp=sharing">this Google sheet</a>, and record the results of the frequency analysis. Then use the sheet to keep track of your guesses for the key.</p>
 
         <button type="button" class="collapsible">Example</button>
@@ -58,166 +252,104 @@
               <td><h3>Frequency</h3></td>
           </tr>
           <tr>
-            <td>e</td><td>12.7</td>
-            <td>Q</td><td>14.1</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
+            <td>e</td><td>12.7</td><td>Q</td><td>14.1</td><td>HJ</td><td>15</td><td>HJQ</td><td>11</td>
+            </tr>
+            <tr>
+            <td>t</td><td>9.1</td><td>H</td><td>9.4</td><td>JQ</td><td>12</td><td>IVB</td><td>7</td>
+            </tr>
+            <tr>
+            <td>a</td><td>8.2</td><td>V</td><td>9.2</td><td>YV</td><td>11</td><td>YVU</td><td>6</td>
+            </tr>
+            <tr>
+            <td>o</td><td>7.5</td><td>Y</td><td>8.3</td><td>QS</td><td>11</td><td>SIV</td><td>5</td>
+            </tr>
+            <tr>
+            <td>i</td><td>7.0</td><td>I</td><td>7.8</td><td>VH</td><td>10</td><td>FKD</td><td>4</td>
+            </tr>
+            <tr>
+            <td>n</td><td>6.7</td><td>K</td><td>7.6</td><td>SI</td><td>9</td><td>HYK</td><td>4</td>
+            </tr>
           <tr>
-            <td>t</td><td>9.1</td>
-            <td>H</td><td>9.4</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>a</td><td>8.2</td>
-            <td>V</td><td>9.2</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>o</td><td>7.5</td>
-            <td>Y</td><td>8.3</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>i</td><td>7.0</td>
-            <td>I</td><td>7.8</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>n</td><td>6.7</td>
-            <td>K</td><td>7.6</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>s</td><td>6.3</td>
-            <td>S</td><td>6.7</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>h</td><td>6.1</td>
-            <td>D</td><td>6.1</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>r</td><td>6.0</td>
-            <td>J</td><td>4.5</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>d</td><td>4.3</td>
-            <td>B</td><td>3.6</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>l</td><td>4.0</td>
-            <td>M</td><td>3.6</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>c</td><td>2.8</td>
-            <td>G</td><td>2.9</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>u</td><td>2.8</td>
-            <td>F</td><td>2.7</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>m</td><td>2.4</td>
-            <td>U</td><td>2.7</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>w</td><td>2.4</td>
-            <td>R</td><td>2.5</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>f</td><td>2.2</td>
-            <td>W</td><td>1.8</td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>g</td><td>2.0</td>
-            <td>L</td><td>1.8</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>y</td><td>2.0</td>
-            <td>Z</td><td>1.6</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>p</td><td>1.9</td>
-            <td>E</td><td>1.1</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>b</td><td>1.5</td>
-            <td>O</td><td>0.7</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>v</td><td>1.0</td>
-            <td>A</td><td>0.7</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>k</td><td>0.8</td>
-            <td>X</td><td>0.4</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>j</td><td>0.2</td>
-            <td>C</td><td>0.2</td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>x</td><td>0.2</td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
-            <td>q</td><td>0.1</td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
-          <tr>
+            <td>s</td><td>6.3</td><td>S</td><td>6.7</td><td>QV</td><td>9</td><td>YKV</td><td>4</td>
+            </tr>
+            <tr>
+            <td>h</td><td>6.1</td><td>D</td><td>6.1</td><td>IV</td><td>8</td><td>JQY</td><td>4</td>
+            </tr>
+            <tr>
+            <td>r</td><td>6.0</td><td>J</td><td>4.5</td><td>VB</td><td>8</td><td>QSI</td><td>4</td>
+            </tr>
+            <tr>
+            <td>d</td><td>4.3</td><td>B</td><td>3.6</td><td>DQ</td><td>8</td><td>OWQ</td><td>3</td>
+            </tr>
+            <tr>
+            <td>l</td><td>4.0</td><td>M</td><td>3.6</td><td>KV</td><td>8</td><td>QQV</td><td>3</td>
+            </tr>
+            <tr>
+            <td>c</td><td>2.8</td><td>G</td><td>2.9</td><td>IH</td><td>8</td><td>QVH</td><td>3</td>
+            </tr>
+            <tr>
+            <td>u</td><td>2.8</td><td>F</td><td>2.7</td><td>VU</td><td>7</td><td>IHY</td><td>3</td>
+            </tr>
+            <tr>
+            <td>m</td><td>2.4</td><td>U</td><td>2.7</td><td>HK</td><td>7</td><td>QYD</td><td>3</td>
+            </tr>
+            <tr>
+            <td>w</td><td>2.4</td><td>R</td><td>2.5</td><td>KD</td><td>6</td><td>KFH</td><td>3</td>
+            </tr>
+            <tr>
+            <td>f</td><td>2.2</td><td>W</td><td>1.8</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>g</td><td>2.0</td><td>L</td><td>1.8</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>y</td><td>2.0</td><td>Z</td><td>1.6</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>p</td><td>1.9</td><td>E</td><td>1.1</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>b</td><td>1.5</td><td>O</td><td>0.7</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>v</td><td>1.0</td><td>A</td><td>0.7</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>k</td><td>0.8</td><td>X</td><td>0.4</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>j</td><td>0.2</td><td>C</td><td>0.2</td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>x</td><td>0.2</td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+            <td>q</td><td>0.1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
             <td>z</td><td>0.1</td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-          </tr>
+            </tr> 
        </table> 
+       <p>We now begin to make guesses. It is a sufficient amount of text to make the guess that Q represents e, especially give the spread in the relative frequency between Q and the next most frequent character. As  a next guess, HJQ could be the, and this makes sense when comparing the relative frequencies of H and J to what we expect t and h to be.</p>
+       <p>From here we continue to make guesses, based on the most frequent letters, digraphs, and trigraphs. It's hard to get it right on the first try, so don't be afraid to make some conjectures with a willingness to back up if strange letter orderings occur.</p>
         </div>  
-        <h2>Now you try it!</h2>
-        <p>Cryptanalyze the message below that was encrypted with a monoalphabetic substitution cipher:</p>
+        <table>
+          <tr>
+              <td><img src="../images/thinkingcap.gif" alt="Unlock" ALIGN="middle"  height="60" width="60"></td> 
+              <td><h2>Exercise:</h2></td>
+          </tr>
+      </table>
+        <p>Cryptanalyze the messages below that were encrypted with a monoalphabetic substitution cipher:</p>
         
+        <h3>First Message</h3>
         <div class="preDivLeft">GFKVM VLFKW CSXEK CRFSO IVKZK VLEML PKWCO KEVKW KEEIX URCXC VKJKC JHKLC DMEEC HZKLF KJCHM LMWIH PIVDE GFMWF FIZKW CVVKW LKDLF KOGML FIVCL FKXIV DLCIE ESOKI OCVYL FKJCG KXECR LFKKI XLFLF KEKJI XILKI VDKQS IHELI LMCVL CGFMW FLFKH IGECR VILSX KIVDC RVILS XKEYC DKVLM LHKLF KOIDK WKVLX KEJKW LLCLF KCJMV MCVEC ROIVA MVDXK QSMXK ELFIL LFKUE FCSHD DKWHI XKLFK WISEK EGFMW FMOJK HLFKO LCLFK EKJIX ILMCV GKFCH DLFKE KLXSL FELCP KEKHR KZMDK VLLFI LIHHO KVIXK WXKIL KDKQS IHLFI LLFKU IXKKV DCGKD PULFK MXWXK ILCXG MLFWK XLIMV SVIHM KVIPH KXMYF LELFI LIOCV YLFKE KIXKH MRKHM PKXLU IVDLF KJSXE SMLCR FIJJM VKEEL FILLC EKWSX KLFKE KXMYF LEYCZ KXVOK VLEIX KMVEL MLSLK DIOCV YOKVD KXMZM VYLFK MXTSE LJCGK XERXC OLFKW CVEKV LCRLF KYCZK XVKDL FILGF KVKZK XIVUR CXOCR YCZKX VOKVL PKWCO KEDKE LXSWL MZKCR LFKEK KVDEM LMELF KXMYF LCRLF KJKCJ HKLCI HLKXC XLCIP CHMEF MLIVD LCMVE LMLSL KVKGY CZKXV OKVLH IUMVY MLERC SVDIL MCVCV ESWFJ XMVWM JHKEI VDCXY IVMBM VYMLE JCGKX EMVES WFRCX OIELC LFKOE FIHHE KKOOC ELHMA KHULC KRRKW LLFKM XEIRK LUIVD FIJJM VKEE</div>
+        
+        <h3>Second Message</h3>
+
+        <div class="preDivLeft">
+          RWEWN DWTXK ETOWK ESYQN VFTYX VDLKN EDVYX OMQUO MQUOM QUYVL RWOKS AYPRN DRWKT OWRNV TSREN DLYUR WEEYO NVNLN DKDPK EKDRW AVYXD LRWYV ZHXKH YPSYQ NVFTY XVDLK NEDOM LDYQW LNQWD RWPWW ZDLRK LLRWE WEWKZ ZHNDK VYLRW EXKHN PYVZH RWSYM ZTDLY UOMQU NVFPY EKQYQ WVLKV TLRNV AYPNL KVTLR WVRWP WWZDL RKLUW ERKUD LRWEW NDVLK VHRYX RWEWR WNDKL LRWOY LLYQK VTEWK THLYO WNVLE YTMSW TLYHY MXNVV NWLRW UYYRX RWVNP NEDLR WKETR NDVKQ WNDKN TJMDL KDHYM KEWFY NVFLY DKHOM LNLRY MFRLR WXKDK OYHDY TNTND KNTSR ENDLY URWEE YONVL RWVHY MSKVL SKZZR NQXNV VNWNT YVLOM LHYMD KNTRW DXNVV NWLRW EUYYR TYVLH YMAVY XXRKL LRWEQ WKVDK RHWDV YXNTY NDKNT CMNSA ZHKVT NRYUW HYMTY LYYOW SKMDW NLNDK ZZLRW WGUZK VKLNY VHYMK EWFYN VFLYF WLDYQ WLNQW DXNVV NWLRW UYYRZ NAWDK FKQWY PDYQW DYELX RWVRW SYQWD TYXVD LKNED KVTDY QWLNQ WDRWZ NAWDL YDNLC MNWLZ HNVPE YVLYP LRWPN EWKVT ZNDLW VLYKD LYEHL RNDWB WVNVF XRKLK OYMLK DLYEH DKNTS RENDL YURWE EYONV XRKLK OYMLK DLYEH NDKNT SYMZT HYMBW EHDXW WLZHL WZZXN VVNWL RWUYY RYVWN DMUUY DWNSY MZTND KNTXR KLDYE LYPDL YENWD TYWDR WZNAW KOYML RNQDW ZPOWS KMDWR WDLRK LDYEL YPOWK EYRND WWDYS YMZTH YMBWE HDXWW LZHNZ ZLEHN DKNT
+        </div>
+        
         <table>
           <tr>
               <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
@@ -230,7 +362,10 @@
         CQCSN JADCY XYTZC FCLHN DDAVA LSJNZ ASKCJ SSQDC ICWBT DYUNK CXXAW VNSAK NFAHY WQKAC DTCDS QFCZQ YDONB NCWSQ QKAAF CLBNL NZQCZ AUJCD AXEDC WBQKA VNQQL ADAVA LSJCA SUNWN BAXQY SQANL SAZDA QJLNW SQYQK AAUJC DASEL QCUNQ AHANJ YWQKA XANQK SQNDN WNDUY DAXSJ NZASQ NQCYW HCQKA WYEBK JYHAD QYXAS QDYON WAWQC DAJLN WAQJE DSEAX VOQKA AUJCD ASSCW CSQAD NBAWQ SJDCW ZASSL ACNDN ZASKY UANVY NDXKA DSQND SKCJZ ESQYX CNWYT QKASQ YLAWJ LNWSQ KNQZN WSNFA KADJA YJLAN WXDAS QYDAT DAAXY UQYQK ABNLN PO
       </div>
 
-        
+    <h2> And one more just in case...</h2> 
+    <div class="preDivLeft">
+      WEMZO FUQWV JQXPW TJLXJ PKXZY JJHBC XZPWH JYJKP YKFXZ KPHJU KSMCZ TKCXJ FMCYJ QJXMJ GTWZJ UDMQO JZMDW LKPPF UQWVJ CNZMF MCQRM CXJSC ZZMUK FWUQM VJZRQ MCERZ RJXCS CQSXT QFWLE TKCXJ FMCYJ QJLZK QMCLU KLUFM CQJNQ MSKSP FYWZR ZRKZS PMLUJ EWQPY RMKPY KFXOK UJOJU MCSZX RJXXM OCTRM PUJQZ RKLOJ XRJXJ VJQFZ RWLEW OWLXJ TCQJK SMCZF JKRZM UKFWU QMVJZ RQMCE RZRJX CSCQS XTKCX JRMYT MCPUW JVJQP MVJXM OJMLJ JPXJK LUWHL MYYJY JQJLZ NJQDJ TZSCZ WVJLJ VJQDJ PZZRW XYKFD MQLMM LJKLU WBCXZ TKLZW OKEWL JRMYF MCTMC PUSJX MMHKF LMYZR KZWOE MLJEC JXXFM CUWUL ZOJKL YRKZF MCYQM ZJWLZ RKZXM LEKSM CZOJT KCXJF MCXKW UDMQJ VJQLM YWUQW VJKPM LJNKX ZFMCQ XZQJJ Z
+    </div>       
 
         
     </td>

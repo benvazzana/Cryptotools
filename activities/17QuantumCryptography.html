@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>GCDs and Primes</title>
+    <title>Quantum Cryptography</title>
     
     <script src="../jquery.js"></script> 
     <script> 
@@ -28,25 +28,115 @@
     <td>
     <h1>Quantum Cryptography</h1>
 
-    
-    Group 1 Sender Receiver
+   <p>In this activity, we will first simulate a quantum key exchange. Then we will use Binary Cipher to exchange messages.</p>
 
-    Group 2 Sender Receiver
+   <p>The sender first needs to communicate a string of bits to the receiver to be used as a key. These are sent as photons. A 1 can be represented by either &varr; or &#10530; (chosen randomly) and a 0 can be represented by either &harr; or &#10529; (chosen randomly). The receiver randomly chooses a detector for each photon. For &harr; or  &varr; the correct detector is &#12344;, and for &#10529; and &#10530; the correct detector is X. The receiver then tells the sender which detectors they used. The sender replies with the list of correct detectors. They then put together the bits corresponding to these photons for their key.</p>
 
-    <!--TODO 
-    Create tools that compute:
-    1) The GCD of two numbers
-    2) The prime factorization of a number
-    -->
+    <p> We will use the spreadsheets below to help simulate the photon transmissions:</p>
+
+    <table cellpadding="8">
+        <tr>
+            <td> Group 1</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1AprjAq97Om_VEtj1SBLPYWIFOydiQZe4bsAeOZ-7cnI/edit#gid=0" target="_blank">Sender</a></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1wKzehb_nPbtexcX9ZYn38bcLnM7urn2G6WcXZOmqP_o/edit#gid=0" target="_blank">Receiver</a></td>
+        </tr>
+        <tr>
+            <td>Group 2</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1BwFiEvGHV7DFexkq7ig7il3p-UqwW1xmui3TKqBEmDw/edit?usp=sharing" target="_blank">Sender</a></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1SSBAGuJkKh5chTUTgcH8r_pcpzCQGw3tcehzbjgaUFE/edit?usp=sharing" target="_blank">Receiver</a></td>
+        </tr>
+        <tr>
+            <td>Group 3</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1tOu9jGOM4MWpupRHrvruQSOJeZh7HkvK-D17V8nciRc/edit?usp=sharing" target="_blank">Sender</a></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1QRjl8qMs3TBdiO0nuLKyMZlOvnmEDZ0w0GxFZ8B2cb0/edit?usp=sharing" target="_blank">Receiver</a></td>
+        </tr>
+        <tr>
+            <td>Group 4</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1WkYoouv2wTx37k_jhJXOMlUZ7Cm7s7Dnx-8xBTAZ91k/edit?usp=sharing" target="_blank">Sender</a></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1xqKgUxBydkCvGeG7QCSz5D7gAe9Y7HnWYWoDfdD7P3E/edit?usp=sharing" target="_blank">Receiver</a></td>
+        </tr>
+        <tr>
+            <td>Group 5</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/13jpZes8sSAL7m43Rw0cHNLd4HBbBbcqiStHTq_hq_Tg/edit?usp=sharing" target="_blank">Sender</a></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/18OAQ1jeY09nq8OF7h79xmn_MjfeyXRobGibkpAOhBdI/edit?usp=sharing" target="_blank">Receiver</a></td>
+        </tr>
+        <tr>
+            <td>Demo</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1sFQ0bt-WGVE9I6l_MptD2oF0xPizyRza0zqRvl_-8iw/edit#gid=0" target="_blank">Sender</a></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1kGESCM6OMqHAezAfoxYN5PH7TgMZgnQd8kdnpS4dKRk/edit#gid=0" target="_blank">Receiver</a></td>
+
+        </tr>
+    </table>
 
 
+   <button type="button" class="collapsible">Example</button>
+   <div class="content">
+       
+    <p>The sender first makes their selection of photons:</p>
+       <img src="../images/QuantumSenderPhotons.JPG">
+    <p>The receiver makes their choices of detectors:</p>
+        <img src="../images/QuantumReceiverDetectors.JPG">
+    <p>In our simulation, the list of detectors will appear in the sender's spreadsheet. They note which ones will correctly detect the photons.</p>
+        <img src="../images/QuantumSenderDetectorMatches.JPG">
+    <p>The sender now communicates back to the receiver to use the bits corresonding to detectors 2, 3, 5, 7, 10, 15, 16.  </p>
+        <img src="../images/QuantumReceiverBits.JPG">
+     <p>The receiver compiles the bits from these photons: 0101101. This will constitute the key for the message exchange. Notice that if you compare the bits the sender intended with what the receiver detected, sometimes the correct bit was read with the wrong detector, but sometimes not. </p>   
+    </div>  
 
+   <table>
+    <tr>
+        <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+        <td><h2>Group Message Exchange</h2></td>
+    </tr>
+</table>
 
+    <ol>
+        <li>The Senders access the appropriate Google Sheet above, and make a set of random choices for photons to send.</li>
+        <li>The Receivers access the appropriate Google Sheet above, and make a set of random choices for detectors to use. </li>
+        <li>After the both the Senders and Receivers make their choices, the Senders will get a list of the detector choices made by the Receivers. They decide which ones are guaranteed to correctly detect the photon. So for &harr; or  &varr; the correct detector is &#12344; and for &#10529; and &#10530; the correct detector is X. For these dectors, the Expected bits will match the Received bit. </li>
+        <li> In the Quantum Message forum in the Student Messages section of Blackboard, the Senders post the list of correct detectors. So they will post something like: 1, 4, 5, 7, 8, 12, 14, 16. (Do not post the bits.)
+        </li>
+        <li>The key is the list of bits corresponding to correct detector positions. Both the Sender and Receiver (and only the Sender and Receiver) know what these bits are. </li>
+        <li> Both the Sender and Receiver should create messages using the Binary Cipher. You can access the necessary tools in the Tools section or on the Binary Cipher activity page. Post cipher texts under the list of correct detectors in the Quantum Message forum, and decrypt the message from the other party.</li>
+    </ol>
+ 
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+    </table>
+        <p> You have succeeded in intercepting a stream of photons between two parties attempting to agree on a key. The detectors you used were:</p>
 
+        <img src="../images/QuantumChallenger1.JPG">
 
-        
+        <p>You have also intercepted the follow up transmissions between the two parties in which the receiver communicates their list of detectors:</p>
+
+        <img src="../images/QuantumChallenger2.JPG">
+
+        <p>and the send indicates the correct detectors were 3, 5, 7, 9, 11, 13. The ciphertext that followed is given below:</p>
+
+        <div class="preDivLeft">fad28 e8ef8 8ecfd 68e8e ee99c bdb98 dbc88 e8ede 84cbc 9cbc0 d59f8 edf93 c7c99 f8f9a aecad d8adc 9aaac 2d68a c09ab bc1df cbc3d b8fcb 9a9ed e9a9f c6dfc bd9d2 84c2d fcbda d282c 0ddc5</div>
+        Cryptanalyze the message!
     </td>
     </tr>
 </table>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 </body>
 </html>

@@ -52,7 +52,7 @@
             let text = document.getElementById('keywordEncryptPlaintext').value;
             let keyword = document.getElementById('keywordEncryptKey').value;
             let keyLetter = document.getElementById('keywordEncryptKeyLetter').value;
-            let cipherText = keywordEncrypt(text, keyword, keyLetter);
+            let cipherText = keywordEncryptPunctuation(text, keyword, keyLetter);
             document.getElementById('keywordEncryptResult').innerHTML = cipherText;
           }
         </script>

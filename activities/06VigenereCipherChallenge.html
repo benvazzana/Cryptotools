@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Vigenere Cipher Challenge</title>
+    <title>Vigen&egrave;re Cipher Challenge</title>
     
     <script src="../jquery.js"></script> 
     <script> 
@@ -28,11 +28,288 @@
     <td>
         <h1>Vigen&egrave;re Cipher Challenge</h1>
 
+        <h2>Tools</h2>
 
 
 
+        <h3>Encryption   </h3>
+        <div id="vigEncrypt" class="default">
+  
+        Plaintext:
+        <textarea type="text" rows=4 cols=100 id="vigEncryptPlaintext"></textarea> <br />
+        Keyword:
+        <input type="text" id="vigEncryptKey">
+        <script>
+          function btnVigEncryptOnClick() {
+            let text = document.getElementById('vigEncryptPlaintext').value;
+            let keyword = document.getElementById('vigEncryptKey').value;
+            document.getElementById('vigEncryptResult').innerHTML = vigenereEncrypt(text, keyword);
+          }
+        </script>
+        <button id="btnVigEncrypt" onclick=btnVigEncryptOnClick()>Submit</button>
+        <p id="vigEncryptResult"></p>
+        </div>
 
-        
+
+        <h3>Quadgraph Search  </h3>
+        <div id="quadgraphSearch" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="quadgraphCiphertext"></textarea> <br />
+        Number of Quadgraphs
+        <input type="text" id="numberQuadgraphs">
+        <script>
+          function btnQuadGraphClick() {
+            document.getElementById("quad_Graph_Table").innerHTML = (
+              "<tr> <td>Quadgraph </td><td>Frequency</td></tr></table>"
+              );
+            let text = document.getElementById("quadgraphCiphertext").value;
+            let nQuadGraphs = parseInt(document.getElementById("numberQuadgraphs").value);
+            let txtClean = cleanText(text);
+            let dict = frequencyAnalysis(txtClean, 4);
+            let table = document.getElementById("quad_Graph_Table");
+            if(table.rows.length == 1) {
+              for(let i = 1; i <= nQuadGraphs; i++) {
+                let row = table.insertRow(i);
+                let cellQuadGraph = row.insertCell(0);
+                let cellFrequency = row.insertCell(1);
+                let n = -1;
+                let selectedKey = "";
+                for(key in dict) {
+                  let value = dict[key];
+                  if(value > n) {
+                    n = value;
+                    selectedKey = key;
+                  }
+                }
+                cellQuadGraph.innerHTML = selectedKey;
+                cellFrequency.innerHTML = dict[selectedKey];
+                delete dict[selectedKey];
+              }
+            }
+          }
+        </script>          
+        <button id="btnQuadGraph" onclick=btnQuadGraphClick()>Submit</button>
+        </div>
+
+        <p>
+          <table id="quad_Graph_Table">
+          <tr>
+           <td>Quadgraph </td>
+           <td>Frequency</td>
+          </tr>
+          </table>  
+        </p>
+
+        <h3>GCD of a List</h3>
+
+        <div id="listGCD" class="default">
+          List of numbers (e.g. 4, 5, 8): 
+          <input type="text" id="listGCDInput"><br>
+          <script>
+              function btnListGCDClick() {
+                  let text = document.getElementById("listGCDInput").value;;
+                  let numsTxt = text.split(',');
+                  let nums = [];
+                  for(let i = 0; i < numsTxt.length; i++) {
+                      nums.push(parseInt(numsTxt[i]));
+                  }
+                  document.getElementById("lblListGCDResult").innerText = gcdList(nums);
+              }
+          </script>
+          <button id="btnListGCD" onclick=btnListGCDClick()>Submit</button>
+          <p id="lblListGCDResult"></p>
+      </div>
+
+
+        <h3>Subtext Frequency Analysis  </h3>
+        <div id="subtextFreqAnalysis" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="freqAnalysisCiphertext"></textarea> <br>
+        Keyword length:
+        <input type="text" id="keywordLength">
+        Keyword guess:
+        <input type="text" id="keywordGuess">
+        <script>
+          function btnSubtextClick() {
+            let n = parseInt(document.getElementById("keywordLength").value);
+            let text = cleanText(document.getElementById("freqAnalysisCiphertext").value);
+            let table = document.getElementById("freq_Analysis_Table");
+            let keyword = document.getElementById("keywordGuess").value;
+            for(let i = keyword.length; i < n; i++){
+              keyword +="A";
+            }
+            keyword = keyword.toUpperCase();
+            for(let i = 0; i < n; i++) {
+              let start = keyword.charCodeAt(i)-65;
+              let subtext = "";
+              for(let j = i; j < text.length; j += n) {
+                subtext = subtext.concat(text.charAt(j));
+              }
+              let dict = frequencyAnalysis(subtext, 1);
+              const index = i;
+              for(let j = 0; j < 26; j++) {
+                let row = table.rows[j + 1];
+                var cell;
+                var cell2;
+                if(row.cells.length < (n * 2) + 2) {
+                  cell2 = row.insertCell();
+                  cell = row.insertCell();
+                } else {
+                  cell2 = row.cells[(index * 2) + 2];
+                  cell = row.cells[(index * 2) + 3];
+                }
+                
+                let char2 = String.fromCharCode(65 + ((j + start) % 26));
+                cell2.innerHTML = char2;
+                let char = String.fromCharCode(65 + ((j + start) % 26));
+                let value = Math.round(dict[char]);
+                let Xs = "";
+                let i = 0;
+                for (let i = 0; i<=value; i++) {
+                  Xs += "x";                 
+                }
+                if(dict.hasOwnProperty(char)) {
+                  cell.innerHTML = Xs;
+                } else {
+                  cell.innerHTML = "";
+                }
+
+              }
+            }
+          }
+        </script>
+        <button id="btnSubtext" onclick=btnSubtextClick()>Submit</button>
+        </div>
+
+
+
+        <p>
+          <table id="freq_Analysis_Table">       <tr>
+            <td><h3>Letter</h3></td>
+            <td><h3>Rel. Freq.</h3></td>
+        </tr>
+        <tr>
+        <td>a</td><td>xxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>b</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>c</td><td>xxx</td>
+        </tr>
+        <tr>
+          <td>d</td><td>xxxx</td>
+        </tr>
+        <tr>
+          <td>e</td><td>xxxxxxxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>f</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>g</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>h</td><td>xxxxxx</td>
+        </tr>
+        <tr>
+          <td>i</td><td>xxxxxxx</td>
+        </tr>
+        <tr>
+          <td>j</td><td></td>
+        </tr>
+        <tr>
+          <td>k</td><td>x</td>
+        </tr>
+        <tr>
+          <td>l</td><td>xxxx</td>
+        </tr>
+        <tr>
+          <td>m</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>n</td><td>xxxxxxx</td>
+        </tr>
+        <tr>
+          <td>o</td><td>xxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>p</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>q</td><td></td>
+        </tr>
+        <tr>
+          <td>r</td><td>xxxxxx</td>
+        </tr>
+        <tr>
+          <td>s</td><td>xxxxxx</td>
+        </tr>
+        <tr>
+          <td>t</td><td>xxxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>u</td><td>xxx</td>
+        </tr>
+        <tr>
+          <td>v</td><td>x</td>
+        </tr>
+        <tr>
+          <td>w</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>x</td><td></td>
+        </tr>
+        <tr>
+          <td>y</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>z</td><td></td>
+        </tr>
+
+
+          </table>
+        </p>
+
+        <h3>Decryption   </h3>
+        <div id="vigDecrypt" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="vigDecryptCiphertext"></textarea> <br />
+        Keyword:
+        <input type="text" id="vigDecryptKey">
+        <script>
+          function btnVigDecryptOnClick() {
+            let text = document.getElementById('vigDecryptCiphertext').value;
+            let keyword = document.getElementById('vigDecryptKey').value;
+            document.getElementById('vigDecryptResult').innerHTML = vigenereDecrypt(text, keyword);
+          }
+        </script>
+        <button id="btnVigDecrypt" onclick=btnVigDecryptOnClick()>Submit</button>
+        <p id="vigDecryptResult"></p>
+        </div>
+
+        <table>
+            <tr>
+                <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+                <td><h2>Vigen&egrave;re Cryptanalysis Challenge</h2></td>
+            </tr>
+        </table>
+
+        <ol>
+            <li> Choose a keyword with at most 15 letters.
+            <li> Choose a message that has at least 50 times as many letters at the keyword. For example, if your keyword has 5 letters, your message should have at least 250.</li>
+
+            <li>Enrypt the message using the Encryption tool above.</li>
+            <li>Post your message in the Vigen&egrave;re Challenge forum of the Student Messages section of Blackboard. Do <em>not</em> post your keyword.</li>
+            <li>Cryptanalyze the messages from the other groups.</li>
+            <li>When you have completed solved the messages from the other groups, cryptanalyze the following:
+                <div class="preDivLeft">QGZEU UBZSK IMPMO UWIGU NNKKY GZYZB YITAE TMLNE CILLH ETZTF YVRUS EBGKI XPOJS VRFNM XUHVY HAKNE AMWCK EDGML LGDKH FMVQG LWJJZ DUKOH CEXUH VEOIW QVSCL FJNJI DHJGF XEFXT TBBIF HUNCF FDCCX GRKTH XMNTG FYMCF LRVBQ YNFNB YHAUH ITJCS SZNHE SJEHE MAPJA ZGFYI ZRFMR OMWFD AATRO YBLKZ ETWBW BDRMI HVRBJ QNJHF OMVUL WNPNJ YZMFL RLVWA CZWAJ IAIFR LEHHA LIWXC AUPVQ AWLGU QSJKE FYWMI HRVPM XYYAU SMAGH GJUQV ZVWBD JQADP NFUFI VPVMP QP</div>
+            </li>
+        </ol>
+
     </td>
     </tr>
 </table>

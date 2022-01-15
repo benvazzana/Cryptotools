@@ -76,7 +76,7 @@
                 mat2[3] = document.getElementById('txtMatrix22').value;
 
                 let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
-                if(det % 26 == 0 ) {
+                if(Math.abs(gcd(det, 26)) >1  ) {
                     document.getElementById('hillResult').innerHTML = "WARNING: Matrix is not invertible!";
                 }
                 else{document.getElementById('hillResult').innerHTML = hillCipher(text, mat2);}

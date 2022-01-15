@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hill Cipher Tools</title>
+    <script src="../jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("../header.html"); 
+    });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+</head>
+
+
+
+
+
+<body>
+
+    <div id="includedContent"></div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>Hill Cipher Tools</h1>
+
+
+
+
+        <h3>Encryption and Decryption</h3>
+    
+        <div id="hillCipher" class="default">
+        Text:
+        <input type="text" id="txtHill"> <br />
+        <p id="matWarning"></p>
+        Matrix: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix11"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix12"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix21"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix22"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick() {
+                let text = document.getElementById('txtHill').value;
+                let mat2 = [];
+                mat2[0] = document.getElementById('txtMatrix11').value;
+                mat2[1] = document.getElementById('txtMatrix12').value;
+                mat2[2] = document.getElementById('txtMatrix21').value;
+                mat2[3] = document.getElementById('txtMatrix22').value;
+    
+                let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
+                if(Math.abs(gcd(det, 26)) >1  ) {
+                    document.getElementById('hillResult').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{document.getElementById('hillResult').innerHTML = hillCipher(text, mat2);}
+                
+            }
+        </script>
+              <button id="btnSubmitHill" onclick=btnHillSubmitOnClick()>Submit</button>
+        <p id="hillResult"></p>
+    </div>
+
+
+    <div id="matrixInverse26" class="default">
+        <h3> Mod 26 Inverse of a Matrix</h3>
+        Matrix: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrixInv11"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrixInv12"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrixInv21"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrixInv22"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnMatrixInv26SubmitOnClick() {
+        let mat2 = [];
+        mat2[0] = document.getElementById('txtMatrixInv11').value;
+        mat2[1] = document.getElementById('txtMatrixInv12').value;
+        mat2[2] = document.getElementById('txtMatrixInv21').value;
+        mat2[3] = document.getElementById('txtMatrixInv22').value;
+        let det =mod( mat2[0] * mat2[3] - mat2[1] * mat2[2],26);
+        let detInv = multInverseModn(det,26)
+                if(Math.abs(gcd(det, 26)) >1  ) {
+                    document.getElementById('matrixInv26Result').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('matrixInv26Result11').innerHTML = mod(detInv*mat2[3],26);
+                    document.getElementById('matrixInv26Result12').innerHTML = mod(detInv*(-mat2[1]),26);
+                    document.getElementById('matrixInv26Result21').innerHTML = mod(detInv*(-mat2[2]),26);
+                    document.getElementById('matrixInv26Result22').innerHTML =  mod(detInv*mat2[0],26)
+              ;}
+    }
+</script>
+              <button id="btnMatrixInv26Submit" onclick=btnMatrixInv26SubmitOnClick()>Submit</button>
+        <p ></p>
+        <table>
+            <tr><td id="matrixInv26Result11"></td><td id="matrixInv26Result12"></td></tr>
+            <tr><td id="matrixInv26Result21"></td><td id="matrixInv26Result22"></td></tr>
+        </table>
+    </div>
+
+
+    <div id="hillCipherCryptanalysis" class="default">
+        <h3>Hill Cryptanalysis</h3>
+
+        Plaintext (Enter 4 letters):
+        <input type="text" id="txtHillCAPlain"> <Br>
+        Ciphertext (Enter 4 letters):
+        <input type="text" id="txtHillCACipher"> 
+
+        <script>
+        function btnHillCASubmitOnClick(){
+        let plain = document.getElementById('txtHillCAPlain').value;
+        let cipher = document.getElementById('txtHillCACipher').value;
+        let solutions = hillCrib(plain,cipher);
+        result="<p>Possible first rows are: </p>";
+        for(i=0; i<solutions[0].length; i++){
+        result=result.concat(solutions[0][i]+"<BR>");
+        }
+        result=result.concat("<p> Possible second rows are: </p>");
+        for(i=0; i<solutions[0].length; i++){
+        result=result.concat(solutions[1][i]+"<BR>");
+        }
+        document.getElementById('hillCAResult').innerHTML = (result);
+   
+        }
+        </script>
+        <button id="btnSubmitHillCA" onclick=btnHillCASubmitOnClick()>Submit</button>
+        <p id="hillCAResult">
+
+            </p>
+    </div>
+
+
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>

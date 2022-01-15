@@ -158,11 +158,12 @@
         let numberExponents = parseInt(document.getElementById('numExponents2').value);
         let length = parseInt(document.getElementById('numBits2').value);
         let key = generateBinaryOneTimePad(prime, exponent, length);
-
-        var result = [];
+        let result="<table><tr><td>Exponent &nbsp;</td><td>One Time Pad Key</td></tr>";
         for(let i = 0; i < numberExponents; i++) {
-        result.push(["Exponent=", i,generateBinaryOneTimePad(prime, exponent+i, length)])};
-
+            let j = exponent+i;
+        result=result.concat("<tr><td>"+j+"</td><td>" + generateBinaryOneTimePad(prime,j , length)+ "</td></tr>");
+        };
+        result=result.concat("</table>");      
         document.getElementById('listOfOneTimePadResult').innerHTML = result;
     }
     </script>

@@ -70,7 +70,24 @@
             <button id="btnListCompute" onclick=btnListComputeClick()>Submit</button>
             <p id="lblListComputeResult"></p>
         </div>
-
+        <h3>GCD </h3>
+        <p> Compute gcd(exponent, (<i>p</i> - 1)(<i>q</i> - 1))</p>
+        First number:
+        <input type="text" id="txtGcdBigA"> <br />
+        Second number:
+        <input type="text" id="txtGcdBigB"> <br />
+        <script>
+            function btnGcdBigOnClick() {
+                let a = BigInt(document.getElementById('txtGcdBigA').value);
+                let b = BigInt(document.getElementById('txtGcdBigB').value);
+                let result = "gcd = ";
+                result += gcdBig(a, b);
+                document.getElementById('gcdBigResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnGcdBig" onclick=btnGcdBigOnClick()>Submit</button> <br />
+        <p id="gcdBigResult"></p>
+        
         <h3>Next Prime</h3>
         Number:
         <input type="text" id="txtNextPrime1">

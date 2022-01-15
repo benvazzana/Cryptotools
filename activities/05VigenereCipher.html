@@ -28,13 +28,257 @@
     <td>
         <h1> Cryptanalysis of the Vigen&egrave;re Cipher</h1>
 
+        <h2>Tools</h2>
+
+        <h3>Quadgraph Search  </h3>
+        <div id="quadgraphSearch" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="quadgraphCiphertext"></textarea> <br />
+        Number of Quadgraphs
+        <input type="text" id="numberQuadgraphs">
+        <script>
+          function btnQuadGraphClick() {
+            document.getElementById("quad_Graph_Table").innerHTML = (
+              "<tr> <td>Quadgraph </td><td>Frequency</td></tr></table>"
+              );
+            let text = document.getElementById("quadgraphCiphertext").value;
+            let nQuadGraphs = parseInt(document.getElementById("numberQuadgraphs").value);
+            let txtClean = cleanText(text);
+            let dict = frequencyAnalysis(txtClean, 4);
+            let table = document.getElementById("quad_Graph_Table");
+            if(table.rows.length == 1) {
+              for(let i = 1; i <= nQuadGraphs; i++) {
+                let row = table.insertRow(i);
+                let cellQuadGraph = row.insertCell(0);
+                let cellFrequency = row.insertCell(1);
+                let n = -1;
+                let selectedKey = "";
+                for(key in dict) {
+                  let value = dict[key];
+                  if(value > n) {
+                    n = value;
+                    selectedKey = key;
+                  }
+                }
+                cellQuadGraph.innerHTML = selectedKey;
+                cellFrequency.innerHTML = dict[selectedKey];
+                delete dict[selectedKey];
+              }
+            }
+          }
+        </script>          
+        <button id="btnQuadGraph" onclick=btnQuadGraphClick()>Submit</button>
+        </div>
+
+        <p>
+          <table id="quad_Graph_Table">
+          <tr>
+           <td>Quadgraph </td>
+           <td>Frequency</td>
+          </tr>
+          </table>  
+        </p>
+
+        <h3>GCD of a List</h3>
+
+        <div id="listGCD" class="default">
+          List of numbers (e.g. 4, 5, 8): 
+          <input type="text" id="listGCDInput"><br>
+          <script>
+              function btnListGCDClick() {
+                  let text = document.getElementById("listGCDInput").value;;
+                  let numsTxt = text.split(',');
+                  let nums = [];
+                  for(let i = 0; i < numsTxt.length; i++) {
+                      nums.push(parseInt(numsTxt[i]));
+                  }
+                  document.getElementById("lblListGCDResult").innerText = gcdList(nums);
+              }
+          </script>
+          <button id="btnListGCD" onclick=btnListGCDClick()>Submit</button>
+          <p id="lblListGCDResult"></p>
+      </div>
+
+
+        <h3>Subtext Frequency Analysis  </h3>
+        <div id="subtextFreqAnalysis" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="freqAnalysisCiphertext"></textarea> <br>
+        Keyword length:
+        <input type="text" id="keywordLength">
+        Keyword guess:
+        <input type="text" id="keywordGuess">
+        <script>
+          function btnSubtextClick() {
+            let n = parseInt(document.getElementById("keywordLength").value);
+            let text = cleanText(document.getElementById("freqAnalysisCiphertext").value);
+            let table = document.getElementById("freq_Analysis_Table");
+            let keyword = document.getElementById("keywordGuess").value;
+            for(let i = keyword.length; i < n; i++){
+              keyword +="A";
+            }
+            keyword = keyword.toUpperCase();
+            for(let i = 0; i < n; i++) {
+              let start = keyword.charCodeAt(i)-65;
+              let subtext = "";
+              for(let j = i; j < text.length; j += n) {
+                subtext = subtext.concat(text.charAt(j));
+              }
+              let dict = frequencyAnalysis(subtext, 1);
+              const index = i;
+              for(let j = 0; j < 26; j++) {
+                let row = table.rows[j + 1];
+                var cell;
+                var cell2;
+                if(row.cells.length < (n * 2) + 2) {
+                  cell2 = row.insertCell();
+                  cell = row.insertCell();
+                } else {
+                  cell2 = row.cells[(index * 2) + 2];
+                  cell = row.cells[(index * 2) + 3];
+                }
+                
+                let char2 = String.fromCharCode(65 + ((j + start) % 26));
+                cell2.innerHTML = char2;
+                let char = String.fromCharCode(65 + ((j + start) % 26));
+                let value = Math.round(dict[char]);
+                let Xs = "";
+                let i = 0;
+                for (let i = 0; i<=value; i++) {
+                  Xs += "x";                 
+                }
+                if(dict.hasOwnProperty(char)) {
+                  cell.innerHTML = Xs;
+                } else {
+                  cell.innerHTML = "";
+                }
+
+              }
+            }
+          }
+        </script>
+        <button id="btnSubtext" onclick=btnSubtextClick()>Submit</button>
+        </div>
+
+
+
+        <p>
+          <table id="freq_Analysis_Table">       <tr>
+            <td><h3>Letter</h3></td>
+            <td><h3>Rel. Freq.</h3></td>
+        </tr>
+        <tr>
+        <td>a</td><td>xxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>b</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>c</td><td>xxx</td>
+        </tr>
+        <tr>
+          <td>d</td><td>xxxx</td>
+        </tr>
+        <tr>
+          <td>e</td><td>xxxxxxxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>f</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>g</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>h</td><td>xxxxxx</td>
+        </tr>
+        <tr>
+          <td>i</td><td>xxxxxxx</td>
+        </tr>
+        <tr>
+          <td>j</td><td></td>
+        </tr>
+        <tr>
+          <td>k</td><td>x</td>
+        </tr>
+        <tr>
+          <td>l</td><td>xxxx</td>
+        </tr>
+        <tr>
+          <td>m</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>n</td><td>xxxxxxx</td>
+        </tr>
+        <tr>
+          <td>o</td><td>xxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>p</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>q</td><td></td>
+        </tr>
+        <tr>
+          <td>r</td><td>xxxxxx</td>
+        </tr>
+        <tr>
+          <td>s</td><td>xxxxxx</td>
+        </tr>
+        <tr>
+          <td>t</td><td>xxxxxxxxx</td>
+        </tr>
+        <tr>
+          <td>u</td><td>xxx</td>
+        </tr>
+        <tr>
+          <td>v</td><td>x</td>
+        </tr>
+        <tr>
+          <td>w</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>x</td><td></td>
+        </tr>
+        <tr>
+          <td>y</td><td>xx</td>
+        </tr>
+        <tr>
+          <td>z</td><td></td>
+        </tr>
+
+
+          </table>
+        </p>
+
+        <h3>Decryption   </h3>
+        <div id="vigDecrypt" class="default">
+  
+        Ciphertext:
+        <textarea type="text" rows=4 cols=100 id="vigDecryptCiphertext"></textarea> <br />
+        Keyword:
+        <input type="text" id="vigDecryptKey">
+        <script>
+          function btnVigDecryptOnClick() {
+            let text = document.getElementById('vigDecryptCiphertext').value;
+            let keyword = document.getElementById('vigDecryptKey').value;
+            document.getElementById('vigDecryptResult').innerHTML = vigenereDecrypt(text, keyword);
+          }
+        </script>
+        <button id="btnVigDecrypt" onclick=btnVigDecryptOnClick()>Submit</button>
+        <p id="vigDecryptResult"></p>
+        </div>
+
+
+
         <h2> The Process</h2>
         <ol>
             <li>Use the Quadgraph Search tool to find repeated quadgraphs in the ciphertext. </li>
-            <li>Count the number of letters between repeated quadgraphs. You find it helpful to copy the cipher text into a Google Doc. Highlight from the beginning of one quadgraph to just before the next occurrence of it. Then under the Tools menu, select word count. The number you want is "Characters excluding spaces"</li>
+            <li>Count the number of letters between repeated quadgraphs. You may find it helpful to copy the cipher text into a Google Doc. Highlight from the beginning of one quadgraph to just before the next occurrence of it. Then under the Tools menu, select word count. The number you want is "Characters excluding spaces"</li>
             <li>Compute the GCD of the numbers you found in step 2. For best results, you will want to compute a GCD of at least three numbers, but preferably more. The length of the keyword is probably a divisor of the GCD you computed.</li>
-            <li>Make a guess for the length of the keyword. Then use the Subtext Frequency Analysis tool to get a frequency analysis of each chunk of the cipher.</li>
-            <li>Make a guess for the shift value for each chunk of of text from the previous step. (Remember that it's just a Caesar shift.)</li>
+            <li>Make a guess for the length of the keyword. Then use the Subtext Frequency Analysis tool to get a frequency analysis of each chunk of the cipher. You can leave the keyword guess blank</li>
+            <li>Make a guess for the shift value for each chunk of of text from the previous step. (Remember that it's just a Caesar shift.) If you rerun the Subresr Frequency Analysis tool with your guess, you can see how well the relative frequncies line up with the expected frequencies.</li>
             <li>Use the Decryption Tool to try to decipher the text. If your guess at the key is partially correct, you should see pieces of words, and from this, you may able to deduce which letters in your guess for the keyword are correct.</li>
         </ol>
 
@@ -61,14 +305,113 @@
                     This distance between the first occurrence of TRFG and the second is 410, and between the second and third is 200. The distance between the first occurrence of KLEC and the second is 120, and between the second and the third is 55.  
                 </li>
                 <li>We now compute the GCD of 410, 200, 120, and 55 and get 5. This means our keyword likely has length 5. (Notice that if we had only used the first three numbers, we would have gotten a GCD of 10, which would leave us much more work in the next steps.)</li>
+
+                <li> Next we run the Subtext Frequency Analysis tool with Keyword length 5 (leaving the Keyword guess blank). We get
+                    <img src="../images/VigSubFreq1.JPG">
+
+                    We consider what shift is most likely for each chunk:
+                    <ol style="list-style-type:lower-roman">
+                        <li>
+                           The most frequent cipher letter is F, so that's a good guess for e. Looking at the other vowels, a would be B, i would be J, and o would be P. The relative frequencies match up well. The slightly lower number of a's and o's would be offset by the extra e's. It's also usually a good idea to look at where the last five letters of the alphabet would be, as we would expect low relative frequencies there. Under our guess, v - z would be W - A, and the frequencies match pretty well. So the first letter of the keyword (the guess for what a encicphers as) is B.
+                        </li>
+                        <li>The most fequent cipher letter is K, but if we guess that is e, then a, i, and o would be G, O, U, but the frequencies of those characters is too low to reasonably be those three vowels. Also, this would give us a whole lot of end of the alphabet letters (look at C, D, E, F). If we look at L - Q, we have what looks like a match for the end of the alphabet. This would make a = R and V =e. The relative frequencies look good here. So the second letter of the keyword looks like R </li>
+                        <li>
+                        Here again match e with the most frequent cipher letter I, gives good matches. This means a = E.
+                        </lI>
+                        <li>
+                            The skyscapers here already look like they should. So we guess a = A.
+                        </li>
+                        <li>
+                            Again we get a good match setting e to the most frequent cipher letter, O. This  makes a = K.
+                        </li>
+                    </ol>
+                    So our guess for the keyword is "BREAK". Taking a look at the Subtext Frequency Analysis tool with this guess, we get:
+                    <img src="../images/VigSubFreq2.JPG">
+                    The skyscapers line up pretty well
+                </li>
+                <li> We use the decryption tool to check our guess:
+                    <div class="preDivLeft">
+                        wheni nthec ourse ofhum aneve ntsit becom esnec essar yforo nepeo pleto disso lveth epoli tical bands which havec onnec tedth emwit hanot heran dtoas sumea mongt hepow ersof theea rthth esepa ratea ndequ alsta tiont owhic hthel awsof natur eando fnatu resgo denti tleth emade centr espec ttoth eopin ionso fmank indre quire sthat theys hould decla rethe cause swhic himpe lthem tothe separ ation wehol dthes etrut hstob eself evide nttha tallm enare creat edequ altha tthey areen dowed bythe ircre atorw ithce rtain unali enabl erigh tstha tamon gthes earel ifeli berty andth epurs uitof happi nesst hatto secur ethes erigh tsgov ernme ntsar einst itute damon gmend erivi ngthe irjus tpowe rsfro mthec onsen tofth egove rnedt hatwh eneve ranyf ormof gover nment becom esdes truct iveof these endsi tisth erigh tofth epeop letoa ltero rtoab olish itand toins titut enewg overn mentl aying itsfo undat ionon suchp rinci plesa ndorg anizi ngits power sinsu chfor masto thems halls eemmo stlik elyto effec tthei rsafe tyand happi ness
+                    </div>
+                The first few lines of the Declaration of Independence.
+
+                </li>
             </ol>
             
         </div>   
+        <table>
+            <tr>
+                <td><img src="../images/thinkingcap.gif" alt="Unlock" ALIGN="middle"  height="60" width="60"></td> 
+                <td><h2>Exercises:</h2></td>
+            </tr>
+        </table>
+        <p>Cryptanalyze the following, all encrypted with the Vigen&egrave;re Cipher:</p>
+        <ol>
+            <li>
+                <div class="preDivLeft">
+                ZVNNF TROEB UKXZB AELGN VZRRZ DRJRP BHSQG TFBNT RAGEU QEZPE RZYWY 
+                KWQYR VLJOK PGNVM AJJWS CFZZY RVQGE WBFPA ZKCTA UIGRZ RLEES IEKJI 
+                AJPPB RVEVZ YVBZY QAMZV VZKWF OKLBC EWAUI BBKRB VZNIF GYWOH ZBUUC 
+                MNTUB UGKUR GEAPU DNBXK QGNRL NVVZS KTBYE IWHTU LBUIT VQVIC UIBUU 
+                CMCGZ VGKUO EKVVJ OKPNY YQAEP MYRFE OXRAF QEWOO EBUKV FNIKU VJUTR 
+                ZYMQU FZBVV VRJFV GURBH HVAUG GMQNR TYRZS RGKCA TVTNB VZLIF USUIB 
+                NHCMG AEVRR NQGNF CGYDW XKNQG NGIAK CTRJN IYRJI AJWTB UIAGO CMQGE 
+                LPGIX RZVLC XFDVJ VLJOK PCUCQ FNVLP NRQEY RVQRF BFGEL YUKAB LGMTY 
+                WWENR BFGEL PURBF ZYMUU SJVZN IFLFV QUWDV YZBBX JBUKK CATVT JULVQ 
+                UEIAJ FVTUZ VTLRQ ERPJH ZEWGW LQGKJ BEGZO UZZVG UKPRY ZLRUW BUKYQ 
+                YRKPR NZTYG JIYRK PRVVW CRVNB XDIAE DQYKJ ZBAEL PGCTR JZBNT UUNTP 
+                TVZKT RXFCA JUWBX JWCKE MQULB BLZBS OIAGU EWAKJ QQKRV QZYMA UEIAU 
+                KPRXE WTUZV TAGAG GZZFL FZGNV PBHSQ GHVLE UFUFH RBUXF WZYTM YRRZF 
+                VRVGX ZMFRF BFUWB UKJMJ GILEU SMFNV PNJNP BRVZB UDAQK MWGKU BBICW 
+                GNVAX OKKUK EAQOE QAMIW BSJIY RNMEK FVGNV ANSVN YUFZN TUQAJ VMQUE 
+                BUKJI ZKGIF YRORZ YMOKJ BEUFU FCVZR GCTBT KPRRV NGNRV QYZLR MFQAM 
+                ZVSUI BUKJM JKIMG NVWAR PWAKJ BBNRD RCZVQ UNAQK VXFKK ZBAEL JOELB 
+                CJTBU BQAMF DRXYQ FMRZQ KEIAJ DMNJF EFHVG BTUAY UGQAM UWJTK WGNVZ 
+                VBVZG NZAUU SJVZN IFGMM EENMY RKWQU YWOHZ BNTUP VYEIZ KNIFH ROTOE 
+                AGNVJ NMXQA YVAUG UTVBV LVTKP RTVQT NSWHX YWBJF NGNVP VRCNB XKQZK 
+                FCGUW UVTUI AJGMB VCMPU EAVJV ZRJKP RSMME EIMFV VKGGS TRTFB BTCGO 
+                KTIHY VUBYK WSZYM ZCVZR XZKUH LBNRJ WOKTI HYVBU KPVRB VZUGU IAERL 
+                IKEBH XVABX UQQGE GGNZV TAEMK VVKGK UGBAT WHRUB RRCEU GKIOG XOVTJ 
+                EBACL FGPWA GEGDA VAGOF VJOKP BAKBU KSWGN VZBLR AXOEO UODBU OJQFG 
+                JBBXP WSNFE NHROT OEAUG UIAGU DRTKC EKRVQ LFCAJ YQZYV TSJFQ AMRVQ 
+                YRGVT XBUOE OFGCB BMVBU KICAK OXRIK MQNVU NEYII KCWFZ KPRTV QTNSW 
+                HXJZR YGMPZ SCGNV ONOEM QCVTY EFCJO CTFKV EUKKP RXYMT GZVRJ RVLZY 
+                QAMZV GNVMA J 
+                </div> 
+            </li>
+            <li>
+                <div class="preDivLeft">
+                    NSMAE IGMIH XKTFP TWJIW EEXYT FXTWC TSITX KWSFH QVCHU NXEDH YHVCD BZAMJ PIGMT VIIGB ENPGT PEBTO GWMKL OLAII HVKBP CKCBV IKWOM FEUTH AXJZG GMGSZ HSHYX YTRTR YGVSM NTEDK ATVIN KHDIN XHATW KPFMA MJPIG MVRED XWSEI VXWSF GOZTM EJDLA IJRFX XGYTR ATVIN VXTVU WSKPE CZWGZ XFLOK WXYTY BMGYT BTGHK WSGML VHCNG HFUHA XJINW GZTRC PXBRX EIMHR KWSLM SMTVX KSCAS WHRKD VBLFR RYTGH KGWXW XFGSF XQSTF MAIUG STFLV WOWUI VCVTO MEVWM AEUQS XGEXD CWHRV IVXKI YPRUX IEPTE RMEVA HMSIR MVEIZ CWMAI YPRTY YECMY XICXB ZAIUW OWMLV HOFXH ITOFU IWDFX AMJPI GMARH PTVOF JHLBH VIVXW SFGOK XCFJI IRIKH VXWID PBWXH ETOKE CJPWW AEIGM PXPCV SMTQF KSHGM NPBMR SLICE HSBPT MXVKW SUTGF COGWH FCHRH YUPFX EIKXH UNVEX KTGXV KSKRX YXBZI IIUSV MSESI WWCJQ WKMLU PMATV INUKH EETR
+                </div>
+            </li>
+            <li>
+                <div class="preDivLeft">
+                    WMCAT DBRTP RKPAA CTPZC RTBWA GPDFV RHOVV ISEOI SBPDF CBYLL PDFRR ELTPW LVRXH MSTDT LSUKF JWDLS UKRCE EKTEK KIZWV REURA WBHXI ERCET BXETC NZUFS MMKWT NTMVM BTATG SMGJT WFGLR WLVST UISMP TLRFM WIJXY TUIWI IBJSR PFUVS TCNPC WIEDI JESWE ALTRH UBPDY EAMGP KLSEA XHMPQ COHKH BZCLB NHLGN DFNQI DXZAZ TSVOU FCPOS XHMIP TDFLE KFJWD OERMC NEAYO HMCDZ KRHAB DTLNQ WAQUI SEBHD ANTCE NKAQE HEUFY PBYTC EOYTE VLPNG MNIEN HALMM OCPOT UICIG ILIAQ ALVIS EEMGP KSPCV WIWEI SECML WKHYA ZIWIJ VPOEK EHZEE HRPAA KISIA KHMJP TDGSM MUDNH RWAQU HZMRX IUVLS EAXHM TGPWV WUXRV LIAWT QKPYD GLEJI TLKFE RMSTL TVRGB YTMOL WTMCA EHRQT WXTEO HXTPV GPAAH GQMTT TNPLB YTJGB XAVUL TNWYS BFCPF BVTPV OTPCI RQUDY TXROE NWPRR MLTST EHRRD WTWPS NMDJL ITWBR TADTW LGSOO FDOTU ETAWD CSHVE
+                </div>
+            </li>
+        </ol>
 
+        <table>
+          <tr>
+              <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+              <td><h2>Cryptanalysis Challenge</h2></td>
+          </tr>
+      </table>
 
+      <ol>
+        <li>
+        <div class="preDivLeft">ERRBE SHQMO VGEGR GCIZO WGSUM ZGRVW ZHPKP ZGDOR WIMDX KBLRA BDYSP KDLPL ETITK WBOJR FWHXO ZSFHO SOGVO MPSZV XDBVG LWJNG USGAW UJMGJ ITNZL DUEVZ WZRSS ZQHSN EACTU HDAOP HZRFK FABTB ZPECI HVLZI ICCNG DMQWR JVVGW VBBIP AAMLA EOPYE ULIEV SAPUE ZCNBJ ELFXU HGRYS QPCIS SZRTL ARNRZ AJGWL HVOVY WBVVQ VBBZZ MSEQW HHKBA SWSSE USQRJ WIAJX IDUSN OOGIW IFUYL RNMKR ZQFSG BRRFW LVPML VJAJF HFVTK SZTKV ESGVK QYUXS JCRKL HHWKR XNGNW BBNWJ POCGL BVDGC LOIIL RWAGS VNBIN PPADL XUWKV HQQEQ WLGUE GLECP DLPLP RUIJI FPIKS GKXKL QNBBP NLKXT FGRSY FIWWW ZMGXA XLHHW BACKD ITEGG KFLKK WARMJ MQNHA ZZMNA LGRTT DSBFI LPRPG CBASU POGGN WOUYX KBDVO GWXKV CZASC NVNTZ WGNMI UTEYR STJGQ ADEOR ASCWD MVHRS DEMUO MVPNT WHRGB ASRLV VTYLS UUPVS GWERA BDYSI KAFXY PGSYH DSTZQ YANTV XVVSZ QZUBA LEORH ISQVG UPVIC MXNBZ LVRTA SUARE GZMRU KTNZW ZSQWO YVTXY IFTNE WUPVX FQGKV ADNHA OOYWI IGNIV RTAVG LPBAK IXQGK BAGFL WDYLV LHPKH FMQHD IMXQD ESBKL RVRGZ HMQEJ STBTW BYGVA EYLXD PAALJ OVMEW HIEKF BCVBJ KYRAL VPCOX LFAFU TIPQL WQEOJ ZTMMO ITSOR VPCKK WZAZG EXFKD AURAL YTBGR QPZKK JMAKY MNBBE PZCVV RQMOG SSWDL KMFZZ MDBKJ NLYVA IFTUY VBAZW KQANS JSGOJ PZFTK VGAIX HEBFD DTGNA VQFBA SICYV VGOAV FPUZQ YQGXW OKERA ZBQTD LKLKA LUPFX LKHXA WCVHU XBRPP XJCGY WJWED FLNLL MBJSS AYCLL IPTUF HIIIP DMFYS VNPVE HKPXU MVCRS VFLZQ SZBAF LEFOO WYCTS QQTNI UFUSU SKRYS ADEOJ CLPLJ LKLJA DSUCB TCGTG BDBCB WTGEP ETLEA HMQMH VEVZZ WEEUN WUBFV XJEXE QECEF DMVTL POESW NVDMO IUTUV HJBND KIYCS GCFDK GLLHM AKTNE FBXZW STFCZ QMUGD AOYWV APEJW RNMKZ WVGEX QFRMA WYQXH VNYOR WIMTH FBHXQ UYZAW SLQHV RUTUT SFLTD DTVTY POEUN WUBFV XJEXW RMLCX FKUKK BYGVA OHUFL RKNZL HMCDE WZLGJ LONGP OAYFW WCNJX KFAVH VURTS BDUSY KARHU KKNCI VUAKD EXFNW ZMEWO LTCTA TKEYE QEKFR DTRSG VKQSS DLLCV MPEJX RIMIP AZNIM TYHGW XPJBA CVOHI LOBNR HTNIW AKGHD AZYFL XKMKE VTCIH VPRXT CCVBA OZQNJ GGSYJ UPUSH AVTGE WLVZA HBLVO GQUTX HSAYH KMGAH ICGOJ ZICMD IGNZL HUEFS GQAZK WPSWO YHJBU XGRKW WBVUV MXCRA MNGVA SVPDL VUNKI GTNFU SNRCQ MKEGP DLLLO IJAJX KFAKR JMOAA TDVBP DLFXH VVOLX KFVVJ JWNXW IYISN POCRL ETSOX EFKRP WBUKD IIPSJ PLPHM EETOZ LUQVV AVGUO VYAGW PBPWH CUBGV EFZJV SBGNW QBPIO PVKXY WKNZL HTPRG WWAZZ MZBFY DVDMO IUTUV HBVUW JWHHS LYHFO KURAL MTCKE VFTVV KKEGO TSAUO POPHB KJTNI VPCKK DMNTW LKPFK OZGMZ FGNIL HTIEG KIAML POVFO WKQHU KUOLX KFJID RWFCZ QVRHD AFNEH CGDPY LDMYD JXFGF LMVUW NIMQN YKTGV VUPVI GZZGD VKZSK BAFXZ XQRKA DTBYH OUWUZ VCBBC AUCKH POEXG KBVUL KMFZG ZOPIO PVKXY WEOAP GGQEG XWBJK BKCZA OHEHV HXAXM HUGFI UWYUJ MNGVN AHBFH WJFUV KPOJF GZALG ZMUWY GLLLJ SCLUM OGWIO SUCYD QQUHX QSZLM STTNI ZFICW ZGFNG MCGFE JNQAH MTDXI VTQEJ TIYRG WXFOJ ZMJHD ITSKI GTIEB LPVTY VYGJE OPZEL LCDUR OZBFE WWEJW ZOQIJ PPJPL FGCGQ HGIDL DQNXW VYHUD PVZXS SPGZS WIMJW GZRGF LSGHK QZUXD ITERS FLMUX HQAGX CXUCQ OLMYA LKNMW ZIMIH LPRGL BOARW JAFTK KQNKL RNMWR JTVLW</div>
+        </li>
 
+        <li>
+          <div class="preDivLeft">         CCMWV ENBLD USAJH UNVHD PONWJ DJASI UEEWD MQQDH DPTZK UNBLI TTEVE ISKVD EVEVZ CSLVH FDOXU QUPIU UOUJA VLPIU ELRWW ZFAEP GCIUS AKQVV VQEES TJKVB REAFS TDAXV WNCWK AKCPO AMUKL QSOWP WRGDW ZXLYU KYGHJ WMQFL VTOFS VIUSV VYOLS JQGFU GLKAF OZXEQ CKIKH GWQRJ CNRGK AXWYW JLMWJ QHIHX TTNYL PJVMQ GEEWF NTZXL GDBML CSBMO TPCGJ LXLIW CTLAF OMMVL PGODN MRMRW KYWGJ TIEEU KTWWJ MIMGO CDSAX QJLMQ VHOLZ WZAEQ FPIYZ BRWWW CXEJA KFVWK CONWN MWPID TOOXX ZNMHP CYAES VYPIQ FTRWU BTZSI VSEXT QOMHJ CCHGG DJZXR QVCJW LNBJR TQRAW LRIRV YLRLA UJAYF EPSKS VIALH VZOCZ MWAIF TPTDA NJIWR PPOXL PJKSX PERQK BTXGR FPBJW IPMVV VZTZW OWIZH</div>
+        </li>
 
-        
+        <li>
+          <div class="preDivLeft" >QFPUT VQVWZ RMZSF WFECE UZUHA HJXRU IYVRK UXDWX ACHRU EFLNK MFQPG XFWEH KUNGN GOQAB JNXVS ONWBM BAWGM CXMAV DNYAB HQVVM IWTRG ULFBK GXCFS TMVEC UVUFB HQUGM CXLGZ UHTVY COEOX ROEEK YINFP CFJCG IYKVF HMSNB XTCFF BOMRV LYNNW CEVWZ VOBWY UXSPB YZVWE IUMKF EALRP BAQJQ GMXIJ JBEPH GBCBK HKNEE JOMNB JDQUD PGMLV SIMCT HKTSO THMPP EJEAX XMPSJ EUGHV TWAYB ZATBU PVTWV TWAZI OEHCO JMXHF DNHRX ZRQFF WYLEZ T
+          </div>
+        </li>
+        </ol>
     </td>
     </tr>
 </table>

@@ -57,17 +57,7 @@
             function btnNumToBinaryOnClick() {
                 let numStr = document.getElementById('txtNumber').value;
                 let num = parseInt(numStr);
-                let binaryNumStr = num.toString(2);
-                let length = binaryNumStr.length;
-                let nLeadingZeroes = 8 - (length % 8);
-                console.log(nLeadingZeroes);
-                let leadingZeroes = "";
-                for(let i = 0; i < nLeadingZeroes; i++) {
-                    leadingZeroes += "0";
-                }
-                console.log(leadingZeroes);
-                let adjustedNumStr = leadingZeroes + binaryNumStr;
-                document.getElementById('numToBinaryResult').innerHTML = adjustedNumStr;
+                document.getElementById('numToBinaryResult').innerHTML = num.toString(2);
             }
         </script>
         <button id="btnNumToBinary" onclick=btnNumToBinaryOnClick()>Submit</button>
@@ -145,9 +135,12 @@
         </script>
         <button id="btnDiscreteLog" onclick=btnDiscreteLogOnClick()>Submit</button>
         <p id="discreteLogResult"></p>
+
+        For larger numbers, you can try <a href="https://www.wolframalpha.com/" target="_blank">WolframAlpha</a> using the MultiplicativeOrder command. To solve for <i>k</i> type  MultiplicativeOrder[a, p, {b}].
+
     <p>The message below was encrypted with by first doing a Diffie-Hellman exhange and then the Binary Additive Cipher. </p>
     <div class="preDiv">
-        48406 61564 13724 07605 21136 90f74 0c654 06901 77052 11572 05654 06309 66076 41221 0e740 d6305 73132 f
+        f9784 b636e 76f1e 117d5 785f7 e6470 eea54 0d839 5a732 b70f1 a4049 03a45 716c6 0f0e1 0ec53 54e73 7976a c
     </div>
     <p>For the Diffie-Hellman exchange, we know the prime was 541, the base was 123, and the two half keys were 25 and 214. Cryptanalyze the message.</p>
 

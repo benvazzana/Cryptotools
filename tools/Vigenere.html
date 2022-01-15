@@ -80,6 +80,9 @@
         <input type="text" id="numberQuadgraphs">
         <script>
           function btnQuadGraphClick() {
+            document.getElementById("quad_Graph_Table").innerHTML = (
+              "<tr> <td>Quadgraph </td><td>Frequency</td></tr></table>"
+              );
             let text = document.getElementById("quadgraphCiphertext").value;
             let nQuadGraphs = parseInt(document.getElementById("numberQuadgraphs").value);
             let txtClean = cleanText(text);
@@ -154,7 +157,7 @@
             let text = cleanText(document.getElementById("freqAnalysisCiphertext").value);
             let table = document.getElementById("freq_Analysis_Table");
             let keyword = document.getElementById("keywordGuess").value;
-            for(i = keyword.length; i < n; i++){
+            for(let i = keyword.length; i < n; i++){
               keyword +="A";
             }
             keyword = keyword.toUpperCase();
@@ -165,13 +168,21 @@
                 subtext = subtext.concat(text.charAt(j));
               }
               let dict = frequencyAnalysis(subtext, 1);
+              const index = i;
               for(let j = 0; j < 26; j++) {
-  
                 let row = table.rows[j + 1];
-                let cell2 = row.insertCell();
+                var cell;
+                var cell2;
+                if(row.cells.length < (n * 2) + 2) {
+                  cell2 = row.insertCell();
+                  cell = row.insertCell();
+                } else {
+                  cell2 = row.cells[(index * 2) + 2];
+                  cell = row.cells[(index * 2) + 3];
+                }
+                
                 let char2 = String.fromCharCode(65 + ((j + start) % 26));
                 cell2.innerHTML = char2;
-                let cell = row.insertCell();
                 let char = String.fromCharCode(65 + ((j + start) % 26));
                 let value = Math.round(dict[char]);
                 let Xs = "";
@@ -192,8 +203,7 @@
         <button id="btnSubtext" onclick=btnSubtextClick()>Submit</button>
         </div>
 
-        <p></p>
-        <button onClick="window.location.reload();">Refresh Table</button>
+
 
         <p>
           <table id="freq_Analysis_Table">       <tr>

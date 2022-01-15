@@ -49,13 +49,14 @@ function numToText(nums, isUpperCase) {
  * @param {char} op operation (+, -, *, /, or %)
  * @param {number} scale number to apply operation with
  */
-function listCompute(nums, op, scale) {
+ function listCompute(nums, op, scale) {
     for(let i = 0; i < nums.length; i++) {
         if(op == '+') nums[i] += scale;
         else if(op == '-') nums[i] -= scale;
         else if(op == '*') nums[i] *= scale;
         else if(op == '/') nums[i] /= scale;
-        else if(op == '%') nums[i] %= scale;
+        else if(op == '%') nums[i] = ((nums[i] % scale)+scale)%scale;
+          
     }
 }
 
@@ -79,6 +80,31 @@ function cleanTextCaseSensative(text) {
     }
     return result;
 }
+
+/**
+ * This function cleans a String of text by deleting any non-letter
+ * characters, and changing each character to a capital letter.
+ * @param {String} text input String of text
+ * @returns {String} cleaned String of text
+ */
+ function cleanTextSpaces(text) {
+    return cleanTextCaseSensativeSpaces(text.toUpperCase());
+}
+
+function cleanTextCaseSensativeSpaces(text) {
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charCodeAt(i);
+        if((c > 64 && c < 91) || (c > 96 && c < 123)) {
+            result = result.concat(text.charAt(i));
+        } else{
+            if(c == 32) {result = result.concat(text.charAt(i));}
+        }
+    }
+    return result;
+}
+
+
 
 /**
  * Given a string of text, this function tracks the frequency of
@@ -228,6 +254,34 @@ function monoEncrypt(text, key) {
     return spaceText(result, 5);
 }
 
+function monoEncryptSpaces(text, key) {
+    text = cleanTextSpaces(text);
+    key = cleanText(key);
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let keyIndex = text.charCodeAt(i) - 65;
+        if (keyIndex == -33) {
+            result = result.concat(" ");
+        } else {
+        result = result.concat(key.charAt(keyIndex));}
+    }
+    return result;
+}
+
+function monoEncryptPunctuation(text, key) {
+    text = text.toUpperCase();
+    key = cleanText(key);
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let keyIndex = text.charCodeAt(i) - 65;
+        if ((keyIndex < 26) && (keyIndex > -1)) {
+            result = result.concat(key.charAt(keyIndex));;
+        } else {result = result.concat(text.substr(i,1));
+        }
+    }
+    return result;
+}
+
 /**
  * This function decrypts a string of ciphertext with a
  * monoalphabetic substitution cipher given a ciphertext alphabet
@@ -246,6 +300,22 @@ function monoDecrypt(text, key) {
         result = result.concat(String.fromCharCode(index + 65));
     }
     return spaceText(result, 5).toLowerCase();
+}
+
+function monoDecryptSpaces(text, key) {
+    text = cleanTextSpaces(text);
+    key = cleanText(key);
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let c = text.charAt(i);
+        if (c == " ") {
+        result = result.concat(" ");
+        } else {
+        let index = key.indexOf(c);
+        result = result.concat(String.fromCharCode(index + 65));
+        }
+    }
+    return result;
 }
 
 /**
@@ -269,7 +339,7 @@ function removeDupLetters(text) {
  * @param {*} text input text
  * @param  {...char} letters any letter
  */
-function removeLetters(text, ...letters) {
+function removeLetters(text, letters) {
     let result = "";
     for(let i = 0; i < text.length; i++) {
         let c = text.charAt(i);
@@ -311,7 +381,7 @@ function getKeywordAlphabet(key, letter) {
     for(let i = 0; i < key.length; i++) {
         monoKey[(i + letterCode) % 26] = key.charAt(i);
     }
-    alphabet = removeLetters(alphabet, key.split(''));
+    alphabet = removeLetters(alphabet, key);
     for(let i = 0; i < alphabet.length; i++) {
         monoKey[(i + letterCode + key.length) % 26] = alphabet.charAt(i);
     }
@@ -332,6 +402,18 @@ function keywordEncrypt(text, key, letter) {
     return monoEncrypt(text, alphabet);
 }
 
+function keywordEncryptSpaces(text, key, letter) {
+    let alphabet = getKeywordAlphabet(key, letter);
+    return monoEncryptSpaces(text, alphabet);
+}
+
+function keywordEncryptPunctuation(text, key, letter) {
+    let alphabet = getKeywordAlphabet(key, letter);
+    return monoEncryptPunctuation(text, alphabet);
+}
+
+
+
 /**
  * This function decrypts a string of keyword-ciphered text
  * @param {String} text input ciphertext
@@ -343,6 +425,11 @@ function keywordEncrypt(text, key, letter) {
 function keywordDecrypt(text, key, letter) {
     let alphabet = getKeywordAlphabet(key, letter);
     return monoDecrypt(text, alphabet);
+}
+
+function keywordDecryptSpaces(text, key, letter) {
+    let alphabet = getKeywordAlphabet(key, letter);
+    return monoDecryptSpaces(text, alphabet);
 }
 
 /**
@@ -1088,3 +1175,55 @@ function primeFactor(n){
       } else {return(number)
       }
 }
+
+/**
+ * Returns a mod n (fixes issues with negatives)
+
+ */
+
+ function mod(a,n){
+    return(((a%n)+n)%n);
+  }
+
+/**
+ * 
+ * Hill Cryptanalysis
+
+ */
+
+function modSolve(x,y){
+    let solutions = [];
+    for (i = 0; i < 26; i++){
+    if ( (mod((i*x),26)) == (mod(y,26)) ) 
+      solutions.push(i);
+    }
+    return (solutions);
+  }
+  
+  function matrixSolve(a,b,c,d,y,z){
+    let det = a*d - b*c;
+    let result = [];
+    let m = modSolve(det, d*y-b*z);
+    let n = modSolve(det, (-c)*y+a*z);
+    for (i = 0; i < m.length; i++)
+    {
+      for (j =0; j < n.length; j++){
+        if ( 
+          ( mod((a*m[i]+b*n[j]),26) == (mod(y,26))) && 
+          ( mod((c*m[i]+d*n[j]),26) == (mod(z,26)))
+          )
+        result.push([m[i],n[j]])
+      }
+    }
+    
+    return result;
+  }
+  
+  function hillCrib(p,c){
+   let plain = textToNum(p);
+   let cipher = textToNum(c);
+   let row1 = matrixSolve(plain[0],plain[1],plain[2],plain[3],cipher[0],cipher[2]);
+   let row2 = matrixSolve(plain[0],plain[1],plain[2],plain[3],cipher[1],cipher[3]);
+   return ([row1,row2]);
+  }
+  

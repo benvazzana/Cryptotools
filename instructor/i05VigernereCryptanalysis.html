@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vigenere Cryptanalysis (Instructor)</title>
+        <script src="../jquery.js"></script> 
+        <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+        </script> 
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+    </head>
+
+<body>
+
+    <div id="includedContent"></div>
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+    <td>
+
+        <h1>Vigenere Cryptanalysis (Instructor)</h1>
+
+        
+
+        <h3>Exercises</h3>
+
+        <ol>
+            <li> (keyword = ring)<br> In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort. It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube-shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats—the hobbit was fond of visitors. The tunnel wound on and on, going fairly but not quite straight into the side of the hill —The Hill, as all the people for many miles round called it—and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining-rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left-hand side (going in), for these were the only ones to have windows, deep-set round windows looking over his garden, and meadows beyond, sloping down to the river. This hobbit was a very well-to-do hobbit, and his name was Baggins. The Bagginses had lived in the neighbourhood of The Hill for time out of mind, and people considered them very respectable, not only because most of them were rich, but also because they never had any adventures or did anything unexpected: you could tell what a Baggins would say on any question without the bother of asking him. This is a story of how a Baggins had an adventure, and found himself doing and saying things altogether unexpected. He may have lost the neighbours’ respect, but he gained—well, you will see whether he gained anything in the end. 
+
+                
+
+            </li>
+
+            <li>
+                (keyword = potter)<br> Yet Harry Potter was still there, asleep at the moment, but not for long. His Aunt Petunia was 
+                awake and it was her shrill voice that made the first noise of the day.  <br>
+                
+                "Up! Get up! Now!" <br>
+                
+                Harry woke with a start. His aunt rapped on the door again. <br>
+                
+                "Up!" she screeched. Harry heard her walking toward the kitchen and then the sound of the 
+                frying pan being put on the stove. He rolled onto his back and tried to remember the dream 
+                he had been having. It had been a good one. There had been a flying motorcycle in it. He 
+                had a funny feeling he'd had the same dream before. 
+                
+                His aunt was back outside the door. <br>
+                
+                "Are you up yet?" she demanded. <br>
+                
+                "Nearly," said Harry. <br>
+                
+                "Well, get a move on, I want you to look after the bacon. And don't you dare let it 
+                burn, I want everything perfect on Duddy's birthday." <br>
+                
+                Harry groaned.
+            </li>
+            <li>(keyword = airplane) <br>
+                Well I don't have anything to say. You've done the best you could you really have, the best you could. You can't expect to win 'em all. But I want to tell you something I've kept to myself through these years. I was in the war myself, medical corps. I was on late duty one night when they brought in a badly wounded pilot from one of the raids. He could barely talk.  He looked at me and said the odds were against us up there, but we went in anyway. I'm glad. The captain made the right decision. The pilots name was George Zip. The last thing he said to me, doc, he said, sometime when the crew is up against it and the breaks are beating the boys, tell them to get out there and give it all they got, and win just one for the Zipper. I don't know where I'll be then, doc, he said, but I won't smell too good. That's for sure.
+                </li>
+
+                </ol>
+                <ol>
+
+            <li>(keyword = i know why the caged bird sings) <br>
+                When I was three and Bailey four, we had arrived in the musty little town, wearing tags on our wrists which instructed--"To Whom It May Concern"--that we were Marguerite and Bailey Johnson Jr., from Long Beach, California, en route to Stamps, Arkansas, c/o Mrs. Annie Henderson.<br>
+
+Our parents had decided to put an end to their calamitous marriage, and Father shipped us home to his mother. A porter had been charged with our welfare--he got off the train the next day in Arizona--and our tickets were pinned to my brother's inside coat pocket.<br>
+
+I don't remember much of the trip, but after we reached the segregated southern part of the journey, things must have looked up. Negro passengers, who always traveled with loaded lunch boxes, felt sorry for "the poor little motherless darlings" and plied us with cold fried chicken and potato salad.<br>
+
+Years later I discovered that the United States had been crossed thousands of times by frightened Black children traveling alone to their newly affluent parents in Northern cities, or back to grandmothers in Southern towns when the urban North reneged on its economic promises.<br>
+
+The town reacted to us as its inhabitants had reacted to all things new before our coming. It regarded us a while without curiosity but with caution, and after we were seen to be harmless (and children) it closed in around us, as a real mother embraces a stranger's child. Warmly, but not too familiarly.<br>
+
+We lived with our grandmother and uncle in the rear of the Store (it was always spoken of with a capital s), which she had owned some twenty-five years.<br>
+
+Early in the century, Momma (we soon stopped calling her Grandmother) sold lunches to the sawmen in the lumberyard (east Stamps) and the seedmen at the cotton gin (west Stamps). Her crisp meat pies and cool lemonade, when joined to her miraculous ability to be in two places at the same time, assured her business success. From being a mobile lunch counter, she set up a stand between the two points of fiscal interest and supplied the workers' needs for a few years. Then she had the Store built in the heart of the Negro area. Over the years it became the lay center of activities in town. On Saturdays, barbers sat their customers in the shade on the porch of the Store, and troubadours on their ceaseless crawlings through the South leaned across its benches and sang their sad songs of The Brazos while they played juice harps and cigarbox guitars.<br>
+
+The formal name of the Store was the Wm. Johnson General Merchandise Store. Customers could find food staples, a good variety of colored thread, mash for hogs, corn for chickens, coal oil for lamps, light bulbs for the wealthy, shoestrings, hair dressing, balloons, and flower seeds. Anything not visible had only to be ordered.<br>
+
+Until we became familiar enough to belong to the Store and it to us, we were locked up in a Fun House of Things where the attendant had gone home for life.
+            </li>
+
+            <li>(keyword = classified)<BR>
+        Armed with a sharp mind and nerves of steel, Elizebeth Smith Friedman cracked hundreds of ciphers during her career as America’s first female cryptanalyst, successfully busting smugglers during Prohibition and, most notably, breaking up a Nazi spy ring across South America during the nineteen forties.
+        <BR>
+        But until records detailing her involvement in World War II were declassified in two thousand eight, most Americans had never heard of Friedman. A man—then-director of the FBI J. Edgar Hoover—took credit for Friedman’s wartime success, and she took her secret life as one of the country’s top codebreakers to the grave.
+
+            </li>
+
+        <li>
+    (keyword = quantumcomputer) <br>
+    Alphabet Inc.’s Google plans to spend several billion dollars to build a quantum computer by two thousand twenty nine that can perform large-scale business and scientific calculations without errors, said Hartmut Neven, a distinguished scientist at Google who oversees the company’s Quantum AI program. The company recently opened an expanded California-based campus focused on the effort, he said.
+
+        </li>
+            </ol>
+
+  
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>
