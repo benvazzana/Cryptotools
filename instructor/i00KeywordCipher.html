@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Keyword Cipher (Instructor)</title>
+    <script src="../jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("../header.html"); 
+    });
+    </script> 
+    <script type="text/javascript" src="../script.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+</head>
+
+
+
+
+
+<body>
+
+    <div id="includedContent"></div>
+          
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h1>The Keyword Cipher (Instructor) </h1>
+
+        <h3>Group 1  </h3>
+        <div id="keywordDecrypt1" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey1"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter1"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext1"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick1() {
+            let text = document.getElementById('keywordDecryptCiphertext1').value;
+            let keyword = document.getElementById('keywordDecryptKey1').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter1').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult1').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt1" onclick=btnKeywordDecryptOnClick1()>Submit</button>
+        <p id="keywordDecryptResult1"></p>
+
+        </div>
+
+        <h3>Group 2  </h3>
+        <div id="keywordDecrypt2" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey2"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter2"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext2"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick2() {
+            let text = document.getElementById('keywordDecryptCiphertext2').value;
+            let keyword = document.getElementById('keywordDecryptKey2').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter2').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult2').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt2" onclick=btnKeywordDecryptOnClick2()>Submit</button>
+        <p id="keywordDecryptResult2"></p>
+
+        </div>
+
+        <h3>Group 3  </h3>
+        <div id="keywordDecrypt3" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey3"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter3"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext3"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick3() {
+            let text = document.getElementById('keywordDecryptCiphertext3').value;
+            let keyword = document.getElementById('keywordDecryptKey3').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter3').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult3').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt3" onclick=btnKeywordDecryptOnClick3()>Submit</button>
+        <p id="keywordDecryptResult3"></p>
+
+        </div>
+
+        <h3>Group 4  </h3>
+        <div id="keywordDecrypt4" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey4"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter4"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext4"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick4() {
+            let text = document.getElementById('keywordDecryptCiphertext4').value;
+            let keyword = document.getElementById('keywordDecryptKey4').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter4').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult4').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt4" onclick=btnKeywordDecryptOnClick4()>Submit</button>
+        <p id="keywordDecryptResult4"></p>
+
+        </div>
+
+        <h3>Group 5  </h3>
+        <div id="keywordDecrypt5" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey5"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter5"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext5"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick5() {
+            let text = document.getElementById('keywordDecryptCiphertext5').value;
+            let keyword = document.getElementById('keywordDecryptKey5').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter5').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult5').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt5" onclick=btnKeywordDecryptOnClick5()>Submit</button>
+        <p id="keywordDecryptResult5"></p>
+
+        </div>
+        <h3>Group 6 </h3>
+        <div id="keywordDecrypt6" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey6"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter6"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext6"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick6() {
+            let text = document.getElementById('keywordDecryptCiphertext6').value;
+            let keyword = document.getElementById('keywordDecryptKey6').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter6').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult6').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt6" onclick=btnKeywordDecryptOnClick6()>Submit</button>
+        <p id="keywordDecryptResult6"></p>
+
+        </div>
+
+        <h3>Group 7 </h3>
+        <div id="keywordDecrypt7" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey7"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter7"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext7"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick7() {
+            let text = document.getElementById('keywordDecryptCiphertext7').value;
+            let keyword = document.getElementById('keywordDecryptKey7').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter7').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult7').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt7" onclick=btnKeywordDecryptOnClick7()>Submit</button>
+        <p id="keywordDecryptResult7"></p>
+
+        </div>
+        <h3>Group 8 </h3>
+        <div id="keywordDecrypt8" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey8"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter8"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext8"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick8() {
+            let text = document.getElementById('keywordDecryptCiphertext8').value;
+            let keyword = document.getElementById('keywordDecryptKey8').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter8').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult8').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt8" onclick=btnKeywordDecryptOnClick8()>Submit</button>
+        <p id="keywordDecryptResult8"></p>
+
+        </div>
+
+        <h3>Group 9 </h3>
+        <div id="keywordDecrypt9" class="default">
+  
+        Keyword:
+        <input type="text" id="keywordDecryptKey9"><br><br>
+        Keyletter:
+        <input type="text" maxlength="1" size="1" id="keywordDecryptKeyLetter9"><br><br>
+        Ciphertext:
+        <textarea type="text" rows=1 cols=100 id="keywordDecryptCiphertext9"></textarea> <br />
+        <script>
+          function btnKeywordDecryptOnClick9() {
+            let text = document.getElementById('keywordDecryptCiphertext9').value;
+            let keyword = document.getElementById('keywordDecryptKey9').value;
+            let keyLetter = document.getElementById('keywordDecryptKeyLetter9').value;
+            let result = keywordDecrypt(text, keyword, keyLetter);
+            document.getElementById('keywordDecryptResult9').innerHTML = result;
+          }
+        </script>
+        <button id="btnkeywordDecrypt9" onclick=btnKeywordDecryptOnClick9()>Submit</button>
+        <p id="keywordDecryptResult9"></p>
+
+        </div>
+
+      </td>
+    </tr>
+    </table>
+
+</body>
+</html>
