@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Onetime Pad Generator (Instructor)</title>
+        <script src="../jquery.js"></script> 
+        <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+        </script> 
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+
+    </head>
+
+<body>
+
+    <div id="includedContent"></div>
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+        <h4>Onetime Pade Generator (Instructor)</h4>
+    
+
+        Number of letters: <BR>
+        <input type="text" id="txtNextPrime1">
+        <script>
+            function btnNextPrime1OnClick() {
+                let n = parseInt(document.getElementById('txtNextPrime1').value);
+                let p = rng(1,n);
+                let result = "";
+                for(let i = 0; i < n; i++) {
+                result = result.concat(String.fromCharCode(rng(0,25) + 97));
+                };
+                result = spaceText(result, 5);
+                document.getElementById('nextPrime1Result').innerHTML = result;
+            }
+        </script>
+        <button id="btnNextPrime1" onclick=btnNextPrime1OnClick()>Submit</button> <br />
+        <p id="nextPrime1Result"></p>
+
+        <h4>Reverse String</h4>
+        <div id="instructorReverseString" class="default">
+            Ciphertext:
+            <input type="text" id="reverseStringTool">
+            <script>
+                function btnReverseStringOnClick() {
+                    let string = document.getElementById('reverseStringTool').value;
+                    let result = "";
+                    for(let i = 0; i < string.length; i++) {
+                        result = result.concat(string.charAt(string.length-i-1));
+                    };
+                    result = cleanTextSpaces(result);
+                    document.getElementById("textReverseResult").innerText = result;
+                    }
+            </script>
+            <button id="instructorReverseString" onclick=btnReverseStringOnClick()>Submit</button>
+            <p id="textReverseResult"></p>            
+        </div>
+
+        <h4>To Upper Case, Space Every Five</h4>
+        <div id="instructorUppserSpace" class="default">
+            Text:
+            <input type="text" id="UppserSpaceTool">
+            <script>
+                function btnUppserSpaceOnClick() {
+                    let string = document.getElementById('UppserSpaceTool').value;
+                    document.getElementById("UppserSpaceResult").innerText = spaceText(string,5).toUpperCase();
+                    }
+            </script>
+            <button id="instructorUppserSpace" onclick=btnUppserSpaceOnClick()>Submit</button>
+            <p id="UppserSpaceResult"></p>            
+        </div>
+
+
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>

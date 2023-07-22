@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> Binary One Time Pads Cryptanalysis (Instructor)</title>
+        <title> Binary One Time Pads (Instructor)</title>
         <script src="../jquery.js"></script> 
         <script> 
         $(function(){
@@ -30,6 +30,207 @@
     <td>
         <h1>Binary One Time Pads Cryptanalysis (Instructor)</h1>
 
+        
+
+        <h4>Group 1</h4>
+        <div id="instructorBinaryDecrypt1" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput1"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime1"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent1"> <br />
+            Number of Bits:
+            <input type="text" id="numBits1"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick1() {
+                    let ct1 = document.getElementById('cipherTextInput1').value;
+                    let prime1 = parseInt(document.getElementById('txtPrime1').value);
+                    let exponent1 = parseInt(document.getElementById('txtExponent1').value);
+                    let length1 = parseInt(document.getElementById('numBits1').value);
+                    let key1 = generateBinaryOneTimePad(prime1, exponent1, length1);
+                    document.getElementById("plainTextResult1").innerText = binToText(addKey(hexToBin(ct1),key1));
+                }
+            </script>
+            <button id="BinaryDecrypt1" onclick=btnBinaryDecryptClick1()>Submit</button>
+            <p id="plainTextResult1"></p>            
+        </div>
+
+        <h4>Group 2</h4>
+        <div id="instructorBinaryDecrypt2" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput2"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime2"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent2"> <br />
+            Number of Bits:
+            <input type="text" id="numBits2"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick2() {
+                    let ct2 = document.getElementById('cipherTextInput2').value;
+                    let prime2 = parseInt(document.getElementById('txtPrime2').value);
+                    let exponent2 = parseInt(document.getElementById('txtExponent2').value);
+                    let length2 = parseInt(document.getElementById('numBits2').value);
+                    let key2 = generateBinaryOneTimePad(prime2, exponent2, length2);
+                    document.getElementById("plainTextResult2").innerText = binToText(addKey(hexToBin(ct2),key2));
+                }
+            </script>
+            <button id="BinaryDecrypt2" onclick=btnBinaryDecryptClick2()>Submit</button>
+            <p id="plainTextResult2"></p>            
+        </div>
+        <h4>Group 3</h4>
+        <div id="instructorBinaryDecrypt3" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput3"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime3"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent3"> <br />
+            Number of Bits:
+            <input type="text" id="numBits3"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick3() {
+                    let ct3 = document.getElementById('cipherTextInput3').value;
+                    let prime3 = parseInt(document.getElementById('txtPrime3').value);
+                    let exponent3 = parseInt(document.getElementById('txtExponent3').value);
+                    let length3 = parseInt(document.getElementById('numBits3').value);
+                    let key3 = generateBinaryOneTimePad(prime3, exponent3, length3);
+                    document.getElementById("plainTextResult3").innerText = binToText(addKey(hexToBin(ct3),key3));
+                }
+            </script>
+            <button id="BinaryDecrypt3" onclick=btnBinaryDecryptClick3()>Submit</button>
+            <p id="plainTextResult3"></p>            
+        </div>
+        <h4>Group 4</h4>
+        <div id="instructorBinaryDecrypt4" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput4"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime4"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent4"> <br />
+            Number of Bits:
+            <input type="text" id="numBits4"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick4() {
+                    let ct4 = document.getElementById('cipherTextInput4').value;
+                    let prime4 = parseInt(document.getElementById('txtPrime4').value);
+                    let exponent4 = parseInt(document.getElementById('txtExponent4').value);
+                    let length4 = parseInt(document.getElementById('numBits4').value);
+                    let key4 = generateBinaryOneTimePad(prime4, exponent4, length4);
+                    document.getElementById("plainTextResult4").innerText = binToText(addKey(hexToBin(ct4),key4));
+                }
+            </script>
+            <button id="BinaryDecrypt4" onclick=btnBinaryDecryptClick4()>Submit</button>
+            <p id="plainTextResult4"></p>            
+        </div>
+
+        <h4>Group 5</h4>
+        <div id="instructorBinaryDecrypt5" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput5"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime5"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent5"> <br />
+            Number of Bits:
+            <input type="text" id="numBits5"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick5() {
+                    let ct5 = document.getElementById('cipherTextInput5').value;
+                    let prime5 = parseInt(document.getElementById('txtPrime5').value);
+                    let exponent5 = parseInt(document.getElementById('txtExponent5').value);
+                    let length5 = parseInt(document.getElementById('numBits5').value);
+                    let key5 = generateBinaryOneTimePad(prime5, exponent5, length5);
+                    document.getElementById("plainTextResult5").innerText = binToText(addKey(hexToBin(ct5),key5));
+                }
+            </script>
+            <button id="BinaryDecrypt5" onclick=btnBinaryDecryptClick5()>Submit</button>
+            <p id="plainTextResult5"></p>            
+        </div>
+
+        <h4>Group 6</h4>
+        <div id="instructorBinaryDecrypt6" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput6"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime6"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent6"> <br />
+            Number of Bits:
+            <input type="text" id="numBits6"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick6() {
+                    let ct6 = document.getElementById('cipherTextInput6').value;
+                    let prime6 = parseInt(document.getElementById('txtPrime6').value);
+                    let exponent6 = parseInt(document.getElementById('txtExponent6').value);
+                    let length6 = parseInt(document.getElementById('numBits6').value);
+                    let key6 = generateBinaryOneTimePad(prime6, exponent6, length6);
+                    document.getElementById("plainTextResult6").innerText = binToText(addKey(hexToBin(ct6),key6));
+                }
+            </script>
+            <button id="BinaryDecrypt6" onclick=btnBinaryDecryptClick6()>Submit</button>
+            <p id="plainTextResult6"></p>            
+        </div>
+
+        <h4>Group 7</h4>
+        <div id="instructorBinaryDecrypt7" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput7"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime7"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent7"> <br />
+            Number of Bits:
+            <input type="text" id="numBits7"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick7() {
+                    let ct7 = document.getElementById('cipherTextInput7').value;
+                    let prime7 = parseInt(document.getElementById('txtPrime7').value);
+                    let exponent7 = parseInt(document.getElementById('txtExponent7').value);
+                    let length7 = parseInt(document.getElementById('numBits7').value);
+                    let key7 = generateBinaryOneTimePad(prime7, exponent7, length7);
+                    document.getElementById("plainTextResult7").innerText = binToText(addKey(hexToBin(ct7),key7));
+                }
+            </script>
+            <button id="BinaryDecrypt7" onclick=btnBinaryDecryptClick7()>Submit</button>
+            <p id="plainTextResult7"></p>            
+        </div>
+
+        <h4>Group 8</h4>
+        <div id="instructorBinaryDecrypt8" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput8"></textarea> <BR>
+            Prime number:
+            <input type="text" id="txtPrime8"> <br />
+            Starting Exponent:
+            <input type="text" id="txtExponent8"> <br />
+            Number of Bits:
+            <input type="text" id="numBits8"> <br />
+            </div>
+            <script>
+                function btnBinaryDecryptClick8() {
+                    let ct8 = document.getElementById('cipherTextInput8').value;
+                    let prime8 = parseInt(document.getElementById('txtPrime8').value);
+                    let exponent8 = parseInt(document.getElementById('txtExponent8').value);
+                    let length8 = parseInt(document.getElementById('numBits8').value);
+                    let key8 = generateBinaryOneTimePad(prime8, exponent8, length8);
+                    document.getElementById("plainTextResult8").innerText = binToText(addKey(hexToBin(ct8),key8));
+                }
+            </script>
+            <button id="BinaryDecrypt8" onclick=btnBinaryDecryptClick8()>Submit</button>
+            <p id="plainTextResult8"></p>            
+        </div>
+
+        <H2> Challenge</H2>
         <p>Exponent = 35 </p>
         <div class="preDivLeft">It is really hard to be random. </div>
     </td>

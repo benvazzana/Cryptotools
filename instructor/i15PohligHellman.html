@@ -179,6 +179,55 @@
             <p id="plainTextResult6"></p>            
         </div>
 
+        
+        <h4>Group 7</h4>
+        <div id="instructorPHDecrypt7" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput7">
+            Prime: 
+            <input type="text" id="primeInput7">
+            Exponent:
+            <input type="text" id="exponentInput7">
+            <script>
+                function btnPHDecryptClick7() {
+                    let numsStr = document.getElementById('cipherTextInput7').value;
+                        numsStr = removeSpaces(numsStr);
+                    let nums = numsStr.split(',');
+                    let t = BigInt(document.getElementById('exponentInput7').value);
+                    let p = BigInt(document.getElementById('primeInput7').value);
+                    let u = multInverseModnBig(t,p-1n);
+                    let numPlain = phExponentiate(nums, u, p);
+                    document.getElementById("plainTextResult7").innerText =phNumsTxtAscii(numPlain);
+                }
+            </script>
+            <button id="PHDecrypt7" onclick=btnPHDecryptClick7()>Submit</button>
+            <p id="plainTextResult7"></p>            
+        </div>
+
+        <h4>Group 8</h4>
+        <div id="instructorPHDecrypt8" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput8">
+            Prime: 
+            <input type="text" id="primeInput8">
+            Exponent:
+            <input type="text" id="exponentInput8">
+            <script>
+                function btnPHDecryptClick8() {
+                    let numsStr = document.getElementById('cipherTextInput8').value;
+                        numsStr = removeSpaces(numsStr);
+                    let nums = numsStr.split(',');
+                    let t = BigInt(document.getElementById('exponentInput8').value);
+                    let p = BigInt(document.getElementById('primeInput8').value);
+                    let u = multInverseModnBig(t,p-1n);
+                    let numPlain = phExponentiate(nums, u, p);
+                    document.getElementById("plainTextResult8").innerText =phNumsTxtAscii(numPlain);
+                }
+            </script>
+            <button id="PHDecrypt8" onclick=btnPHDecryptClick8()>Submit</button>
+            <p id="plainTextResult8"></p>            
+        </div>
+
     </td>
     </tr>
     </table>

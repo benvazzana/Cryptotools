@@ -28,7 +28,171 @@
     </td>
         
     <td>
-        <h1>Diffie Hellman Cryptanalysis (Instructor)</h1>
+        <h1>Diffie Hellman (Instructor)</h1>
+
+        <h3>Finding <i>k</i> satisfying 131<sup><i>k</i></sup> mod 541 = <i>b</i></h3>
+        Computed Power (<i>b</i>):
+        <input type="text" id="txtComputedPower2"> <br />
+        <script>
+            function btnDiscreteLogOnClick() {
+                let b = document.getElementById('txtComputedPower2').value;
+                let result = discreteLogarithm(131, b, 541);
+                document.getElementById('discreteLogResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnDiscreteLog" onclick=btnDiscreteLogOnClick()>Submit</button>
+        <p id="discreteLogResult"></p>
+
+        <h3>Computing <i>a</i><sup><i>k</i></sup> mod 541</h3>
+        Base (<i>a</i>): <input type="text" id="txtBase"> <br />
+        Exponent (<i>k</i>): <input type="text" id="txtExponent"> <br />
+        <script>
+            function btnComputeOnClick() {
+                let a = document.getElementById('txtBase').value;
+                let k = document.getElementById('txtExponent').value;
+                let result = parseInt(successiveSquare(a, k, 541)).toString(2);
+                document.getElementById('computeResult').innerHTML = result;
+            }
+        </script>
+        <button id="btnCompute" onclick=btnComputeOnClick()>Submit</button>
+        <p id="computeResult"></p>
+
+
+
+        <h4>Group 1</h4>
+        <div id="instructorBinaryDecrypt1" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput1"></textarea> <BR>
+            Key: 
+            <input type="text" id="key1">
+
+            <script>
+                function btnBinaryDecryptClick1() {
+                    let ct1 = document.getElementById('cipherTextInput1').value;
+                    let key1 = document.getElementById('key1').value;
+                    document.getElementById("plainTextResult1").innerText = binToText(addKey(hexToBin(ct1),key1));
+                }
+            </script>
+            <button id="BinaryDecrypt1" onclick=btnBinaryDecryptClick1()>Submit</button>
+            <p id="plainTextResult1"></p>            
+        </div>
+
+
+        <h4>Group 2</h4>
+        <div id="instructorBinaryDecrypt2" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput2"></textarea> <BR>
+            Key: 
+            <input type="text" id="key2">
+
+            <script>
+                function btnBinaryDecryptClick2() {
+                    let ct2 = document.getElementById('cipherTextInput2').value;
+                    let key2 = document.getElementById('key2').value;
+                    document.getElementById("plainTextResult2").innerText = binToText(addKey(hexToBin(ct2),key2));
+                }
+            </script>
+            <button id="BinaryDecrypt2" onclick=btnBinaryDecryptClick2()>Submit</button>
+            <p id="plainTextResult2"></p>            
+        </div>
+
+        <h4>Group 3</h4>
+        <div id="instructorBinaryDecrypt3" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput3"></textarea> <BR>
+            Key: 
+            <input type="text" id="key3">
+
+            <script>
+                function btnBinaryDecryptClick3() {
+                    let ct3 = document.getElementById('cipherTextInput3').value;
+                    let key3 = document.getElementById('key3').value;
+                    document.getElementById("plainTextResult3").innerText = binToText(addKey(hexToBin(ct3),key3));
+                }
+            </script>
+            <button id="BinaryDecrypt3" onclick=btnBinaryDecryptClick3()>Submit</button>
+            <p id="plainTextResult3"></p>            
+        </div>
+
+        <h4>Group 4</h4>
+        <div id="instructorBinaryDecrypt4" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput4"></textarea> <BR>
+            Key: 
+            <input type="text" id="key4">
+
+            <script>
+                function btnBinaryDecryptClick4() {
+                    let ct4 = document.getElementById('cipherTextInput4').value;
+                    let key4 = document.getElementById('key4').value;
+                    document.getElementById("plainTextResult4").innerText = binToText(addKey(hexToBin(ct4),key4));
+                }
+            </script>
+            <button id="BinaryDecrypt4" onclick=btnBinaryDecryptClick4()>Submit</button>
+            <p id="plainTextResult4"></p>            
+        </div>
+
+        <h4>Group 5</h4>
+        <div id="instructorBinaryDecrypt5" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput5"></textarea> <BR>
+            Key: 
+            <input type="text" id="key5">
+
+            <script>
+                function btnBinaryDecryptClick5() {
+                    let ct5 = document.getElementById('cipherTextInput5').value;
+                    let key5 = document.getElementById('key5').value;
+                    document.getElementById("plainTextResult5").innerText = binToText(addKey(hexToBin(ct5),key5));
+                }
+            </script>
+            <button id="BinaryDecrypt5" onclick=btnBinaryDecryptClick5()>Submit</button>
+            <p id="plainTextResult5"></p>            
+        </div>
+
+        <h4>Group 6</h4>
+        <div id="instructorBinaryDecrypt6" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput6"></textarea> <BR>
+            Key: 
+            <input type="text" id="key6">
+
+            <script>
+                function btnBinaryDecryptClick6() {
+                    let ct6 = document.getElementById('cipherTextInput6').value;
+                    let key6 = document.getElementById('key6').value;
+                    document.getElementById("plainTextResult6").innerText = binToText(addKey(hexToBin(ct6),key6));
+                }
+            </script>
+            <button id="BinaryDecrypt6" onclick=btnBinaryDecryptClick6()>Submit</button>
+            <p id="plainTextResult6"></p>            
+        </div>
+
+        <h4>Group 7</h4>
+        <div id="instructorBinaryDecrypt7" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput7"></textarea> <BR>
+            Key: 
+            <input type="text" id="key7">
+
+            <script>
+                function btnBinaryDecryptClick7() {
+                    let ct7 = document.getElementById('cipherTextInput7').value;
+                    let key7 = document.getElementById('key7').value;
+                    document.getElementById("plainTextResult7").innerText = binToText(addKey(hexToBin(ct7),key7));
+                }
+            </script>
+            <button id="BinaryDecrypt7" onclick=btnBinaryDecryptClick7()>Submit</button>
+            <p id="plainTextResult7"></p>            
+        </div>
+        <h4>Group 8</h4>
+        <div id="instructorBinaryDecrypt8" class="default">
+            Ciphertext:
+            <textarea type="text" rows=4 cols=80 id="cipherTextInput8"></textarea> <BR>
+            Key: 
+            <input type="text" id="key8">
+
+      <h2>Challenge</h2>  
 
         <p>Exponents were 263 and 420, the key is 352.</p>
         <div class="preDivLeft"> I guess we should have used bigger numbers.</div>

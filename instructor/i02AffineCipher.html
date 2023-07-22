@@ -198,8 +198,63 @@
             </script>
             <button id="AffineDecrypt6" onclick=btnAffineDecryptClick6()>Submit</button>
             <p id="plainTextResult6"></p>
-
         </div>  
+
+        
+        <h4>Group 7</h4>
+        <div id="textToNum7" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput7">
+            Add key: 
+            <input type="text" id="addKeyInput7">
+            Mult key:
+            <input type="text" id="multKeyInput7">
+            <script>
+                function btnAffineDecryptClick7() {
+                    let text = document.getElementById("cipherTextInput7").value;
+                    let addKey = document.getElementById("addKeyInput7").value;
+                    let multKey = document.getElementById("multKeyInput7").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult7").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt7" onclick=btnAffineDecryptClick7()>Submit</button>
+            <p id="plainTextResult7"></p>
+
+        </div> 
+
+        
+        <h4>Group 8</h4>
+        <div id="textToNum8" class="default">
+            Ciphertext:
+            <input type="text" id="cipherTextInput8">
+            Add key: 
+            <input type="text" id="addKeyInput8">
+            Mult key:
+            <input type="text" id="multKeyInput8">
+            <script>
+                function btnAffineDecryptClick8() {
+                    let text = document.getElementById("cipherTextInput8").value;
+                    let addKey = document.getElementById("addKeyInput8").value;
+                    let multKey = document.getElementById("multKeyInput8").value;
+                    let numbers = textToNum(text);
+                    multKey = multInverseModn(multKey,26);
+                    listCompute(numbers,'*',multKey);
+                    listCompute(numbers,'-',addKey);
+                    listCompute(numbers,'%',26);
+
+                    document.getElementById("plainTextResult8").innerText = numToText(numbers);
+                }
+            </script>
+            <button id="AffineDecrypt8" onclick=btnAffineDecryptClick8()>Submit</button>
+            <p id="plainTextResult8"></p>
+
+        </div> 
   
     </td>
     </tr>

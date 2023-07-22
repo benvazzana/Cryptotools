@@ -96,7 +96,7 @@
         </tr>
     </table>
     <ol>
-        <li>Everyone will use the prime <i>p</i>=541 and the base <i>b</i>=131.</li>
+        <li>Everyone will use the prime <i>p</i>=541 and the base <i>a</i>=131.</li>
         <li>Decide on a secret exponent <i>k</i> between 1 and 540 (choose something in between - not 1 or 540).</li>
         <li>Use the tool at the top of the page to compute you "half-key," 131<sup><i>k</i></sup> mod 541 and post it in the appropriate thread in the Diffie-Hellman Key Exchange Forum in Student Messages on Blackboard.</li>
         <li>Obtain the half-key, <i>b</i> from the group you will be communicating with, and again use the tool at the top of the page to compute <i>b<sup>k</sup></i> mod 541.  This will be your key.  </li>
@@ -129,7 +129,7 @@
                 let a = document.getElementById('txtBase2').value;
                 let b = document.getElementById('txtComputedPower2').value;
                 let n = document.getElementById('txtModulus2').value;
-                let result = discreteLogarithm(a, b, n);
+                let result = discreteLogarithmOneAnswer(a, b, n);
                 document.getElementById('discreteLogResult').innerHTML = result;
             }
         </script>

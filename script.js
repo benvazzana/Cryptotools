@@ -106,6 +106,10 @@ function cleanTextCaseSensativeSpaces(text) {
 
 
 
+
+
+   
+
 /**
  * Given a string of text, this function tracks the frequency of
  * each substring of a given length, and stores the data in a
@@ -634,6 +638,24 @@ function hillCipher(text, mat2) {
 }
 
 /**
+ * Performs a decryption for a Hill cipher on a string of text given a 2x2 matrix
+ * as a key
+ * @param {String} text 
+ * @param {Array<Number>} mat2 array storing 2x2 matrix
+ * @returns {String} encrypted text
+ */
+function hillDeCipher(text, mat2) {
+    let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
+    let matinv = [];
+    let detInv = multInverseModn(det,26);
+    matinv[0] = mod(detInv*mat2[3],26);
+    matinv[1] = mod((-1)*detInv*mat2[1],26);
+    matinv[2] = mod((-1)*detInv*mat2[2],26);
+    matinv[3] = mod(detInv*mat2[0],26);
+    return hillCipher(text, matinv);
+}
+
+/**
  * Converts a string of text into a list of numbers by grouping
  * characters into groups of 4, filling in 0's in front of single
  * digits
@@ -1046,7 +1068,7 @@ function isPrimeBig(n) {
  */
  function multInverseModn(a,n) {
     let result = "The number is not invertible.";
-    let g = extendedGcd(a, n);
+    let g = extendedGcd(mod(a,n), n);
     if(g[0] == 1) {
         let inverse = extendedGcd(a, n)[1];
         if(inverse < 0) inverse += n;
@@ -1065,6 +1087,22 @@ function isPrimeBig(n) {
     }
     return possibleKeys;
 }
+
+function discreteLogarithmOneAnswer(a, b, n){
+    let k = 1;
+    let x = a;
+    let result = "No such exponent exists";
+    while ((k < n) && (x !=b)){
+        k++;
+        x = (a*x)% n;
+        };
+    if (k < n ){
+        result = k
+        };
+    return result
+}
+
+
 
 /**
  * This function computes the gcd of 2  Big Integers recursively using

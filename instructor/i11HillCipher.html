@@ -30,9 +30,314 @@
     </td>
         
     <td>
+
         <h1>Hill Cipher (Instructor)</h1>
+        <h3>Group 1</h3>
+        <div id="hillDeCipher1" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill1"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix111"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix121"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix211"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix221"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick1() {
+                let text1 = document.getElementById('txtHill1').value;
+                let mat1 = [];
+                mat1[0] = document.getElementById('txtMatrix111').value;
+                mat1[1] = document.getElementById('txtMatrix121').value;
+                mat1[2] = document.getElementById('txtMatrix211').value;
+                mat1[3] = document.getElementById('txtMatrix221').value;
+    
+                let det1 = mat1[0] * mat1[3] - mat1[1] * mat1[2];
+                if(Math.abs(gcd(det1, 26)) >1  ) {
+                    document.getElementById('hillResult1').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult1').innerHTML = hillDeCipher(text1, mat1)}        
+            }
+        </script>
+              <button id="btnSubmitHill1" onclick=btnHillSubmitOnClick1()>Submit</button>
+        <p id="hillResult1"></p>
+        </div>
 
 
+        <h3>Group 2</h3>
+        <div id="hillDeCipher2" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill2"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix112"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix122"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix212"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix222"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick2() {
+                let text2 = document.getElementById('txtHill2').value;
+                let mat2 = [];
+                mat2[0] = document.getElementById('txtMatrix112').value;
+                mat2[1] = document.getElementById('txtMatrix122').value;
+                mat2[2] = document.getElementById('txtMatrix212').value;
+                mat2[3] = document.getElementById('txtMatrix222').value;
+    
+                let det2 = mat2[0] * mat2[3] - mat2[1] * mat2[2];
+                if(Math.abs(gcd(det2, 26)) >1  ) {
+                    document.getElementById('hillResult2').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult2').innerHTML = hillDeCipher(text2, mat2)}        
+            }
+        </script>
+              <button id="btnSubmitHill2" onclick=btnHillSubmitOnClick2()>Submit</button>
+        <p id="hillResult2"></p>
+        </div>
+
+
+        <h3>Group 3</h3>
+        <div id="hillDeCipher3" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill3"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix113"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix123"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix213"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix223"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick3() {
+                let text3 = document.getElementById('txtHill3').value;
+                let mat3 = [];
+                mat3[0] = document.getElementById('txtMatrix113').value;
+                mat3[1] = document.getElementById('txtMatrix123').value;
+                mat3[2] = document.getElementById('txtMatrix213').value;
+                mat3[3] = document.getElementById('txtMatrix223').value;
+    
+                let det3 = mat3[0] * mat3[3] - mat3[1] * mat3[2];
+                if(Math.abs(gcd(det3, 26)) >1  ) {
+                    document.getElementById('hillResult3').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult3').innerHTML = hillDeCipher(text3, mat3)}        
+            }
+        </script>
+              <button id="btnSubmitHill3" onclick=btnHillSubmitOnClick3()>Submit</button>
+        <p id="hillResult3"></p>
+        </div>
+
+        
+        <h3>Group 4</h3>
+        <div id="hillDeCipher4" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill4"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix114"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix124"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix214"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix224"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick4() {
+                let text4 = document.getElementById('txtHill4').value;
+                let mat4 = [];
+                mat4[0] = document.getElementById('txtMatrix114').value;
+                mat4[1] = document.getElementById('txtMatrix124').value;
+                mat4[2] = document.getElementById('txtMatrix214').value;
+                mat4[3] = document.getElementById('txtMatrix224').value;
+    
+                let det4 = mat4[0] * mat4[3] - mat4[1] * mat4[2];
+                if(Math.abs(gcd(det4, 26)) >1  ) {
+                    document.getElementById('hillResult4').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult4').innerHTML = hillDeCipher(text4, mat4)}        
+            }
+        </script>
+              <button id="btnSubmitHill4" onclick=btnHillSubmitOnClick4()>Submit</button>
+        <p id="hillResult4"></p>
+        </div>
+
+        
+        <h3>Group 5</h3>
+        <div id="hillDeCipher5" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill5"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix115"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix125"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix215"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix225"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick5() {
+                let text5 = document.getElementById('txtHill5').value;
+                let mat5 = [];
+                mat5[0] = document.getElementById('txtMatrix115').value;
+                mat5[1] = document.getElementById('txtMatrix125').value;
+                mat5[2] = document.getElementById('txtMatrix215').value;
+                mat5[3] = document.getElementById('txtMatrix225').value;
+    
+                let det5 = mat5[0] * mat5[3] - mat5[1] * mat5[2];
+                if(Math.abs(gcd(det5, 26)) >1  ) {
+                    document.getElementById('hillResult5').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult5').innerHTML = hillDeCipher(text5, mat5)}        
+            }
+
+        </script>
+              <button id="btnSubmitHill5" onclick=btnHillSubmitOnClick5()>Submit</button>
+        <p id="hillResult5"></p>
+        </div>
+
+
+        <h3>Group 6</h3>
+        <div id="hillDeCipher6" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill6"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix116"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix126"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix216"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix226"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick6() {
+                let text6 = document.getElementById('txtHill6').value;
+                let mat6 = [];
+                mat6[0] = document.getElementById('txtMatrix116').value;
+                mat6[1] = document.getElementById('txtMatrix126').value;
+                mat6[2] = document.getElementById('txtMatrix216').value;
+                mat6[3] = document.getElementById('txtMatrix226').value;
+    
+                let det6 = mat6[0] * mat6[3] - mat6[1] * mat6[2];
+                if(Math.abs(gcd(det6, 26)) >1  ) {
+                    document.getElementById('hillResult6').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult6').innerHTML = hillDeCipher(text6, mat6)}        
+            }
+        </script>
+              <button id="btnSubmitHill6" onclick=btnHillSubmitOnClick6()>Submit</button>
+        <p id="hillResult6"></p>
+        </div>
+
+
+        <h3>Group 7</h3>
+        <div id="hillDeCipher7" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill7"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix117"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix127"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix217"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix227"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick7() {
+                let text7 = document.getElementById('txtHill7').value;
+                let mat7 = [];
+                mat7[0] = document.getElementById('txtMatrix117').value;
+                mat7[1] = document.getElementById('txtMatrix127').value;
+                mat7[2] = document.getElementById('txtMatrix217').value;
+                mat7[3] = document.getElementById('txtMatrix227').value;
+    
+                let det7 = mat7[0] * mat7[3] - mat7[1] * mat7[2];
+                if(Math.abs(gcd(det7, 26)) >1  ) {
+                    document.getElementById('hillResult7').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult7').innerHTML = hillDeCipher(text7, mat7)}        
+            }
+        </script>
+              <button id="btnSubmitHill7" onclick=btnHillSubmitOnClick7()>Submit</button>
+        <p id="hillResult7"></p>
+        </div>
+
+
+
+        <h3>Group 8</h3>
+        <div id="hillDeCipher8" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill8"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix118"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix128"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix218"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix228"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick8() {
+                let text8 = document.getElementById('txtHill8').value;
+                let mat8 = [];
+                mat8[0] = document.getElementById('txtMatrix118').value;
+                mat8[1] = document.getElementById('txtMatrix128').value;
+                mat8[2] = document.getElementById('txtMatrix218').value;
+                mat8[3] = document.getElementById('txtMatrix228').value;
+    
+                let det8 = mat8[0] * mat8[3] - mat8[1] * mat8[2];
+                if(Math.abs(gcd(det8, 26)) >1  ) {
+                    document.getElementById('hillResult8').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult8').innerHTML = hillDeCipher(text8, mat8)}        
+            }
+        </script>
+              <button id="btnSubmitHill8" onclick=btnHillSubmitOnClick8()>Submit</button>
+        <p id="hillResult8"></p>
+        </div>
+
+        
         <h4>Cryptanalysis Challenge</h4>
         <p> The encrypting matrix is 
             \(\begin{bmatrix} 25 & 17 \\ 16 & 15 \end{bmatrix}\). The decrypting matrix 
