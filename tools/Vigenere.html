@@ -157,6 +157,13 @@
             let text = cleanText(document.getElementById("freqAnalysisCiphertext").value);
             let table = document.getElementById("freq_Analysis_Table");
             let keyword = document.getElementById("keywordGuess").value;
+            // Clear previous result
+            for(let i = 1; i < table.rows.length; i++) {
+              let cells = table.rows[i].getElementsByTagName("td");
+              for(let j = 2; j < cells.length; j++) {
+                cells[j].innerHTML = "";
+              }
+            }
             for(let i = keyword.length; i < n; i++){
               keyword +="A";
             }
