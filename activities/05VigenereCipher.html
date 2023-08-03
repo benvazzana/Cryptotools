@@ -116,6 +116,10 @@
             let text = cleanText(document.getElementById("freqAnalysisCiphertext").value);
             let table = document.getElementById("freq_Analysis_Table");
             let keyword = document.getElementById("keywordGuess").value;
+            // Clear previous result
+            for(let i = 0; i < table.rows.length; i++) {
+              table.rows[i].innerHTML = "";
+            }
             for(let i = keyword.length; i < n; i++){
               keyword +="A";
             }
