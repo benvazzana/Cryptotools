@@ -1011,6 +1011,12 @@ function findNextPrimeBig(n) {
  * @return {Boolean} true if prime, false if not
  */
 function isPrime(n) {
+    if(n < 100) {
+        for(let i = 2; i < n; i++) {
+            if(n % i == 0) return false;
+        }
+        return true;
+    }
     let s = n - 1;
     let r = 0;
     while(s % 2 == 0) {
@@ -1030,6 +1036,7 @@ function isPrime(n) {
     }
 
     return result;
+
 }
 
 /**
@@ -1039,6 +1046,7 @@ function isPrime(n) {
  * @return {Boolean} true if prime, false if not
  */
 function isPrimeBig(n) {
+    if(n < 100n) return isPrime(Number(n));
     let s = n - 1n;
     let r = 0;
     while(s % 2n == 0) {
