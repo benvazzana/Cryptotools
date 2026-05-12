@@ -647,7 +647,7 @@ function hillCipher(text, mat2) {
 function hillDeCipher(text, mat2) {
     let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
     let matinv = [];
-    let detInv = multInverseModn(det,26);
+    let detInv = multInverseModn(mod(det,26),26);
     matinv[0] = mod(detInv*mat2[3],26);
     matinv[1] = mod((-1)*detInv*mat2[1],26);
     matinv[2] = mod((-1)*detInv*mat2[2],26);

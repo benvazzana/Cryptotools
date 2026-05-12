@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hill Cipher (Instructor)</title>
+        <script src="../jquery.js"></script> 
+        <script> 
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
+        </script> 
+        <script type="text/javascript" src="../script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../jba_style.css">
+    <!-- Mathjax link below-->
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+    </head>
+
+<body>
+
+    <div id="includedContent"></div>
+          
+    <table style="width:100%"  cellspacing="0" cellpadding="07" >
+        <col style="width:15%">
+        <col style="width:85%">
+  
+    <tr> 
+    <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
+    </td>
+        
+    <td>
+
+        <h1>Hill Cipher (Instructor)</h1>
+        <h3>Group 1</h3>
+        <div id="hillDeCipher1" class="default">
+        Ciphertext:
+        <input type="text" id="txtHill1"> <br />
+        <p id="matWarning"></p>
+        Key: 
+        <table>
+            <tr>
+                <td><input type="text" size="2" type="text" id="txtMatrix111"></input></td> 
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix121"></input></td>
+            </tr>
+            <tr>
+                <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix211"></input></td> 
+                <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix221"></input></td>
+            </tr>
+        </table>
+        <script>
+            function btnHillSubmitOnClick1() {
+                let text1 = document.getElementById('txtHill1').value;
+                let mat1 = [];
+                mat1[0] = document.getElementById('txtMatrix111').value;
+                mat1[1] = document.getElementById('txtMatrix121').value;
+                mat1[2] = document.getElementById('txtMatrix211').value;
+                mat1[3] = document.getElementById('txtMatrix221').value;
+                let det1 = mat1[0] * mat1[3] - mat1[1] * mat1[2];
+                if(Math.abs(gcd(det1, 26)) >1  ) {
+                    document.getElementById('hillResult1').innerHTML = "WARNING: Matrix is not invertible!";
+                }
+                else{
+                    document.getElementById('hillResult1').innerHTML = hillDeCipher(text1, mat1)}        
+            }
+        </script>
+              <button id="btnSubmitHill1" onclick=btnHillSubmitOnClick1()>Submit</button>
+        <p id="hillResult1"></p>
+        </div>
+
+
+
+
+        
+        <h4>Cryptanalysis Challenge</h4>
+        <p> The encrypting matrix is 
+            \(\begin{bmatrix} 25 & 17 \\ 16 & 15 \end{bmatrix}\). The decrypting matrix 
+            \(\begin{bmatrix} 11 & 17 \\ 16 & 1 \end{bmatrix}\).
+        </p>
+        
+        <div class="preDivLeft">
+            IM NO GOOD AT BEING NOBLE BUT IT DOESNT TAKE MUCH TO SEE THAT THE PROBLEMS OF THREE LITTLE PEOPLE DONT AMOUNT TO A HILL OF BEANS IN THIS CRAZY WORLD
+        </div>
+
+    </td>
+    </tr>
+    </table>
+
+</body>
+</html>

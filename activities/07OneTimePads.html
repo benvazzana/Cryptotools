@@ -29,6 +29,7 @@
         <h1>One Time Pads</h1>
         <h2>Tools</h2>
 
+ <!--
         <div id="oneTimePad" class="default">
             <p id="lblOneTimePad">Number of letters in One Time Pad:</p>
             <input type="text" id="oneTimeLength">
@@ -46,6 +47,7 @@
             <p id="oneTimePadResult"></p>
             <h3>Encryption   </h3>
             <div id="vigEncrypt" class="default">
+-->
       
             Plaintext:<br>
             <textarea type="text" rows=2 cols=80 id="vigEncryptPlaintext"></textarea> <br />
@@ -82,6 +84,7 @@
         </div>
         <h2>How it works</h2>
         <p>The One Time Pad is just the Vigener cipher except the keyword is a random string of letters of length greater than the plain text.</p>
+<!--
         <table>
             <tr>
                 <td><img src="../images/lock.png" alt="Unlock" ALIGN="middle"  height="42" width="42"></td> 
@@ -118,6 +121,8 @@
         </tr>
     </table> 
         <ul><li>Decrypt using the One Time Pad as the key.</li></ul>
+
+
         <button type="button" class="collapsible">Example</button>
         <div class="content">
         <p>Completing the example above, we decrypt the ciphertext 
@@ -128,6 +133,7 @@
         <div class="preDiv">herei saone timep admes sage</div>
         </p>
         </div>
+    -->
     <table>
         <tr>
             <td><img src="../images/topsecret.png" alt="Unlock" ALIGN="middle"  height="60" ></td> 
@@ -136,18 +142,12 @@
     </table>
 
     <ol>
-        <li>Each group will be paired with another group. Designate one group S and the other R.  </li>
-        <li>Meet in person to create two copies of a one time pad with 200 random letters. (It's hard to generate a random string of letters. Later we'll talk about how to make a randomish string.) Group S will use this one time pad to send a message to Group R.</li>
-        <li>Create two copies of a second one time pad with a different set of 200 random letters for R to repond to S's message. (Remember, one time pads can only be used . . .)</li>
-        <li> 
-            Group S now creates their message (of length no more than 200 letters) and encrypts it using the first one time pad. They then post it the One Time Pad forum.
-        </li>
-         <li>Group R decrypts the message from group S using the first one time pad. 
+        <li>Each group will be paired with another group. Both groups will have copies of the same set of 6 onetime pads. </li>
+        <li>In the Onetime Pad Student Message Forum on Brightspace, have one member of pair of groups Start a New Thread. Each group should declare which onetime pad they plan to use, making sure that you choose two different pads (otherwise, you will end up using it two times). It's ok to discuss this choice in the clear, because you two are the only ones with access to these copies of the onetime pads.</li>
+        <li>Each group should create a message (shorter than your onetime pad) and encrypt with their onetime pad. Be very careful typing in the key. Skipping or adding a letter will throw off the rest of the message.</li>
+        <li>Post the ciphertext in your thread on Brightspace.</li>
         <li>
-        Group R creates a responses message (of length no more than 200 letters) and encrypts using the second one time pad. They post it on the One Time Pad forum.
-        </LI>
-        <li>
-            Group S uses the second one time pad to decrypt group R's response.
+            Decipher your partner group's message using their onetime pad.
         </li>
     </ol>  
         

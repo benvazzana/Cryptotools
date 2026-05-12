@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <title>Hill Cipher Tools</title>
+    <title>The Hill Cipher Cryptanalysis</title>
+    
     <script src="../jquery.js"></script> 
     <script> 
-    $(function(){
-      $("#includedContent").load("../header.html"); 
-    });
+        $(function(){
+          $("#includedContent").load("../header.html"); 
+        });
     </script> 
     <script type="text/javascript" src="../script.js"></script>
-
     <link rel="stylesheet" type="text/css" href="../jba_style.css">
-
+    <!-- Mathjax link below-->
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 </head>
 
 
-
-
-
 <body>
-
     <div id="includedContent"></div>
-          
-          
-    <table style="width:100%"  cellspacing="0" cellpadding="07" >
-        <col style="width:15%">
-        <col style="width:85%">
-  
+
+        
+<table style="width:100%"  cellspacing="0" cellpadding="07" >
+    <col style="width:15%">
+    <col style="width:85%">
     <tr> 
     <td valign="top" width="122" style="background-color:rgb(152, 177, 201)"> 
     </td>
-        
     <td>
-        <h1>Hill Cipher Tools</h1>
+
+    <h1>Hill Cipher Cryptanalysis</h1>
 
 
-
-
+    <h2>Tools</h2>
+    <div id="hillCipher" class="default">
         <h3>Encryption and Decryption</h3>
-    
-        <div id="hillCipher" class="default">
         Text:
         <input type="text" id="txtHill"> <br />
         <p id="matWarning"></p>
@@ -54,16 +50,20 @@
                 <td><input type="text" size="2"  rows=1 cols=2 type="text" id="txtMatrix21"></input></td> 
                 <td><input type="text" size="2" rows=1 cols=2 type="text" id="txtMatrix22"></input></td>
             </tr>
+            
         </table>
+ 
+ 
+  
         <script>
-            function btnHillSubmitOnClick() {
+            function btnSubmitOnClick() {
                 let text = document.getElementById('txtHill').value;
                 let mat2 = [];
                 mat2[0] = document.getElementById('txtMatrix11').value;
                 mat2[1] = document.getElementById('txtMatrix12').value;
                 mat2[2] = document.getElementById('txtMatrix21').value;
                 mat2[3] = document.getElementById('txtMatrix22').value;
-    
+
                 let det = mat2[0] * mat2[3] - mat2[1] * mat2[2];
                 if(Math.abs(gcd(det, 26)) >1  ) {
                     document.getElementById('hillResult').innerHTML = "WARNING: Matrix is not invertible!";
@@ -72,12 +72,11 @@
                 
             }
         </script>
-              <button id="btnSubmitHill" onclick=btnHillSubmitOnClick()>Submit</button>
+              <button id="btnSubmit" onclick=btnSubmitOnClick()>Submit</button>
         <p id="hillResult"></p>
+    
     </div>
-
-
-      <div id="matrixInverse26" class="default">
+        <div id="matrixInverse26" class="default">
         <h3> Mod 26 Inverse of a Matrix</h3>
         Matrix: 
         <table>
@@ -155,11 +154,121 @@
 
             </p>
     </div>
+    <h2>How it works</h2>
+    <p>If we have a "crib" for a ciphertext that has been encrypted with the Hill Cipher, we can work out a list of possible keys.</p>
+     <button type="button" class="collapsible">Example</button>
+    <div class="content">
+        <p>
+        Suppose we know that </p>
+        <div class="preDiv">here</div> 
+        <p>is the first word in the ciphertext:
+        </p> 
+        <div class="preDiv">RWBA KEQS RMJ VKFOO.</div>
+        <p>We eneter "here" and "RWBA" into the Hill Cryptanalysis Tool  and get the result:</p>
+
+        <p>Possible first rows are </p>
+        <p>        
+        1, 2 <BR>
+        14, 2 </p>
+        <p>
+        Possible second rows are: </p>
+        <p>
+        3, 5 <br>
+        16, 5 </p>
+         
+    <p> There are four possible matrices we can form. First we consider the matrix \(\begin{bmatrix}1 &2\\3&5\end{bmatrix}\). We use the Mod 26 Inverse of Matrix tool to find its inverse and get:</p>
+    
+
+    <p>\(\begin{bmatrix}21 &2\\3&25\end{bmatrix}\)</p>
+
+    <p>Now we try to decrpt our original ciphertext.</p>
+
+        <div class="preDiv">HERE GEBF NOTH IAGD</div>
+
+    <p>We see the first four letters decode as expected, but the rest is gibberish.</p>
+
+    <p>Next we try \(\begin{bmatrix}1 &2\\16&5\end{bmatrix}\). We find its inverse is \(\begin{bmatrix}21 &2\\16&25\end{bmatrix}\). We again try to decrypt, but using this key we get: </p>
+
+    <div class="preDiv">HERE GOES NOTH INGQ</div>
+
+    <p>We have succefully decipherd the message" "Here goes nothing."</p>
+    </div>
 
 
-    </td>
-    </tr>
+
+
+       
+   <table>
+        <tr>
+            <td><img src="../images/thinkingcap.gif" alt="Unlock" ALIGN="middle"  height="60" width="60"></td> 
+            <td><h2>Exercises:</h2></td>
+        </tr>
+
     </table>
 
+
+    <p>The messages below were enciphered with the Hill cipher, each with a different key.  You are also given the first word or words in the message in plaintext.
+    </p>
+
+    <ol>
+ 
+     <li> 
+        <p>Ciphertext:</p>
+        <div class="preDivLeft">DAGGN YANAD ECUPW JSJUG QICMV PRCKT HVDYH ODQTL VEBYL XADLX GHCST DHOBI VFLHB YKOHV UGQSW LUGQC NDLCD INDAY EFMLI ABVLQ WOUPL XBMQF YPBQE PDR</div>
+        <p>Crib:</p>
+        <div class="preDivLeft">I'm no</div>
+     </li>  
+     <li> 
+        <p>Ciphertext:</p>
+        <div class="preDivLeft">VQVTP QWTIV UGPQH LEAZR HGOJM KSDUG PCEAM N</div>
+        <p>Crib:</p>
+        <div class="preDivLeft">But this</div>
+     </li>  
+     <li> 
+        <p>Ciphertext:</p>
+        <div class="preDivLeft"> SOQON IABMU QOHM</div>
+        <p>Crib:</p>
+        <div class="preDivLeft">Today</div>
+     </li>  
+    
+    </ol>
+
+
+
+
+    <table>
+        <tr>
+            <td><img src="../images/challenge.jpg" alt="Unlock" ALIGN="middle"  height="60" ></td> 
+            <td><h2>Cryptanalysis Challenge</h2></td>
+        </tr>
+    </table>
+            <p>Ciphertext:</p>
+        <div class="preDivLeft">NQMZH HOPEQ KGKSW QAISS RAMHI QKUWS GZWB</div>
+        <p>Crib:</p>
+        <div class="preDivLeft">Hmmm</div>
+
+     </td>
+    </tr>
+</table>
+</table>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>        
+    </td>
+    </tr>
+</table>
 </body>
 </html>
